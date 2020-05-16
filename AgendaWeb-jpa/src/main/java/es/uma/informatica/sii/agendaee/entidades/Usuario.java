@@ -32,7 +32,7 @@ public class Usuario implements Serializable {
     @Id
     private String email;
 	@Column(nullable = false)
-	private String contraseña;
+	private String contrasenia;
 	
 	private String nombre;
 	private String apellido;
@@ -65,15 +65,19 @@ public class Usuario implements Serializable {
 	}
 */	
 	   
-	public String getContraseña() {
-		return contraseña;
-	}
-
-	public void setContraseña(String contraseña) {
-		this.contraseña = contraseña;
-	}   
+	
+	
+	   
 	public String getEmail() {
 		return email;
+	}
+
+	public String getContrasenia() {
+		return contrasenia;
+	}
+
+	public void setContrasenia(String contrasenia) {
+		this.contrasenia = contrasenia;
 	}
 
 	public void setEmail(String email) {
