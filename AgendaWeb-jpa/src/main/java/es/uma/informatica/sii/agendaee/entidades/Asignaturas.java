@@ -47,13 +47,14 @@ public class Asignaturas implements Serializable {
 		super();
 	}   
 	
+	/*
 	public Asignaturas(Long cA, Integer cr, String nA) {
 		
 		this.codigoAsignatura = cA;
 		this.creditos = cr;
 		this.nombreAsignatura = nA;
 	}
-	
+	*/
 	public Long getCodigoAsignatura() {
 		return this.codigoAsignatura;
 	}

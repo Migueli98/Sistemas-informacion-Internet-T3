@@ -1,10 +1,15 @@
 package es.uma.informatica.sii.agendaee.entidades;
 
 import java.io.Serializable;
-import java.lang.Integer;
-import java.lang.Long;
-import java.lang.String;
-import javax.persistence.*;
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  * Entity implementation class for Entity: Servicios
@@ -28,8 +33,12 @@ public class Servicios implements Serializable {
 	private String zona;
 	
 	@ManyToOne
-	@JoinColumn(name = "ONG")
+	@JoinColumn(name = "ong")
 	private Ong ong;
+	
+	@OneToMany(mappedBy="servicio")
+	private List<Actividades> actividades;
+	
 	
 	private static final long serialVersionUID = 1L;
 
@@ -101,5 +110,15 @@ public class Servicios implements Serializable {
 	public void setOng(Ong ong) {
 		this.ong = ong;
 	}
+
+	public List<Actividades> getActividades() {
+		return actividades;
+	}
+
+	public void setActividades(List<Actividades> actividades) {
+		this.actividades = actividades;
+	}
+	
+	
    
 }

@@ -15,7 +15,7 @@ import javax.persistence.*;
 
 public class Curriculum implements Serializable {
 
-	public enum diasSemana {
+	private enum diasSemana {
 		LUNES,
 		MARTES,
 		MIERCOLES,
@@ -25,7 +25,7 @@ public class Curriculum implements Serializable {
 		DOMINGO
 	};
 	
-	public enum idioma {
+	private enum idioma {
 		INGLES,
 		ALEMAN,
 		FRANCES,
@@ -33,20 +33,22 @@ public class Curriculum implements Serializable {
 	};
 	
 	@Id
-	private String id;
+	private Long id;
 	
-	@OneToOne
-	private Alumno alumno;
+	
 	@Column(nullable = false)
-	private String idiomas;
+	private idioma idiomas;
 	@Column(nullable = false)
 	private String experienciaLaboral;
 	@Column(nullable = false)
-	private String disponibilidadHoraria;
+	private diasSemana disponibilidadHoraria;
 	private static final long serialVersionUID = 1L;
 
 	@ManyToMany
 	private List<Asignaturas> compuestoDe;
+	@OneToOne
+	private Alumno alumno;
+	
 	
 	public Curriculum() {
 		super();
@@ -61,7 +63,7 @@ public class Curriculum implements Serializable {
 	}
 	*/
 	
-	/*
+	
 	public Long getId() {
 		return id;
 	}
@@ -69,28 +71,40 @@ public class Curriculum implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-*/
-	public String getIdiomas() {
-		return this.idiomas;
-	}
 
-	public void setIdiomas(String idiomas) {
-		this.idiomas = idiomas;
-	}   
 	public String getExperienciaLaboral() {
 		return this.experienciaLaboral;
+	}
+
+
+	public Alumno getAlumno() {
+		return alumno;
+	}
+
+	public void setAlumno(Alumno alumno) {
+		this.alumno = alumno;
+	}
+
+	public idioma getIdiomas() {
+		return idiomas;
+	}
+
+	public void setIdiomas(idioma idiomas) {
+		this.idiomas = idiomas;
+	}
+
+	public diasSemana getDisponibilidadHoraria() {
+		return disponibilidadHoraria;
+	}
+
+	public void setDisponibilidadHoraria(diasSemana disponibilidadHoraria) {
+		this.disponibilidadHoraria = disponibilidadHoraria;
 	}
 
 	public void setExperienciaLaboral(String experienciaLaboral) {
 		this.experienciaLaboral = experienciaLaboral;
 	}   
-	public String getDisponibilidadHoraria() {
-		return this.disponibilidadHoraria;
-	}
-
-	public void setDisponibilidadHoraria(String disponibilidadHoraria) {
-		this.disponibilidadHoraria = disponibilidadHoraria;
-	}
+	
 
 	public List<Asignaturas> getCompuestoDe() {
 		return compuestoDe;
@@ -99,5 +113,34 @@ public class Curriculum implements Serializable {
 	public void setCompuestoDe(List<Asignaturas> compuestoDe) {
 		this.compuestoDe = compuestoDe;
 	}
+
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Curriculum other = (Curriculum) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+	}
+	
+	
    
 }

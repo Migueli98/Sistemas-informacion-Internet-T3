@@ -2,6 +2,8 @@ package es.uma.informatica.sii.agendaee.entidades;
 
 
 import java.lang.String;
+import java.util.List;
+
 import javax.persistence.*;
 
 /**
@@ -23,6 +25,9 @@ public class Ong extends Usuario {
 	private String pais;
 	private String paginaWeb;
 	private static final long serialVersionUID = 1L;
+	
+	@OneToMany(mappedBy="ong")
+	private List<Servicios> servicios;
 
 	public Ong() {
 		super();
@@ -79,5 +84,32 @@ public class Ong extends Usuario {
 	public void setPaginaWeb(String paginaWeb) {
 		this.paginaWeb = paginaWeb;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((nombreONG == null) ? 0 : nombreONG.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Ong other = (Ong) obj;
+		if (nombreONG == null) {
+			if (other.nombreONG != null)
+				return false;
+		} else if (!nombreONG.equals(other.nombreONG))
+			return false;
+		return true;
+	}
+	
+	
    
 }

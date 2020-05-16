@@ -20,11 +20,15 @@ public class Alumno extends Usuario{
 	private Integer creditos;
 	private Integer horasLibre;
 	
-	@OneToOne(mappedBy="alumno", cascade = CascadeType.ALL)
+	@OneToOne(mappedBy="alumno")
 	private Curriculum cv;
 	
 	@ManyToMany
 	private List<Asignaturas> matriculadoEn;
+	
+	
+	@OneToMany(mappedBy="alumno")
+	private List<InformeActividades> informes;
 	
 	private static final long serialVersionUID = 1L;
 
@@ -72,5 +76,12 @@ public class Alumno extends Usuario{
 	public void setMatriculadoEn(List<Asignaturas> matriculadoEn) {
 		this.matriculadoEn = matriculadoEn;
 	}
+	public List<InformeActividades> getInformes() {
+		return informes;
+	}
+	public void setInformes(List<InformeActividades> informes) {
+		this.informes = informes;
+	}
    
+	
 }

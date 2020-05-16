@@ -1,11 +1,20 @@
 package es.uma.informatica.sii.agendaee.entidades;
 
 import java.io.Serializable;
-import java.lang.Long;
-import java.lang.String;
 import java.util.Date;
+import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 
 
@@ -17,7 +26,7 @@ import javax.persistence.*;
 
 public class Actividades implements Serializable {
 
-
+	private static final long serialVersionUID = 1L;
 
 	public enum Estado {
 	      PENDIENTE,
@@ -36,7 +45,9 @@ public class Actividades implements Serializable {
 	private String tipoActividad;
 	@Column(nullable = false)
 	@Temporal(TemporalType.DATE)
-	private Date fechaActividad;
+	private Date fechaInicioActividad;
+	@Temporal(TemporalType.DATE)
+	private Date fechaFinActividad;
 	@Column(nullable = false)
 	private String lugarRealizacion;
 	private String descripcion; 
@@ -47,12 +58,14 @@ public class Actividades implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "servicio")
 	private Servicios servicio;
-	private static final long serialVersionUID = 1L;
+	
+	@OneToMany(mappedBy="actividades")
+	private List<InformeActividades> informes;
 
 	public Actividades() {
 		super();
 	}  
-	
+	/*
 	public Actividades(Long id,String nombre, String tipo, Date fecha, String lugar, String descripcion, Estado estado) {
 		nombreActividad=nombre;
 		idActividad = id;
@@ -62,7 +75,7 @@ public class Actividades implements Serializable {
 		this.descripcion = descripcion;
 		this.estado=estado;
 	}
-
+*/
 	
 	public String getTipoActividad() {
 		return this.tipoActividad;
@@ -72,13 +85,23 @@ public class Actividades implements Serializable {
 	public void setTipoActividad(String tipoActividad) {
 		this.tipoActividad = tipoActividad;
 	}   
-	public Date getFechaActividad() {
-		return this.fechaActividad;
+	
+	public Date getFechaInicioActividad() {
+		return fechaInicioActividad;
 	}
 
-	public void setFechaActividad(Date fechaActividad) {
-		this.fechaActividad = fechaActividad;
-	}   
+	public void setFechaInicioActividad(Date fechaInicioActividad) {
+		this.fechaInicioActividad = fechaInicioActividad;
+	}
+
+	public Date getFechaFinActividad() {
+		return fechaFinActividad;
+	}
+
+	public void setFechaFinActividad(Date fechaFinActividad) {
+		this.fechaFinActividad = fechaFinActividad;
+	}
+
 	public String getLugarRealizacion() {
 		return this.lugarRealizacion;
 	}
@@ -122,5 +145,15 @@ public class Actividades implements Serializable {
 	public void setEstado(Estado estado) {
 		this.estado = estado;
 	}
+
+	public List<InformeActividades> getInformes() {
+		return informes;
+	}
+
+	public void setInformes(List<InformeActividades> informes) {
+		this.informes = informes;
+	}
+	
+	
    
 }

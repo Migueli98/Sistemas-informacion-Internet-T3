@@ -14,16 +14,32 @@ import javax.persistence.*;
 @Entity
 
 public class Requisitos implements Serializable {
+	
+	private enum diasSemana {
+		LUNES,
+		MARTES,
+		MIERCOLES,
+		JUEVES,
+		VIERNES,
+		SABADO,
+		DOMINGO
+	};
+	
+	private enum idioma {
+		INGLES,
+		ALEMAN,
+		FRANCES,
+		ESPAÑOL
+	};
 
 	@Id @GeneratedValue
 	private Long id;
 	@Column(nullable = false)
-	private String idiomas;
+	private idioma idiomas;
 	@Column(nullable = false)
 	private String experienciaLaboral;
 	@Column(nullable = false)
-	@Temporal(TemporalType.DATE)
-	private Date disponibilidadHoraria;
+	private diasSemana disponibilidadHoraria;
 	private static final long serialVersionUID = 1L;
 	
 	@ManyToOne
@@ -36,13 +52,23 @@ public class Requisitos implements Serializable {
 	public Requisitos() {
 		super();
 	}   
-	public String getIdiomas() {
-		return this.idiomas;
+	
+	public idioma getIdiomas() {
+		return idiomas;
 	}
 
-	public void setIdiomas(String idiomas) {
+	public void setIdiomas(idioma idiomas) {
 		this.idiomas = idiomas;
-	}   
+	}
+
+	public diasSemana getDisponibilidadHoraria() {
+		return disponibilidadHoraria;
+	}
+
+	public void setDisponibilidadHoraria(diasSemana disponibilidadHoraria) {
+		this.disponibilidadHoraria = disponibilidadHoraria;
+	}
+
 	public String getExperienciaLaboral() {
 		return this.experienciaLaboral;
 	}
@@ -50,13 +76,8 @@ public class Requisitos implements Serializable {
 	public void setExperienciaLaboral(String experienciaLaboral) {
 		this.experienciaLaboral = experienciaLaboral;
 	}   
-	public Date getDisponibilidadHoraria() {
-		return this.disponibilidadHoraria;
-	}
-
-	public void setDisponibilidadHoraria(Date disponibilidadHoraria) {
-		this.disponibilidadHoraria = disponibilidadHoraria;
-	}
+	
+	
 	public Servicios getServicio() {
 		return servicio;
 	}

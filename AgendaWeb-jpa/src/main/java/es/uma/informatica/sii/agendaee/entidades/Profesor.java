@@ -14,14 +14,17 @@ import javax.persistence.*;
 @Entity
 
 public class Profesor extends Usuario {
-
+	private static final long serialVersionUID = 1L;
+	
 	@Column(nullable = false)
 	private String departamento;
 	
 	@ManyToMany
 	private List<Asignaturas> imparte;
 	
-	private static final long serialVersionUID = 1L;
+	@OneToMany(mappedBy="profesorAsociado")
+	private List<InformeActividades> informes;
+	
 
 	public Profesor() {
 		super();
@@ -32,8 +35,18 @@ public class Profesor extends Usuario {
 		this.departamento = d;	
 	}
 	*/
+	
+	
 	public String getDepartamento() {
 		return this.departamento;
+	}
+
+	public List<InformeActividades> getInformes() {
+		return informes;
+	}
+
+	public void setInformes(List<InformeActividades> informes) {
+		this.informes = informes;
 	}
 
 	public void setDepartamento(String departamento) {
