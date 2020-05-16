@@ -5,13 +5,14 @@ Id * To change this template, choose Tools | Templates
 package es.uma.informatica.sii.agendaee.entidades;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 
 /**
@@ -38,6 +39,10 @@ public class Usuario implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private Rol rol;
 	private static final long serialVersionUID = 1L;
+	
+	@OneToMany(mappedBy="usuario")
+	private List<Inscripciones> inscripciones;
+	
 
 	public Usuario() {
 		super();
@@ -95,12 +100,16 @@ public class Usuario implements Serializable {
 		this.rol = rol;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		return result;
+	
+
+	
+	
+	public List<Inscripciones> getInscripciones() {
+		return inscripciones;
+	}
+
+	public void setInscripciones(List<Inscripciones> inscripciones) {
+		this.inscripciones = inscripciones;
 	}
 
 	@Override
@@ -118,6 +127,14 @@ public class Usuario implements Serializable {
 		} else if (!email.equals(other.email))
 			return false;
 		return true;
+	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		return result;
 	}
 
 	@Override

@@ -26,7 +26,7 @@ public class Asignaturas implements Serializable {
 	
 	@ManyToOne
 	@JoinColumn(name = "centro")
-	private Centro ensenia;
+	private Centro centro;
 	
 	@ManyToMany(mappedBy = "matriculadoEn")
 	private List<Alumno> estaCursando;
@@ -37,8 +37,9 @@ public class Asignaturas implements Serializable {
 	@ManyToMany(mappedBy = "compuestoDe")
 	private List<Curriculum> incluidasEn;
 	
-	@ManyToMany(mappedBy = "requieren")
-	private List<Requisitos> compuestoDe;
+	@ManyToMany(mappedBy = "asignaturas")
+	private List<Servicios> servicios;
+	
 	
 	
 	private static final long serialVersionUID = 1L;
@@ -88,23 +89,59 @@ public class Asignaturas implements Serializable {
 	public void setImpartidoPor(List<Profesor> impartidoPor) {
 		this.impartidoPor = impartidoPor;
 	}
-	public Centro getEnsenia() {
-		return ensenia;
+	
+	
+	
+	public Centro getCentro() {
+		return centro;
 	}
-	public void setEnsenia(Centro ensenia) {
-		this.ensenia = ensenia;
+
+	public void setCentro(Centro centro) {
+		this.centro = centro;
 	}
+
 	public List<Curriculum> getIncluidasEn() {
 		return incluidasEn;
 	}
 	public void setIncluidasEn(List<Curriculum> incluidasEn) {
 		this.incluidasEn = incluidasEn;
 	}
-	public List<Requisitos> getCompuestoDe() {
-		return compuestoDe;
+
+	public List<Servicios> getServicios() {
+		return servicios;
 	}
-	public void setCompuestoDe(List<Requisitos> compuestoDe) {
-		this.compuestoDe = compuestoDe;
+
+	public void setServicios(List<Servicios> servicios) {
+		this.servicios = servicios;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((codigoAsignatura == null) ? 0 : codigoAsignatura.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Asignaturas other = (Asignaturas) obj;
+		if (codigoAsignatura == null) {
+			if (other.codigoAsignatura != null)
+				return false;
+		} else if (!codigoAsignatura.equals(other.codigoAsignatura))
+			return false;
+		return true;
+	}
+	
+	
+	
+	
    
 }

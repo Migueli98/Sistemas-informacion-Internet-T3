@@ -10,8 +10,8 @@
   	<class>es.uma.informatica.sii.agendaee.entidades.Centro</class>
   	<class>es.uma.informatica.sii.agendaee.entidades.Curriculum</class>
   	<class>es.uma.informatica.sii.agendaee.entidades.Profesor</class>
-  	<class>es.uma.informatica.sii.agendaee.entidades.Requisitos</class>
   	<class>es.uma.informatica.sii.agendaee.entidades.InformeActividades</class>
+  	<class>es.uma.informatica.sii.agendaee.entidades.Inscripciones</class>
     <properties>
     	<property name="javax.persistence.schema-generation.database.action" value="create"/>
     	<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/sii"/>

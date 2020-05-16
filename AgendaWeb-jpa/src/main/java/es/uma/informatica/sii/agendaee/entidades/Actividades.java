@@ -61,6 +61,9 @@ public class Actividades implements Serializable {
 	
 	@OneToMany(mappedBy="actividades")
 	private List<InformeActividades> informes;
+	
+	@OneToMany(mappedBy="actividad")
+	private List<Inscripciones> inscripciones;
 
 	public Actividades() {
 		super();
@@ -153,6 +156,15 @@ public class Actividades implements Serializable {
 	public void setInformes(List<InformeActividades> informes) {
 		this.informes = informes;
 	}
+
+	public List<Inscripciones> getInscripciones() {
+		return inscripciones;
+	}
+
+	public void setInscripciones(List<Inscripciones> inscripciones) {
+		this.inscripciones = inscripciones;
+	}
+	
 	
 	
    

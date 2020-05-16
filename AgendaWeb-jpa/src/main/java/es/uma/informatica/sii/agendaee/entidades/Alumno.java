@@ -2,7 +2,7 @@ package es.uma.informatica.sii.agendaee.entidades;
 
 
 
-import java.io.Serializable;
+
 import java.lang.Integer;
 import java.util.List;
 
@@ -16,7 +16,7 @@ import javax.persistence.*;
 
 public class Alumno extends Usuario{
 
-	@Column(nullable = false)
+
 	private Integer creditos;
 	private Integer horasLibre;
 	
@@ -82,6 +82,26 @@ public class Alumno extends Usuario{
 	public void setInformes(List<InformeActividades> informes) {
 		this.informes = informes;
 	}
+	
+	@Override
+	public int hashCode() {
+		int result = super.hashCode();
+		return result;
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		
+		return true;
+	}
+	
    
 	
 }

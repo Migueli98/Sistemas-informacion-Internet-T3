@@ -1,10 +1,13 @@
 package es.uma.informatica.sii.agendaee.entidades;
 
 import java.io.Serializable;
-import java.lang.Long;
-import java.lang.String;
+import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  * Entity implementation class for Entity: Centro
@@ -19,6 +22,9 @@ public class Centro implements Serializable {
 	private Long codigoCentro;
 	@Column(nullable = false)
 	private String nombreCentro;
+	
+	@OneToMany(mappedBy="centro")
+	private List<Asignaturas> asignaturas;
 	
 	private static final long serialVersionUID = 1L;
 
@@ -39,5 +45,14 @@ public class Centro implements Serializable {
 	public void setNombreCentro(String nombreCentro) {
 		this.nombreCentro = nombreCentro;
 	}
+	public List<Asignaturas> getAsignaturas() {
+		return asignaturas;
+	}
+	public void setAsignaturas(List<Asignaturas> asignaturas) {
+		this.asignaturas = asignaturas;
+	}
+	
+	
+	
    
 }

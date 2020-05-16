@@ -8,8 +8,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
 
 /**
  * Entity implementation class for Entity: Servicios
@@ -19,6 +21,23 @@ import javax.persistence.OneToMany;
 
 public class Servicios implements Serializable {
 
+	private enum diasSemana {
+		LUNES,
+		MARTES,
+		MIERCOLES,
+		JUEVES,
+		VIERNES,
+		SABADO,
+		DOMINGO
+	};
+	
+	private enum idioma {
+		INGLES,
+		ALEMAN,
+		FRANCES,
+		ESPAÑOL
+	};
+	
 	@Id @GeneratedValue
 	private Long codigoServicio;
 	@Column(nullable = false)
@@ -32,6 +51,10 @@ public class Servicios implements Serializable {
 	@Column(nullable = false)
 	private String zona;
 	
+	private idioma idiomas;
+	private String experienciaLaboral;
+	private diasSemana disponibilidadHoraria;
+	
 	@ManyToOne
 	@JoinColumn(name = "ong")
 	private Ong ong;
@@ -39,6 +62,9 @@ public class Servicios implements Serializable {
 	@OneToMany(mappedBy="servicio")
 	private List<Actividades> actividades;
 	
+	@ManyToMany
+	@JoinColumn(name ="asignaturas")
+	private List<Asignaturas> asignaturas;
 	
 	private static final long serialVersionUID = 1L;
 
@@ -118,6 +144,39 @@ public class Servicios implements Serializable {
 	public void setActividades(List<Actividades> actividades) {
 		this.actividades = actividades;
 	}
+
+	public List<Asignaturas> getAsignaturas() {
+		return asignaturas;
+	}
+
+	public void setAsignaturas(List<Asignaturas> asignaturas) {
+		this.asignaturas = asignaturas;
+	}
+
+	public idioma getIdiomas() {
+		return idiomas;
+	}
+
+	public void setIdiomas(idioma idiomas) {
+		this.idiomas = idiomas;
+	}
+
+	public String getExperienciaLaboral() {
+		return experienciaLaboral;
+	}
+
+	public void setExperienciaLaboral(String experienciaLaboral) {
+		this.experienciaLaboral = experienciaLaboral;
+	}
+
+	public diasSemana getDisponibilidadHoraria() {
+		return disponibilidadHoraria;
+	}
+
+	public void setDisponibilidadHoraria(diasSemana disponibilidadHoraria) {
+		this.disponibilidadHoraria = disponibilidadHoraria;
+	}
+	
 	
 	
    

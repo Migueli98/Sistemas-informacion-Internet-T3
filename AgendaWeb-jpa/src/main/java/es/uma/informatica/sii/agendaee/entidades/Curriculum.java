@@ -2,7 +2,7 @@ package es.uma.informatica.sii.agendaee.entidades;
 
 import java.io.Serializable;
 import java.lang.String;
-import java.util.Date;
+
 import java.util.List;
 
 import javax.persistence.*;
@@ -15,6 +15,8 @@ import javax.persistence.*;
 
 public class Curriculum implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	private enum diasSemana {
 		LUNES,
 		MARTES,
@@ -37,12 +39,14 @@ public class Curriculum implements Serializable {
 	
 	
 	@Column(nullable = false)
+	@Enumerated(EnumType.STRING)
 	private idioma idiomas;
 	@Column(nullable = false)
 	private String experienciaLaboral;
 	@Column(nullable = false)
+	@Enumerated(EnumType.STRING)
 	private diasSemana disponibilidadHoraria;
-	private static final long serialVersionUID = 1L;
+	
 
 	@ManyToMany
 	private List<Asignaturas> compuestoDe;

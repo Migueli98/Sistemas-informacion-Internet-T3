@@ -14,14 +14,10 @@ import javax.persistence.*;
 
 public class Ong extends Usuario {
 
-	@Column(nullable = false)
 	private String nombreONG;
-	@Column(nullable = false)
 	private String direccion;
 	private String telefono;
-	@Column(nullable = false)
 	private String ciudad;
-	@Column(nullable = false)
 	private String pais;
 	private String paginaWeb;
 	private static final long serialVersionUID = 1L;
@@ -87,11 +83,10 @@ public class Ong extends Usuario {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((nombreONG == null) ? 0 : nombreONG.hashCode());
 		return result;
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -101,14 +96,10 @@ public class Ong extends Usuario {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Ong other = (Ong) obj;
-		if (nombreONG == null) {
-			if (other.nombreONG != null)
-				return false;
-		} else if (!nombreONG.equals(other.nombreONG))
-			return false;
+		
 		return true;
 	}
+	
 	
 	
    
