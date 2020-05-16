@@ -1,0 +1,177 @@
+body {
+    background-color: #ffffff;
+    font-size: 12px;
+    font-family: Verdana, "Verdana CE",  Arial, "Arial CE", "Lucida Grande CE", lucida, "Helvetica CE", sans-serif;
+    color: #000000;  
+    margin: 10px;
+}
+
+h1 {
+    font-family: Arial, "Arial CE", "Lucida Grande CE", lucida, "Helvetica CE", sans-serif;
+    border-bottom: 1px solid #AFAFAF; 
+    font-size:  24px;
+    font-weight: bold;
+    margin: 0px;
+    padding: 0px;
+    color: #D20005;
+    text-align:center;
+}
+
+h2 {
+    color: white;
+}
+
+h3 {
+	font-family: Arial, "Arial CE", "Lucida Grande CE", lucida, "Helvetica CE", sans-serif;
+    color: black;
+    font-weight: bold;
+    margin: 0px;
+    padding: 0px;
+    font-size: 18px;
+    text-align:center;
+}
+
+h4{
+	font-family: Arial, "Arial CE", "Lucida Grande CE", lucida, "Helvetica CE", sans-serif;
+    border-bottom: 1px solid #AFAFAF; 
+    font-size:  18px;
+    font-weight: bold;
+    margin: 0px;
+    padding: 0px;
+    color: #045491;
+    text-align:center;
+	
+}
+
+a:link, a:visited {
+  color: #045491;
+  font-weight : bold;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+a:link:hover, a:visited:hover  {
+  color: #045491;
+  font-weight : bold;
+  font-size: 14px;
+  text-decoration : underline;
+}
+
+.email{  
+    margin: 15px;
+    border-radius: 10px;
+    background-color: white; 
+}
+
+.login-box{
+    width: 325px;
+    height: 200px;
+    background: #036fab;
+    text-align: center;
+    align-items: center;
+    border-radius: 20px;
+    
+    margin-left: auto;
+  	margin-right: auto;
+	display : block;
+    
+}
+
+.input{
+	border-style: none;
+	margin: 5px;
+	width:80%;
+}
+
+.btnIni{
+    margin: 20px;
+    border-radius: 10px;
+    background-color: cornflowerblue;
+    color:white;
+}
+
+/*Este boton para modificar*/
+.btnMod{
+    margin: 20px;
+    border-radius: 10px;
+    background-color: orange;
+    color:black;
+}
+
+
+/*Este boton para eliminar */
+.btnBorrar{
+	margin: 20px;
+    border-radius: 10px;
+    background-color: red;
+    color:white;
+}
+
+.btnCancelar{
+	margin: 20px;
+    border-radius: 10px;
+    background-color: red;
+    color:white;
+}
+
+.btnVer{
+	margin: 20px;
+    border-radius: 10px;
+    background-color: #0080ff;
+    color:white;
+}
+
+.btnVolver{
+	margin: 20px;
+    border-radius: 10px;
+    background-color: #ffffff;
+    color:black;
+}
+
+.btnModificar{
+	margin: 20px;
+    border-radius: 10px;
+    background-color: orange;
+    color:white;
+}
+
+.btnCrear{
+	margin: 20px;
+    border-radius: 10px;
+    background-color: green;
+    color:white;
+}
+
+.btnGuardar{
+	margin: 20px;
+    border-radius: 10px;
+    background-color: green;
+    color:white;
+}
+
+
+.parrafowelcome{
+	width: 80%;
+    margin: 0 auto;
+    text-align: center;
+    padding: 20px;
+	font-size: 16px;
+	background: none;
+	font-weight : bold;
+	
+}
+
+img{
+	margin-left: auto;
+  	margin-right: auto;
+	display : block;
+}
+
+
+.email5{
+    margin: 20px;
+    border-radius: 10px;
+   color: white;
+    background-color: #EF7F1A;
+}
+

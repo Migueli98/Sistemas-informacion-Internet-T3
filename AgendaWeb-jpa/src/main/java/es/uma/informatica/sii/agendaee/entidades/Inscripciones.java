@@ -25,7 +25,7 @@ public class Inscripciones implements Serializable {
 	};
 	
 	
-	@Id
+	@Id @GeneratedValue
 	private Long id;
 
 	@Column(nullable = false)

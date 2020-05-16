@@ -1,0 +1,230 @@
+<ui:composition template="/WEB-INF/templates/plantilla.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+                
+               
+    <ui:define name="title">Mi perfil</ui:define>
+    <ui:define name="content">
+    
+        <c:choose>
+            
+            <c:when test="#{controlAutorizacion.getEmail().getRol() == 'ALUMNO'}">
+         		<h1>Mi Perfil</h1>
+                <h:form id="controlAutorizacion">
+                    <div class="bordeTablaActividades">
+                    <table id="tablaListaActividades">
+                                <tr>
+                                        <th>ID </th>
+                                        <td><h:outputText  value="#{controlAutorizacion.email.id}"/></td>
+                                        
+                                 </tr>
+                                   <tr>
+                                        <th>Email </th>
+                                        <td><h:inputText  value="#{controlAutorizacion.email.email}"/></td>
+                                        
+                                 </tr>
+                                   <tr>
+                                        <th>Contraseña </th>
+                                        <td><h:inputText  value="#{controlAutorizacion.email.contraseña}"/></td>
+                                        
+                                 </tr>
+                                   <tr>
+                                        <th>Rol </th>
+                                        <td><h:outputText  value="#{controlAutorizacion.email.rol}"/></td>
+                                        
+                                 </tr>
+                                   <tr>
+                                        <th>Apellido </th>
+                                        <td><h:inputText  value="#{controlAutorizacion.email.apellido}"/></td>
+                                        
+                                 </tr>
+                                   <tr>
+                                        <th>Nombre </th>
+                                        <td><h:inputText  value="#{controlAutorizacion.email.nombre}"/></td>
+                                        
+                                 </tr>
+                                 <tr>
+                                        <th>Creditos</th>
+                                        <td><h:inputText  value="#{controlAutorizacion.email.creditos}"/></td>
+                                        
+                                 </tr>
+                                 
+                                 <tr>
+                                        <th>Horas Libre</th>
+                                        <td><h:inputText  value="#{controlAutorizacion.email.horasLibre}"/></td>
+                                        
+                                 </tr>
+                                 
+       
+                    </table>
+                </div>
+                </h:form>
+                       
+                  
+                <h:form>            
+                    <h:commandButton styleClass="btnGuardar"  value="Guardar" action="miPerfil.xhtml" />
+                    <h:commandButton styleClass="btnVolver"  value="Volver" action="miPerfil.xhtml" />
+                    
+          			
+                </h:form>
+               
+            </c:when> 
+            
+            <c:when test="#{controlAutorizacion.getEmail().getRol() == 'PASPDI'}">
+         		<h1>Mi Perfil</h1>
+                <h:form id="controlAutorizacion">
+                    <div class="bordeTablaActividades">
+                    <table id="tablaListaActividades">
+                                <tr>
+                                        <th>ID </th>
+                                        <td><h:outputText  value="#{controlAutorizacion.email.id}"/></td>
+                                        
+                                 </tr>
+                                   <tr>
+                                        <th>Email </th>
+                                        <td><h:inputText  value="#{controlAutorizacion.email.email}"/></td>
+                                        
+                                 </tr>
+                                   
+                                   <tr>
+                                        <th>Rol </th>
+                                        <td><h:outputText  value="#{controlAutorizacion.email.rol}"/></td>
+                                        
+                                 </tr>
+                                   <tr>
+                                        <th>Nombre </th>
+                                        <td><h:inputText  value="#{controlAutorizacion.email.nombre}"/></td>
+                                        
+                                 </tr>
+                                   <tr>
+                                        <th>Apellido </th>
+                                        <td><h:inputText  value="#{controlAutorizacion.email.apellido}"/></td>
+                                        
+                                 </tr>
+                                 <tr>
+                                        <th>Departamento</th>
+                                        <td><h:inputText  value="#{controlAutorizacion.email.departamento}"/></td>
+                                        
+                                 </tr>
+
+                    </table>
+                </div>
+                </h:form>
+                       
+                  
+                <h:form>            
+  					 <h:commandButton styleClass="btnGuardar"  value="Guardar" action="miPerfil.xhtml" />
+                    <h:commandButton styleClass="btnVolver"  value="Volver" action="miPerfil.xhtml" />          			
+                </h:form>
+               
+            </c:when> 
+            
+            <c:when test="#{controlAutorizacion.getEmail().getRol() == 'ADMIN'}">
+         		<h1>Mi Perfil (SUPERUSUARIO)</h1>
+                <h:form id="controlAutorizacion">
+                    <div class="bordeTablaActividades">
+                    <table id="tablaListaActividades">
+                                <tr>
+                                        <th>ID </th>
+                                        <td><h:outputText  value="#{controlAutorizacion.email.id}"/></td>
+                                        
+                                 </tr>
+                                   <tr>
+                                        <th>Email </th>
+                                        <td><h:inputText  value="#{controlAutorizacion.email.email}"/></td>
+                                        
+                                 </tr>
+                                   
+                                   <tr>
+                                        <th>Rol </th>
+                                        <td><h:outputText  value="#{controlAutorizacion.email.rol}"/></td>
+                                        
+                                 </tr>
+                                   <tr>
+                                        <th>Nombre </th>
+                                        <td><h:inputText  value="#{controlAutorizacion.email.nombre}"/></td>
+                                        
+                                 </tr>
+                                   <tr>
+                                        <th>Apellido </th>
+                                        <td><h:inputText  value="#{controlAutorizacion.email.apellido}"/></td>
+                                        
+                                 </tr>
+                                 
+
+                    </table>
+                </div>
+                </h:form>
+                       
+                  
+                <h:form>            
+					   <h:commandButton styleClass="btnGuardar"  value="Guardar" action="miPerfil.xhtml" />
+                    <h:commandButton styleClass="btnVolver"  value="Volver" action="miPerfil.xhtml" />          			
+                </h:form>
+               
+            </c:when>
+            
+            <c:when test="#{controlAutorizacion.getEmail().getRol() == 'ONG'}">
+         		<h1>Mi Perfil</h1>
+                <h:form id="controlAutorizacion">
+                    <div class="bordeTablaActividades">
+                    <table id="tablaListaActividades">
+                                <tr>
+                                        <th>ID </th>
+                                        <td><h:outputText  value="#{controlAutorizacion.email.id}"/></td>
+                                        
+                                 </tr>
+                                   <tr>
+                                        <th>Email </th>
+                                        <td><h:inputText  value="#{controlAutorizacion.email.email}"/></td>
+                                        
+                                 </tr>
+                                   
+                                   <tr>
+                                        <th>Rol </th>
+                                        <td><h:outputText  value="#{controlAutorizacion.email.rol}"/></td>
+                                        
+                                 </tr>
+                                   <tr>
+                                        <th>Nombre </th>
+                                        <td><h:inputText  value="#{controlAutorizacion.email.nombreONG}"/></td>
+                                        
+                                 </tr>
+                                   <tr>
+                                        <th>Direccion </th>
+                                        <td><h:inputText  value="#{controlAutorizacion.email.direccion}"/></td>
+                                        
+                                 </tr>
+                                 <tr>
+                                        <th>Ciudad </th>
+                                        <td><h:inputText  value="#{controlAutorizacion.email.ciudad}"/></td>
+                                        
+                                 </tr>
+                                 <tr>
+                                        <th>Pais </th>
+                                        <td><h:inputText  value="#{controlAutorizacion.email.pais}"/></td>
+                                        
+                                 </tr>
+                                 
+
+                    </table>
+                </div>
+                </h:form>
+                       
+                  
+                <h:form>            
+				    <h:commandButton styleClass="btnGuardar"  value="Guardar" action="miPerfil.xhtml" />
+                    <h:commandButton styleClass="btnVolver"  value="Volver" action="miPerfil.xhtml" />          			
+                </h:form>
+               
+            </c:when>
+            
+            <c:otherwise>
+                <ui:include src="/WEB-INF/templates/errorAutorizacion.xhtml"/>
+            </c:otherwise>
+        </c:choose>
+    </ui:define>
+</ui:composition>

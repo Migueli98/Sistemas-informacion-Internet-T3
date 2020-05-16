@@ -1,0 +1,51 @@
+<ui:composition template="/WEB-INF/templates/plantilla.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+
+	<ui:define name="title">Informe actividad</ui:define>
+	<ui:define name="content">
+		<c:choose>
+			<c:when
+				test="#{controlAutorizacion.getEmail().getRol() == 'ONG'}">
+				
+				
+				<h1>Informes Actividad</h1>
+				<ui:repeat var="i" value= "#{controladorValoraciones.informesValorados}">
+				
+				
+
+					<h:form id="ListaActividades">
+							<table id="tablaListaActividades">
+								<tr>
+									<td>ID Informe Actividad</td>
+									<td><h:outputText value="#{i.idInforme}" /></td>
+								</tr>
+								<tr>
+									<td>Valoracion</td>
+									<td><h:outputText value="#{i.valoracionAlumno}" /></td>
+								</tr>
+								
+									
+							</table>
+							
+							
+							
+						</h:form>
+
+
+				</ui:repeat>
+			<h:form>
+			 <h:commandButton styleClass="btnVolver" value ="Volver" action="valoraciones.xhtml"  />
+			 </h:form>
+			</c:when>
+
+
+			<c:otherwise>
+				<ui:include src="/WEB-INF/templates/errorAutorizacion.xhtml" />
+			</c:otherwise>
+		</c:choose>
+	</ui:define>
+</ui:composition>

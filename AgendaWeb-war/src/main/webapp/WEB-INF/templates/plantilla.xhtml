@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet library="css" name="default.css"/>
+        <h:outputStylesheet library="css" name="cssLayout.css"/>
+        <title>
+            <ui:insert name="title">Facelets Template</ui:insert>
+        </title>
+    </h:head>
+
+    <h:body>
+        <div id="top" class="top">
+       		<div class="LogoUMA">
+            	<center>
+            	<img alt="UMA LOGO" width="500" height="100" src="./resources/pictures/logo_uma_entero.png"/>
+            	</center>
+           	</div>
+        </div>
+        <div id="top1" class="top">
+        	<center>
+            <h:form id="menu">
+                <ul class="menulist">
+
+                    <!-- Home -->
+                    <c:if test="#{controlAutorizacion.email.rol != null}">
+                    <li><h:commandLink action="#{controlAutorizacion.home()}" value="Home"/></li>
+                    </c:if>
+
+                    <!-- Opciones de alumnos -->
+                    <c:if test="#{controlAutorizacion.email.rol == 'ALUMNO'}">
+                    <li><h:commandLink action="#{controlAutorizacion.verBuscarActividades()}" value="Buscar actividades"/></li>
+                 <li><h:commandLink action="#{controlAutorizacion.MisActividades()}" value="Mis actividades"/></li>
+                    <li><h:commandLink action="#{controlAutorizacion.inscripcionActividad()}" value="Inscripciones"/></li>
+                    <li><h:commandLink action="#{controlAutorizacion.miPerfil()}" value="Mi perfil"/></li>
+                    </c:if>
+
+                    <!-- Opciones de paspdi -->
+                    <c:if test="#{controlAutorizacion.email.rol == 'PASPDI'}">
+                    <li><h:commandLink action="#{controlAutorizacion.verBuscarActividades()}" value="Buscar actividades"/></li>
+                    <li><h:commandLink action="#{controlAutorizacion.MisActividades()}" value="Mis actividades"/></li>
+                    <li><h:commandLink action="#{controlAutorizacion.inscripcionActividad()}" value="Inscripciones"/></li>
+                    <li><h:commandLink action="#{controlAutorizacion.proyectosAdPP()}" value="Proyectos"/></li>
+                    <li><h:commandLink action="#{controlAutorizacion.evaluarParticipante()}" value="Evaluar alumno"/></li>
+                    <li><h:commandLink action="#{controlAutorizacion.propuestasOng()}" value="Solicitudes Servicios"/></li>
+                    <li><h:commandLink action="#{controlAutorizacion.supervisionActividad()}" value="Supervisiones"/></li>
+                    <li><h:commandLink action="#{controlAutorizacion.miPerfil()}" value="Mi perfil"/></li>
+                    </c:if>
+
+                    <!-- Opciones de ong -->
+                    <c:if test="#{controlAutorizacion.email.rol == 'ONG'}">
+                    <li><h:commandLink action="#{controlAutorizacion.serviciosActivos()}" value="Servicios activos"/></li>
+                    <li><h:commandLink action="#{controlAutorizacion.propuestasOng()}" value="Propuestas"/></li>
+                    <li><h:commandLink action="#{controlAutorizacion.evaluarParticipante()}" value="Evaluar participantes"/></li>
+                    <li><h:commandLink action="#{controlAutorizacion.valoraciones()}" value="Valoraciones"/></li>
+                    <li><h:commandLink action="#{controlAutorizacion.supervisionActividad()}" value="Supervisiones"/></li>
+                    <li><h:commandLink action="#{controlAutorizacion.miPerfil()}" value="Mi perfil"/></li>
+                    </c:if>
+
+                    <!-- Opciones de admin -->
+                    <c:if test="#{controlAutorizacion.email.rol == 'ADMIN'}">
+                    <li><h:commandLink action="#{controlAutorizacion.verBuscarActividades()}" value="Actividades"/></li>
+                    <li><h:commandLink action="#{controlAutorizacion.verUsuarios()}" value="Ver usuarios"/></li>
+                    <li><h:commandLink action="#{controlAutorizacion.verOngs()}" value="ONGs"/></li>
+                    <li><h:commandLink action="#{controlAutorizacion.proyectosAdPP()}" value="Proyectos"/></li>
+                    <li><h:commandLink action="#{controlAutorizacion.propuestasOng()}" value="Solicitudes servicios"/></li>
+                    <li><h:commandLink action="#{controlAutorizacion.asignaturas()}" value="Asignaturas"/></li>
+                    <li><h:commandLink action="#{controlAutorizacion.asignarProfesores()}" value="Asignar profesor"/></li>
+                    <li><h:commandLink action="#{controlAutorizacion.miPerfil()}" value="Mi perfil"/></li>
+                    </c:if>
+
+                    <!-- Salir -->
+                    <c:if test="#{controlAutorizacion.email != null}">
+                        <li><h:commandLink action="#{controlAutorizacion.logout()}" value="Salir"/></li>
+                    </c:if>
+                </ul>
+            </h:form>
+            </center>
+        </div>
+
+        <div id="content" class="center_content">
+            <ui:insert name="content">Content</ui:insert>
+        </div>
+        
+        
+        <div id="piePag" class="piePag">
+            © Copyright 2020 Olea and Company<br/>
+        </div>
+        
+    </h:body>
+
+</html>

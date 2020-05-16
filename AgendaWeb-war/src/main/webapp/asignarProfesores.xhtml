@@ -1,0 +1,70 @@
+<ui:composition template="/WEB-INF/templates/plantilla.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+	<ui:define name="title">Asignar Profesores</ui:define>
+	<ui:define name="content">
+		<c:choose>
+			<c:when test="#{controlAutorizacion.getEmail().getRol() == 'ADMIN' }">
+
+				<h1>Asignar profesor</h1>
+				<h:form id="controlAutorizacion">
+				<div class="bordeTablaActividades">
+				
+					<table id="tablaListaActividades">
+						<thead>
+							<tr>
+								<th>Nombre</th>
+								<th>id</th>
+								<th>Tipo</th>
+								<th>Fecha</th>
+								<th>Lugar</th>
+								<th>Descripcion</th>
+								<th>Estado</th>
+								<th>Asignar Profesores</th>
+							</tr>
+						</thead>
+
+
+						<tbody>
+							<ui:repeat var="i" value="#{controladorActividades.actividades}">
+								<tr>
+									<td>#{i.nombreActividad}</td>
+									<td>#{i.idActividad}</td>
+									<td>#{i.tipoActividad}</td>
+									<td>#{i.fechaActividad}</td>
+									<td>#{i.lugarRealizacion}</td>
+									<td>#{i.descripcion}</td>
+									<td>#{i.estado}</td>
+									<td><h:selectBooleanCheckbox value=""/> Pepe Torres 
+									
+										<h:selectBooleanCheckbox
+											value="" /> Eva Millan <h:selectBooleanCheckbox value="" />
+										Fernando Vega <h:selectBooleanCheckbox value="" /> Francisco
+										Chicano <h:selectBooleanCheckbox value="" /> Concepcion
+										Carretero</td>
+
+								</tr>
+
+
+							</ui:repeat>
+						</tbody>
+					</table>
+
+				</div>
+				</h:form>
+				<h:form>
+											<h:column>
+												<h:commandButton styleClass="btnCrear"
+													value="Guardar Profesores" action="asignarProfesores.xhtml" /></h:column>
+										</h:form>
+			</c:when>
+
+			<c:otherwise>
+				<ui:include src="/WEB-INF/templates/errorAutorizacion.xhtml" />
+			</c:otherwise>
+		</c:choose>
+	</ui:define>
+</ui:composition>
