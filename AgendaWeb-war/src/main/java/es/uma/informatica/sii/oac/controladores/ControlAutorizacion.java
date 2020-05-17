@@ -8,10 +8,12 @@ import java.io.Serializable;
 
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import es.uma.informatica.sii.agendaee.entidades.Alumno;
 import es.uma.informatica.sii.agendaee.entidades.Usuario;
+import es.uma.informatica.sii.oac.negocio.Negocio;
 
 /**
 *
@@ -24,7 +26,10 @@ public class ControlAutorizacion implements Serializable {
 
    private Usuario email;
    private Alumno alumno;
-
+   
+   @Inject 
+   private Negocio bd;
+   
    public void setEmail(Usuario usuario) {
        this.email = usuario;
    }
@@ -131,4 +136,6 @@ public class ControlAutorizacion implements Serializable {
    public String asignarProfesores() {
 	   return "asignarProfesores.xhtml";
    }
+   
+   
 }

@@ -6,6 +6,7 @@
 package es.uma.informatica.sii.oac.negocio;
 
 import java.net.URI;
+import java.util.List;
 import java.util.Random;
 import java.util.logging.Logger;
 
@@ -14,11 +15,19 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.ws.rs.core.UriBuilder;
 
+import es.uma.informatica.sii.agendaee.entidades.Actividades;
+import es.uma.informatica.sii.agendaee.entidades.Alumno;
+import es.uma.informatica.sii.agendaee.entidades.Asignaturas;
+import es.uma.informatica.sii.agendaee.entidades.Centro;
+import es.uma.informatica.sii.agendaee.entidades.Curriculum;
+import es.uma.informatica.sii.agendaee.entidades.InformeActividades;
+import es.uma.informatica.sii.agendaee.entidades.Inscripciones;
+import es.uma.informatica.sii.agendaee.entidades.Ong;
+import es.uma.informatica.sii.agendaee.entidades.Profesor;
+import es.uma.informatica.sii.agendaee.entidades.Servicios;
+import es.uma.informatica.sii.agendaee.entidades.Usuario;
 
-/**
- *
- * @author francis
- */
+
 @Stateless
 public class NegocioImpl implements Negocio {
 
@@ -27,6 +36,343 @@ public class NegocioImpl implements Negocio {
 
     @PersistenceContext(unitName = "OAC-EntidadesPU")
     private EntityManager em;
+    
+    @Override
+    public void compruebaLogin(Usuario u)  throws AprendizajeServicioException {
+    	Usuario uu = em.find(Usuario.class, u.getEmail());
+    	if (uu == null) {
+    		throw new CuentaInexistenteException();
+    	} else if (!u.getContrasenia().equals(uu.getContrasenia())) {
+    		throw new ContraseniaInvalidaException();
+    	}  	
+    }
+    
+    @Override
+    public Usuario refrescarUsuario(Usuario u)  throws AprendizajeServicioException {
+    	compruebaLogin(u);
+    	Usuario uu = em.find(Usuario.class, u.getEmail());
+    	em.refresh(uu);
+        return uu;
+    }
+    
+
+	@Override
+	public List<Actividades> allActividades() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Alumno> allAlumno() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Asignaturas> allAsignaturas() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Centro> allCentro() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Curriculum> allCurriculum() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<InformeActividades> allInformeActividades() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Inscripciones> allInscripciones() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Ong> allOng() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Profesor> allProfesor() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Servicios> allServicios() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Usuario> allUsuario() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void addActividades(Actividades a) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void addAlumno(Alumno a) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void addAsignaturas(Asignaturas a) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void addCentro(Centro a) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void addCurriculum(Curriculum a) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void addInformeActividades(InformeActividades a) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void addInscripciones(Inscripciones a) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void addOng(Ong a) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void addProfesor(Profesor a) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void addServicios(Servicios a) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void addUsuario(Usuario a) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteActividades(Actividades a) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteAlumno(Alumno a) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteAsignaturas(Asignaturas a) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteCentro(Centro a) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteCurriculum(Curriculum a) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteInformeActividades(InformeActividades a) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteInscripciones(Inscripciones a) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteOng(Ong a) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteProfesor(Profesor a) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteServicios(Servicios a) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteUsuario(Usuario a) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateActividades(Actividades a) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateAlumno(Alumno a) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateAsignaturas(Asignaturas a) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateCentro(Centro a) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateCurriculum(Curriculum a) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateOng(Ong a) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateProfesor(Profesor a) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateServicios(Servicios a) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateUsuario(Usuario a) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Actividades findActividades(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Alumno findAlumno(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Asignaturas findAsignaturas(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Centro findCentro(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Curriculum findCurriculum(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InformeActividades findInformeActividades(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Inscripciones findInscripciones(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Ong findOng(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Profesor findProfesor(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Servicios findServicios(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Usuario findUsuario(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
     
     

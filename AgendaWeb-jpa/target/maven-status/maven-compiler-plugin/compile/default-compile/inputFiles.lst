@@ -1,11 +1,11 @@
-D:\Users\cmart\Documents\UNIVERSIDAD\3er_Curso\2o_Cuatrimestre\Sist_Inf_Int\Practicas\Pr_6-EJB\AgendaWeb-master\AgendaWeb-jpa\src\main\java\es\uma\informatica\sii\agendaee\entidades\Asignaturas.java
-D:\Users\cmart\Documents\UNIVERSIDAD\3er_Curso\2o_Cuatrimestre\Sist_Inf_Int\Practicas\Pr_6-EJB\AgendaWeb-master\AgendaWeb-jpa\src\main\java\es\uma\informatica\sii\agendaee\entidades\Ong.java
-D:\Users\cmart\Documents\UNIVERSIDAD\3er_Curso\2o_Cuatrimestre\Sist_Inf_Int\Practicas\Pr_6-EJB\AgendaWeb-master\AgendaWeb-jpa\src\main\java\es\uma\informatica\sii\agendaee\entidades\Inscripciones.java
-D:\Users\cmart\Documents\UNIVERSIDAD\3er_Curso\2o_Cuatrimestre\Sist_Inf_Int\Practicas\Pr_6-EJB\AgendaWeb-master\AgendaWeb-jpa\src\main\java\es\uma\informatica\sii\agendaee\entidades\Centro.java
-D:\Users\cmart\Documents\UNIVERSIDAD\3er_Curso\2o_Cuatrimestre\Sist_Inf_Int\Practicas\Pr_6-EJB\AgendaWeb-master\AgendaWeb-jpa\src\main\java\es\uma\informatica\sii\agendaee\entidades\InformeActividades.java
-D:\Users\cmart\Documents\UNIVERSIDAD\3er_Curso\2o_Cuatrimestre\Sist_Inf_Int\Practicas\Pr_6-EJB\AgendaWeb-master\AgendaWeb-jpa\src\main\java\es\uma\informatica\sii\agendaee\entidades\Curriculum.java
-D:\Users\cmart\Documents\UNIVERSIDAD\3er_Curso\2o_Cuatrimestre\Sist_Inf_Int\Practicas\Pr_6-EJB\AgendaWeb-master\AgendaWeb-jpa\src\main\java\es\uma\informatica\sii\agendaee\entidades\Profesor.java
-D:\Users\cmart\Documents\UNIVERSIDAD\3er_Curso\2o_Cuatrimestre\Sist_Inf_Int\Practicas\Pr_6-EJB\AgendaWeb-master\AgendaWeb-jpa\src\main\java\es\uma\informatica\sii\agendaee\entidades\Servicios.java
-D:\Users\cmart\Documents\UNIVERSIDAD\3er_Curso\2o_Cuatrimestre\Sist_Inf_Int\Practicas\Pr_6-EJB\AgendaWeb-master\AgendaWeb-jpa\src\main\java\es\uma\informatica\sii\agendaee\entidades\Alumno.java
-D:\Users\cmart\Documents\UNIVERSIDAD\3er_Curso\2o_Cuatrimestre\Sist_Inf_Int\Practicas\Pr_6-EJB\AgendaWeb-master\AgendaWeb-jpa\src\main\java\es\uma\informatica\sii\agendaee\entidades\Actividades.java
-D:\Users\cmart\Documents\UNIVERSIDAD\3er_Curso\2o_Cuatrimestre\Sist_Inf_Int\Practicas\Pr_6-EJB\AgendaWeb-master\AgendaWeb-jpa\src\main\java\es\uma\informatica\sii\agendaee\entidades\Usuario.java
+C:\Users\anton\Desktop\Segundo Cuatrimestre\Sistemas de Información en Internet\workspace\AgendaWeb\AgendaWeb-jpa\src\main\java\es\uma\informatica\sii\agendaee\entidades\Alumno.java
+C:\Users\anton\Desktop\Segundo Cuatrimestre\Sistemas de Información en Internet\workspace\AgendaWeb\AgendaWeb-jpa\src\main\java\es\uma\informatica\sii\agendaee\entidades\Asignaturas.java
+C:\Users\anton\Desktop\Segundo Cuatrimestre\Sistemas de Información en Internet\workspace\AgendaWeb\AgendaWeb-jpa\src\main\java\es\uma\informatica\sii\agendaee\entidades\Usuario.java
+C:\Users\anton\Desktop\Segundo Cuatrimestre\Sistemas de Información en Internet\workspace\AgendaWeb\AgendaWeb-jpa\src\main\java\es\uma\informatica\sii\agendaee\entidades\Ong.java
+C:\Users\anton\Desktop\Segundo Cuatrimestre\Sistemas de Información en Internet\workspace\AgendaWeb\AgendaWeb-jpa\src\main\java\es\uma\informatica\sii\agendaee\entidades\Curriculum.java
+C:\Users\anton\Desktop\Segundo Cuatrimestre\Sistemas de Información en Internet\workspace\AgendaWeb\AgendaWeb-jpa\src\main\java\es\uma\informatica\sii\agendaee\entidades\InformeActividades.java
+C:\Users\anton\Desktop\Segundo Cuatrimestre\Sistemas de Información en Internet\workspace\AgendaWeb\AgendaWeb-jpa\src\main\java\es\uma\informatica\sii\agendaee\entidades\Centro.java
+C:\Users\anton\Desktop\Segundo Cuatrimestre\Sistemas de Información en Internet\workspace\AgendaWeb\AgendaWeb-jpa\src\main\java\es\uma\informatica\sii\agendaee\entidades\Actividades.java
+C:\Users\anton\Desktop\Segundo Cuatrimestre\Sistemas de Información en Internet\workspace\AgendaWeb\AgendaWeb-jpa\src\main\java\es\uma\informatica\sii\agendaee\entidades\Profesor.java
+C:\Users\anton\Desktop\Segundo Cuatrimestre\Sistemas de Información en Internet\workspace\AgendaWeb\AgendaWeb-jpa\src\main\java\es\uma\informatica\sii\agendaee\entidades\Inscripciones.java
+C:\Users\anton\Desktop\Segundo Cuatrimestre\Sistemas de Información en Internet\workspace\AgendaWeb\AgendaWeb-jpa\src\main\java\es\uma\informatica\sii\agendaee\entidades\Servicios.java

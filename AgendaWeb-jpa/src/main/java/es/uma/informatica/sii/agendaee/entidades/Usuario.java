@@ -12,13 +12,15 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
+@NamedQueries({
+    @NamedQuery(name="buscarUsuarioContra",query="select u from Usuario u where u.email=:email")
+})
 
-/**
- *
- * @author francis
- */
+
 @Entity
 public class Usuario implements Serializable {
     

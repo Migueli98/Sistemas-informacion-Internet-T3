@@ -1,8 +1,5 @@
-D:\Users\cmart\Documents\UNIVERSIDAD\3er_Curso\2o_Cuatrimestre\Sist_Inf_Int\Practicas\Pr_6-EJB\AgendaWeb-master\AgendaWeb-ejb\src\main\java\es\uma\informatica\sii\agendaee\negocio\CuentaInactivaException.java
-D:\Users\cmart\Documents\UNIVERSIDAD\3er_Curso\2o_Cuatrimestre\Sist_Inf_Int\Practicas\Pr_6-EJB\AgendaWeb-master\AgendaWeb-ejb\src\main\java\es\uma\informatica\sii\agendaee\negocio\ContraseniaInvalidaException.java
-D:\Users\cmart\Documents\UNIVERSIDAD\3er_Curso\2o_Cuatrimestre\Sist_Inf_Int\Practicas\Pr_6-EJB\AgendaWeb-master\AgendaWeb-ejb\src\main\java\es\uma\informatica\sii\agendaee\negocio\NegocioImpl.java
-D:\Users\cmart\Documents\UNIVERSIDAD\3er_Curso\2o_Cuatrimestre\Sist_Inf_Int\Practicas\Pr_6-EJB\AgendaWeb-master\AgendaWeb-ejb\src\main\java\es\uma\informatica\sii\agendaee\negocio\CuentaInexistenteException.java
-D:\Users\cmart\Documents\UNIVERSIDAD\3er_Curso\2o_Cuatrimestre\Sist_Inf_Int\Practicas\Pr_6-EJB\AgendaWeb-master\AgendaWeb-ejb\src\main\java\es\uma\informatica\sii\agendaee\negocio\AgendaException.java
-D:\Users\cmart\Documents\UNIVERSIDAD\3er_Curso\2o_Cuatrimestre\Sist_Inf_Int\Practicas\Pr_6-EJB\AgendaWeb-master\AgendaWeb-ejb\src\main\java\es\uma\informatica\sii\agendaee\negocio\Negocio.java
-D:\Users\cmart\Documents\UNIVERSIDAD\3er_Curso\2o_Cuatrimestre\Sist_Inf_Int\Practicas\Pr_6-EJB\AgendaWeb-master\AgendaWeb-ejb\src\main\java\es\uma\informatica\sii\agendaee\negocio\CuentaRepetidaException.java
-D:\Users\cmart\Documents\UNIVERSIDAD\3er_Curso\2o_Cuatrimestre\Sist_Inf_Int\Practicas\Pr_6-EJB\AgendaWeb-master\AgendaWeb-ejb\src\main\java\es\uma\informatica\sii\agendaee\negocio\ValidacionIncorrectaException.java
+C:\Users\anton\Desktop\Segundo Cuatrimestre\Sistemas de Información en Internet\workspace\AgendaWeb\AgendaWeb-ejb\src\main\java\es\uma\informatica\sii\oac\negocio\AprendizajeServicioException.java
+C:\Users\anton\Desktop\Segundo Cuatrimestre\Sistemas de Información en Internet\workspace\AgendaWeb\AgendaWeb-ejb\src\main\java\es\uma\informatica\sii\oac\negocio\NegocioImpl.java
+C:\Users\anton\Desktop\Segundo Cuatrimestre\Sistemas de Información en Internet\workspace\AgendaWeb\AgendaWeb-ejb\src\main\java\es\uma\informatica\sii\oac\negocio\Negocio.java
+C:\Users\anton\Desktop\Segundo Cuatrimestre\Sistemas de Información en Internet\workspace\AgendaWeb\AgendaWeb-ejb\src\main\java\es\uma\informatica\sii\oac\negocio\ContraseniaInvalidaException.java
+C:\Users\anton\Desktop\Segundo Cuatrimestre\Sistemas de Información en Internet\workspace\AgendaWeb\AgendaWeb-ejb\src\main\java\es\uma\informatica\sii\oac\negocio\CuentaInexistenteException.java

@@ -1,0 +1,5 @@
+es\uma\informatica\sii\oac\negocio\NegocioImpl.class
+es\uma\informatica\sii\oac\negocio\CuentaInexistenteException.class
+es\uma\informatica\sii\oac\negocio\Negocio.class
+es\uma\informatica\sii\oac\negocio\AprendizajeServicioException.class
+es\uma\informatica\sii\oac\negocio\ContraseniaInvalidaException.class
