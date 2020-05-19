@@ -3,6 +3,7 @@ es\uma\informatica\sii\agendaee\entidades\Inscripciones$estadoInscripcion.class
 es\uma\informatica\sii\agendaee\entidades\Usuario.class
 es\uma\informatica\sii\agendaee\entidades\Usuario$Rol.class
 es\uma\informatica\sii\agendaee\entidades\Curriculum$diasSemana.class
+es\uma\informatica\sii\agendaee\entidades\OAC_EntidadesPU.class
 es\uma\informatica\sii\agendaee\entidades\Ong.class
 es\uma\informatica\sii\agendaee\entidades\Curriculum.class
 es\uma\informatica\sii\agendaee\entidades\InformeActividades$Estado.class

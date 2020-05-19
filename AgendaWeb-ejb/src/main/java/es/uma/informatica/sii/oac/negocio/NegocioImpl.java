@@ -5,15 +5,13 @@
  */
 package es.uma.informatica.sii.oac.negocio;
 
-import java.net.URI;
 import java.util.List;
-import java.util.Random;
 import java.util.logging.Logger;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.ws.rs.core.UriBuilder;
+import javax.persistence.Query;
 
 import es.uma.informatica.sii.agendaee.entidades.Actividades;
 import es.uma.informatica.sii.agendaee.entidades.Alumno;
@@ -36,23 +34,39 @@ public class NegocioImpl implements Negocio {
 
     @PersistenceContext(unitName = "OAC-EntidadesPU")
     private EntityManager em;
-    
-    @Override
+
+
+	@Override
     public void compruebaLogin(Usuario u)  throws AprendizajeServicioException {
-    	Usuario uu = em.find(Usuario.class, u.getEmail());
+    	/*Usuario uu = em.find(Usuario.class, u.getEmail());
     	if (uu == null) {
     		throw new CuentaInexistenteException();
     	} else if (!u.getContrasenia().equals(uu.getContrasenia())) {
     		throw new ContraseniaInvalidaException();
-    	}  	
+    	} */
+		Query q = em.createNamedQuery("buscarUsuario").setParameter("email", u.getEmail());
+        List<Usuario> l = q.getResultList();
+        if (l.get(0)== null) {
+            throw new AprendizajeServicioException("La cuenta no existe.");
+        }
+
+        if (!l.get(0).getContrasenia().equals(u.getContrasenia())) {
+            throw new ContraseniaInvalidaException();
+        }
     }
-    
+
+
     @Override
     public Usuario refrescarUsuario(Usuario u)  throws AprendizajeServicioException {
-    	compruebaLogin(u);
+    	/*compruebaLogin(u);
     	Usuario uu = em.find(Usuario.class, u.getEmail());
     	em.refresh(uu);
-        return uu;
+        return uu;*/
+    	compruebaLogin(u);
+        Query q = em.createNamedQuery("buscarUsuario").setParameter("email", u.getEmail());
+        List<Usuario> l = q.getResultList();
+        em.refresh(l.get(0));
+        return l.get(0);
     }
     
 

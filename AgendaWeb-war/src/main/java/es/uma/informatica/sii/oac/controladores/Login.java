@@ -4,15 +4,12 @@
  */
 package es.uma.informatica.sii.oac.controladores;
 
-import java.util.List;
-
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import es.uma.informatica.sii.agendaee.entidades.Alumno;
 import es.uma.informatica.sii.agendaee.entidades.Usuario;
 import es.uma.informatica.sii.oac.negocio.AprendizajeServicioException;
 import es.uma.informatica.sii.oac.negocio.ContraseniaInvalidaException;

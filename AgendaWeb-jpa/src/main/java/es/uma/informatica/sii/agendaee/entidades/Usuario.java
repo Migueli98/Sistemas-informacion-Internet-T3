@@ -17,7 +17,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 @NamedQueries({
-    @NamedQuery(name="buscarUsuarioContra",query="select u from Usuario u where u.email=:email")
+    @NamedQuery(name="buscarUsuario",query="select u from Usuario u where u.email=:email")
 })
 
 
@@ -50,13 +50,13 @@ public class Usuario implements Serializable {
 		super();
 	}   
 	
-/*	public Usuario(Long ID, String EMAIL, String PASS, Rol R) {
-		id=ID;
+	public Usuario(String EMAIL, String PASS, Rol R) {
 		email=EMAIL;
-		contraseña=PASS;
+		contrasenia=PASS;
 		rol = R;
 	}
 	
+/*
 	public Usuario(Long ID, String EMAIL, String PASS, Rol R, String n, String ap) {
 		id=ID;
 		email=EMAIL;

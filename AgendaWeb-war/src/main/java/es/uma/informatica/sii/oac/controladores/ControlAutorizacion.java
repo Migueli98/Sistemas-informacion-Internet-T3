@@ -15,10 +15,7 @@ import es.uma.informatica.sii.agendaee.entidades.Alumno;
 import es.uma.informatica.sii.agendaee.entidades.Usuario;
 import es.uma.informatica.sii.oac.negocio.Negocio;
 
-/**
-*
-* @author francis
-*/
+
 
 @Named(value = "controlAutorizacion")
 @SessionScoped
@@ -64,6 +61,28 @@ public class ControlAutorizacion implements Serializable {
    	}
    	
    	return cad;
+   	/*
+	   if(getEmail()==null){
+           return "login.xhtml";
+       }
+       
+      
+       if(getEmail().getRol().equals(getEmail().getRol().ALUMNO)){
+           return "inicio.xhtml";
+       }
+       
+       if(getEmail().getRol().equals(getEmail().getRol().PASPDI)){
+           return "inicio.xhtml";
+       }
+       
+       if(getEmail().getRol().equals(getEmail().getRol().ONG)){
+           return "inicio.xhtml";
+       }
+       
+       if(getEmail().getRol().equals(getEmail().getRol().ADMIN)){
+           return "inicio.xhtml";
+       }
+       return null;*/
    }
    
    public String logout()
