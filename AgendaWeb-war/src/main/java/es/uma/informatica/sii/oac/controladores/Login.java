@@ -31,12 +31,14 @@ public class Login {
      
    private Usuario email;
 
+   
 
    /**
     * Creates a new instance of Login
     */
    public Login() {
 	   email = new Usuario();
+	   
    }
 
 	public String autenticar() {
@@ -66,6 +68,10 @@ public class Login {
 	public void setEmail(Usuario email) {
 		this.email = email;
 	}
+	
+	
+	
+	
 	
 }
 

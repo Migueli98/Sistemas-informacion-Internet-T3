@@ -22,6 +22,8 @@ import es.uma.informatica.sii.agendaee.entidades.Usuario;
 public interface Negocio {
    // public void registrarUsuario(Usuario u, UriBuilder uriBuilder) throws AgendaException;
    
+	public void inicializar();
+	
 	//Comprobar que el usuario logeado esta en la bd
 	public void compruebaLogin(Usuario u) throws AprendizajeServicioException;
 	public Usuario refrescarUsuario(Usuario u) throws AprendizajeServicioException;

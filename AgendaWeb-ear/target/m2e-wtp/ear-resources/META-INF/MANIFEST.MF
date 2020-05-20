@@ -1,7 +1,0 @@
-Manifest-Version: 1.0
-Built-By: anton
-Class-Path: AgendaWeb-ejb-1.0-SNAPSHOT.jar AgendaWeb-jpa-1.0-SNAPSHOT.
- jar
-Build-Jdk: 1.8.0_251
-Created-By: Maven Integration for Eclipse
-

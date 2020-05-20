@@ -23,12 +23,14 @@ public class ControlAutorizacion implements Serializable {
 
    private Usuario email;
    private Alumno alumno;
+
    
    @Inject 
    private Negocio bd;
    
    public void setEmail(Usuario usuario) {
        this.email = usuario;
+
    }
 
    public Usuario getEmail() {
@@ -85,6 +87,14 @@ public class ControlAutorizacion implements Serializable {
        return null;*/
    }
    
+  
+	
+	public String bd() {
+		
+		bd.inicializar();
+		return "login.xhtml";
+	}
+   
    public String logout()
    {
        // Destruye la sesión (y con ello, el ámbito de este bean)
@@ -98,6 +108,7 @@ public class ControlAutorizacion implements Serializable {
     * Creates a new instance of ControlAutorizacion
     */
    public ControlAutorizacion() {
+	 
    }
    
    public String MisActividades(){

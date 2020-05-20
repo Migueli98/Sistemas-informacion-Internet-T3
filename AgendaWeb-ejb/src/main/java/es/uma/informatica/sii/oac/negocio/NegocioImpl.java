@@ -24,6 +24,7 @@ import es.uma.informatica.sii.agendaee.entidades.Ong;
 import es.uma.informatica.sii.agendaee.entidades.Profesor;
 import es.uma.informatica.sii.agendaee.entidades.Servicios;
 import es.uma.informatica.sii.agendaee.entidades.Usuario;
+import es.uma.informatica.sii.agendaee.entidades.Usuario.Rol;
 
 
 @Stateless
@@ -34,6 +35,19 @@ public class NegocioImpl implements Negocio {
 
     @PersistenceContext(unitName = "OAC-EntidadesPU")
     private EntityManager em;
+
+    
+    
+
+	@Override
+	public void inicializar() {
+		// TODO Auto-generated method stub
+		Usuario us = new Usuario();
+		us.setEmail("admin");
+		us.setContrasenia("q");
+		us.setRol(Rol.ADMIN);
+		em.persist(us);
+	}
 
 
 	@Override
@@ -46,9 +60,12 @@ public class NegocioImpl implements Negocio {
     	} */
 		Query q = em.createNamedQuery("buscarUsuario").setParameter("email", u.getEmail());
         List<Usuario> l = q.getResultList();
-        if (l.get(0)== null) {
-            throw new AprendizajeServicioException("La cuenta no existe.");
+        try {
+        	l.get(0);
+        } catch (IndexOutOfBoundsException e){
+        	throw new CuentaInexistenteException();
         }
+        
 
         if (!l.get(0).getContrasenia().equals(u.getContrasenia())) {
             throw new ContraseniaInvalidaException();
