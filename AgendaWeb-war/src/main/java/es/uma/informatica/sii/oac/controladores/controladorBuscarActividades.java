@@ -7,10 +7,12 @@ import java.util.ArrayList;
 
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import es.uma.informatica.sii.agendaee.entidades.Actividades;
 import es.uma.informatica.sii.agendaee.entidades.Actividades.Estado;
+import es.uma.informatica.sii.oac.negocio.Negocio;
 
 
 @Named(value ="controladorBuscarActividades")
@@ -19,6 +21,10 @@ import es.uma.informatica.sii.agendaee.entidades.Actividades.Estado;
 public class controladorBuscarActividades implements Serializable{
 	private ArrayList<Actividades> actividades;
 	private Actividades actividad;
+	
+	   @Inject 
+	   private Negocio bd;
+	
 	public ArrayList<Actividades> getActividades() {
 		return actividades;
 	}

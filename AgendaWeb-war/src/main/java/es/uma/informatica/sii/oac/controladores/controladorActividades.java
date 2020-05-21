@@ -10,6 +10,7 @@ import java.util.Iterator;
 
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import es.uma.informatica.sii.agendaee.entidades.Actividades;
@@ -21,6 +22,7 @@ import es.uma.informatica.sii.agendaee.entidades.InformeActividades;
 import es.uma.informatica.sii.agendaee.entidades.Profesor;
 import es.uma.informatica.sii.agendaee.entidades.Usuario;
 import es.uma.informatica.sii.agendaee.entidades.Usuario.Rol;
+import es.uma.informatica.sii.oac.negocio.Negocio;
 
 
 
@@ -47,7 +49,8 @@ public class controladorActividades implements Serializable {
 	private ArrayList<Actividades> evaluacionActividades;
 	private ArrayList<Usuario> profesores;
 	
-
+	   @Inject 
+	   private Negocio bd;
 	    
 	   
 	    public controladorActividades() throws ParseException {

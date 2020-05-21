@@ -5,6 +5,8 @@
  */
 package es.uma.informatica.sii.oac.negocio;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -15,6 +17,8 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import es.uma.informatica.sii.agendaee.entidades.Actividades;
+import es.uma.informatica.sii.agendaee.entidades.Actividades.Estado;
+import es.uma.informatica.sii.agendaee.entidades.Actividades.Tipo;
 import es.uma.informatica.sii.agendaee.entidades.Alumno;
 import es.uma.informatica.sii.agendaee.entidades.Asignaturas;
 import es.uma.informatica.sii.agendaee.entidades.Centro;
@@ -89,6 +93,40 @@ public class NegocioImpl implements Negocio {
 		//us.setNombre("Francisco");
 		//us.setApellido("Chicano");
 		em.persist(us);
+		
+		//ACTIVIDADES
+		Actividades a1 = new Actividades();
+		a1.setDescripcion("Recogida puertenia");
+		a1.setEstado(Estado.BUSCANDO_PARTICIPANTES);
+		SimpleDateFormat dateformat1 = new SimpleDateFormat("dd/MM/yyyy");
+		try {
+			a1.setFechaInicioActividad(dateformat1.parse("01/06/2020"));
+			a1.setFechaFinActividad(dateformat1.parse("04/06/2020"));
+
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		a1.setLugarRealizacion("Puerto de la Torre");
+		a1.setNombreActividad("Recogida puertenia");
+		a1.setTipoActividad(Tipo.VOLUNTARIADO);
+		em.persist(a1);
+		
+		Actividades a2 = new Actividades();
+		a2.setDescripcion("Reparto comida");
+		a2.setEstado(Estado.BUSCANDO_PARTICIPANTES);
+		try {
+			a2.setFechaInicioActividad(dateformat1.parse("01/06/2020"));
+			a2.setFechaFinActividad(dateformat1.parse("04/06/2020"));
+
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		a2.setLugarRealizacion("Puerto de la Torre");
+		a2.setNombreActividad("Reparto comida puertenia");
+		a2.setTipoActividad(Tipo.FORMACION);
+		em.persist(a2);
 	}
 
 /**
@@ -135,7 +173,7 @@ Actividades a2 = new Actividades(2L,"Compra de comida a ancianos","Voluntariado"
 	@Override
 	public List<Actividades> allActividades() {
 		// TODO Auto-generated method stub
-		return null;
+		return em.createNamedQuery("Actividades", Actividades.class).getResultList();
 	}
 
 	@Override

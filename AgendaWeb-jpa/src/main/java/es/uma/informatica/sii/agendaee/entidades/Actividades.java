@@ -12,18 +12,17 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 
 
-/**
- * Entity implementation class for Entity: Actividades
- *
- */
 @Entity
-
+@NamedQueries({
+    @NamedQuery(name="findAllActividades",query="select a from Actividades a")})
 public class Actividades implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -36,13 +35,20 @@ public class Actividades implements Serializable {
 	      RECHAZADA,
 	      BUSCANDO_PARTICIPANTES
 	    };
+	    
+	public enum Tipo{
+		VOLUNTARIADO,
+		APYS,
+		FORMACION
+	};
 	
 	@Id @GeneratedValue
 	private Long idActividad;
 	@Column(nullable = false)
 	private String nombreActividad;
 	@Column(nullable = false)
-	private String tipoActividad;
+	@Enumerated(EnumType.STRING)
+	private Tipo tipoActividad;
 	@Column(nullable = false)
 	@Temporal(TemporalType.DATE)
 	private Date fechaInicioActividad;
@@ -64,34 +70,29 @@ public class Actividades implements Serializable {
 	
 	@OneToMany(mappedBy="actividad")
 	private List<Inscripciones> inscripciones;
+	
+	
+	
 
 	public Actividades() {
 		super();
 	}  
-	/*
-	public Actividades(Long id,String nombre, String tipo, Date fecha, String lugar, String descripcion, Estado estado) {
-		nombreActividad=nombre;
-		idActividad = id;
-		tipoActividad = tipo;
-		fechaActividad = fecha;
-		lugarRealizacion = lugar;
-		this.descripcion = descripcion;
-		this.estado=estado;
-	}
-*/
-	
-	public String getTipoActividad() {
-		return this.tipoActividad;
-	}
 
-	
-	public void setTipoActividad(String tipoActividad) {
-		this.tipoActividad = tipoActividad;
-	}   
-	
 	public Date getFechaInicioActividad() {
 		return fechaInicioActividad;
 	}
+
+	public Tipo getTipoActividad() {
+		return tipoActividad;
+	}
+
+
+
+	public void setTipoActividad(Tipo tipoActividad) {
+		this.tipoActividad = tipoActividad;
+	}
+
+
 
 	public void setFechaInicioActividad(Date fechaInicioActividad) {
 		this.fechaInicioActividad = fechaInicioActividad;
