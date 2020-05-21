@@ -17,7 +17,7 @@ public class Curriculum implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	private enum diasSemana {
+	public enum diasSemana {
 		LUNES,
 		MARTES,
 		MIERCOLES,
@@ -27,14 +27,13 @@ public class Curriculum implements Serializable {
 		DOMINGO
 	};
 	
-	private enum idioma {
+	public enum idioma {
 		INGLES,
 		ALEMAN,
-		FRANCES,
-		ESPAÑOL
+		FRANCES
 	};
 	
-	@Id
+	@Id @GeneratedValue
 	private Long id;
 	
 	
@@ -89,21 +88,27 @@ public class Curriculum implements Serializable {
 		this.alumno = alumno;
 	}
 
+	
+
 	public idioma getIdiomas() {
 		return idiomas;
 	}
+
 
 	public void setIdiomas(idioma idiomas) {
 		this.idiomas = idiomas;
 	}
 
+
 	public diasSemana getDisponibilidadHoraria() {
 		return disponibilidadHoraria;
 	}
 
+
 	public void setDisponibilidadHoraria(diasSemana disponibilidadHoraria) {
 		this.disponibilidadHoraria = disponibilidadHoraria;
 	}
+
 
 	public void setExperienciaLaboral(String experienciaLaboral) {
 		this.experienciaLaboral = experienciaLaboral;

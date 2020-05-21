@@ -5,6 +5,7 @@
  */
 package es.uma.informatica.sii.oac.negocio;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -18,6 +19,8 @@ import es.uma.informatica.sii.agendaee.entidades.Alumno;
 import es.uma.informatica.sii.agendaee.entidades.Asignaturas;
 import es.uma.informatica.sii.agendaee.entidades.Centro;
 import es.uma.informatica.sii.agendaee.entidades.Curriculum;
+import es.uma.informatica.sii.agendaee.entidades.Curriculum.diasSemana;
+import es.uma.informatica.sii.agendaee.entidades.Curriculum.idioma;
 import es.uma.informatica.sii.agendaee.entidades.InformeActividades;
 import es.uma.informatica.sii.agendaee.entidades.Inscripciones;
 import es.uma.informatica.sii.agendaee.entidades.Ong;
@@ -36,28 +39,74 @@ public class NegocioImpl implements Negocio {
     @PersistenceContext(unitName = "OAC-EntidadesPU")
     private EntityManager em;
 
-    
-    
-
+ 
 	@Override
 	public void inicializar() {
-		// TODO Auto-generated method stub
+		// CURRICULUMNS
+		Curriculum c1 = new Curriculum();
+		c1.setExperienciaLaboral("Camarero, bandeja, Ayudante de cocina");
+		c1.setIdiomas(idioma.FRANCES);
+		c1.setDisponibilidadHoraria(diasSemana.VIERNES);
+		
+		Curriculum c2 = new Curriculum();
+		c2.setExperienciaLaboral("Soy un maquina en todo");
+		c2.setIdiomas(idioma.INGLES);
+		c2.setDisponibilidadHoraria(diasSemana.JUEVES);
+		
+		// ALUMNOS
+		Alumno al1 = new Alumno();
+		al1.setEmail("alu1");
+		al1.setContrasenia("q");
+		al1.setRol(Rol.ALUMNO);
+		al1.setNombre("Christian");
+		al1.setApellido("Martos");
+		al1.setCreditos(160);
+		al1.setHorasLibre(10);
+		al1.setCv(c2);
+		em.persist(al1);
+		Alumno al2 = new Alumno();
+		al2.setEmail("alu2");
+		al2.setContrasenia("q");
+		al2.setRol(Rol.ALUMNO);
+		al2.setNombre("Miguel");
+		al2.setApellido("Valadez");
+		al2.setCreditos(110);
+		al2.setHorasLibre(5);
+		al2.setCv(c1);
+		em.persist(al2);
+		
+		//CVS CON ALUMNOS
+		c2.setAlumno(al1);
+		c1.setAlumno(al2);
+		em.persist(c1);
+		em.persist(c2);
+		
+		//ADMIN
 		Usuario us = new Usuario();
 		us.setEmail("admin");
 		us.setContrasenia("q");
 		us.setRol(Rol.ADMIN);
+		//us.setNombre("Francisco");
+		//us.setApellido("Chicano");
 		em.persist(us);
 	}
 
+/**
+Curriculum c1 = new Curriculum(1L, "Español, Inglés, Italiano", "Camarero, Enfermero, Pintor", "Lunes, Martes, Miércoles", asignaturas);
+Curriculum c2 = new Curriculum(2L, "Chino, Inglés, Italiano", "Albañil, Médico, Pintor", "Miércoles, Jueves, Viernes", asignaturas);
+Alumno alu1 = new Alumno(100L, "javiolea@uma.es", "q", Rol.ALUMNO, "Javi", "Olea", 120, 5, c1);
+Alumno alu2 = new Alumno(101L,"miguelvaldez@uma.es", "q", Rol.ALUMNO, "Miguel", "Valadez",108,3, c2);
+Alumno alu3 = new Alumno(102L,"marta@uma.es", "q", Rol.ALUMNO, "Marta", "Romero",30,5, c1);
+usuarios.add(alu1);
+usuarios.add(alu2);
+usuarios.add(alu3);
+SimpleDateFormat dateformat1 = new SimpleDateFormat("dd/MM/yyyy");
+Actividades a1 = new Actividades(1L,"Recogida Puerteña","Voluntariado",dateformat1.parse("01/05/2021"), "Puerto de la Torre","Recoger basura",Estado.BUSCANDO_PARTICIPANTES);
+Actividades a2 = new Actividades(2L,"Compra de comida a ancianos","Voluntariado",dateformat1.parse("05/10/2021"), "Teatinos","Ayudar ancianos Clínico",Estado.BUSCANDO_PARTICIPANTES);
+ */
 
 	@Override
     public void compruebaLogin(Usuario u)  throws AprendizajeServicioException {
-    	/*Usuario uu = em.find(Usuario.class, u.getEmail());
-    	if (uu == null) {
-    		throw new CuentaInexistenteException();
-    	} else if (!u.getContrasenia().equals(uu.getContrasenia())) {
-    		throw new ContraseniaInvalidaException();
-    	} */
 		Query q = em.createNamedQuery("buscarUsuario").setParameter("email", u.getEmail());
         List<Usuario> l = q.getResultList();
         try {
@@ -75,10 +124,6 @@ public class NegocioImpl implements Negocio {
 
     @Override
     public Usuario refrescarUsuario(Usuario u)  throws AprendizajeServicioException {
-    	/*compruebaLogin(u);
-    	Usuario uu = em.find(Usuario.class, u.getEmail());
-    	em.refresh(uu);
-        return uu;*/
     	compruebaLogin(u);
         Query q = em.createNamedQuery("buscarUsuario").setParameter("email", u.getEmail());
         List<Usuario> l = q.getResultList();
@@ -294,7 +339,18 @@ public class NegocioImpl implements Negocio {
 	@Override
 	public void updateAlumno(Alumno a) {
 		// TODO Auto-generated method stub
-		
+		/*Alumno b = findAlumno(a.getEmail());
+		b.setNombre(a.getNombre());
+		b.setApellido(a.getApellido());
+		b.setContrasenia(a.getContrasenia());
+		b.setCreditos(a.getCreditos());
+		b.setCv(a.getCv());
+		b.setHorasLibre(a.getHorasLibre());
+		b.setInformes(a.getInformes());
+		b.setInscripciones(a.getInscripciones());
+		b.setMatriculadoEn(a.getMatriculadoEn());
+		*/
+		em.merge(a);
 	}
 
 	@Override
@@ -346,9 +402,9 @@ public class NegocioImpl implements Negocio {
 	}
 
 	@Override
-	public Alumno findAlumno(String id) {
+	public Alumno findAlumno(String email) {
 		// TODO Auto-generated method stub
-		return null;
+		return em.find(Alumno.class, email);
 	}
 
 	@Override

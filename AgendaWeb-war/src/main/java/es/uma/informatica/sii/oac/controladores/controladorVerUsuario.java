@@ -41,22 +41,6 @@ public class controladorVerUsuario implements Serializable{
 	}
     
     
-/*	
-	//borrar
-	public String borrarUsuario(int id){
-    	boolean encontrado =  false;
-    	int cont = 0;
-    	while(!encontrado) {
-    		Usuario ac = usuarios.get(cont);
-    		if(ac.getId() == (id)) {
-    			usuarios.remove(cont);
-    			encontrado = true;
-    		}
-    		cont++;
-    	}
-        return "verUsuariosAd.xhtml";
-    }
- */   
 	//modificar
     public String modificarUsuario(){
      

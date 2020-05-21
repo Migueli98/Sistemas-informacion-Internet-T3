@@ -1,4 +1,4 @@
-<!--<ui:composition template="/WEB-INF/templates/plantilla.xhtml"
+<ui:composition template="/WEB-INF/templates/plantilla.xhtml"
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
@@ -16,21 +16,13 @@
                 <h:form id="controlAutorizacion">
                     <div class="bordeTablaActividades">
                     <table id="tablaListaActividades">
-                                <tr>
-                                        <th>ID </th>
-                                        <td><h:outputText  value="#{controlAutorizacion.email.id}"/></td>
-                                        
-                                 </tr>
+                               
                                    <tr>
                                         <th>Email </th>
                                         <td><h:inputText  value="#{controlAutorizacion.email.email}"/></td>
                                         
                                  </tr>
-                                   <tr>
-                                        <th>Contraseña </th>
-                                        <td><h:inputText  value="#{controlAutorizacion.email.contraseña}"/></td>
-                                        
-                                 </tr>
+                                 
                                    <tr>
                                         <th>Rol </th>
                                         <td><h:outputText  value="#{controlAutorizacion.email.rol}"/></td>
@@ -65,7 +57,7 @@
                        
                   
                 <h:form>            
-                    <h:commandButton styleClass="btnGuardar"  value="Guardar" action="miPerfil.xhtml" />
+                    <h:commandButton styleClass="btnGuardar"  value="Guardar" action="#{controlAutorizacion.modificarPerfilAlumno()}" />
                     <h:commandButton styleClass="btnVolver"  value="Volver" action="miPerfil.xhtml" />
                     
           			
@@ -78,11 +70,7 @@
                 <h:form id="controlAutorizacion">
                     <div class="bordeTablaActividades">
                     <table id="tablaListaActividades">
-                                <tr>
-                                        <th>ID </th>
-                                        <td><h:outputText  value="#{controlAutorizacion.email.id}"/></td>
-                                        
-                                 </tr>
+                                
                                    <tr>
                                         <th>Email </th>
                                         <td><h:inputText  value="#{controlAutorizacion.email.email}"/></td>
@@ -127,11 +115,7 @@
                 <h:form id="controlAutorizacion">
                     <div class="bordeTablaActividades">
                     <table id="tablaListaActividades">
-                                <tr>
-                                        <th>ID </th>
-                                        <td><h:outputText  value="#{controlAutorizacion.email.id}"/></td>
-                                        
-                                 </tr>
+                        
                                    <tr>
                                         <th>Email </th>
                                         <td><h:inputText  value="#{controlAutorizacion.email.email}"/></td>
@@ -172,11 +156,7 @@
                 <h:form id="controlAutorizacion">
                     <div class="bordeTablaActividades">
                     <table id="tablaListaActividades">
-                                <tr>
-                                        <th>ID </th>
-                                        <td><h:outputText  value="#{controlAutorizacion.email.id}"/></td>
-                                        
-                                 </tr>
+                             
                                    <tr>
                                         <th>Email </th>
                                         <td><h:inputText  value="#{controlAutorizacion.email.email}"/></td>
@@ -228,4 +208,3 @@
         </c:choose>
     </ui:define>
 </ui:composition>
--->

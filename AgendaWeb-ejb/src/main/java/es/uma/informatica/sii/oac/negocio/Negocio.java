@@ -41,7 +41,7 @@ public interface Negocio {
 	public List<Servicios> allServicios();
 	public List<Usuario> allUsuario();
 	
-	//Añadir elementos a las entidades
+	//Aï¿½adir elementos a las entidades
 	public void addActividades(Actividades a);
 	public void addAlumno(Alumno a);
 	public void addAsignaturas(Asignaturas a);
@@ -82,7 +82,7 @@ public interface Negocio {
 
 	//Buscar por clave primaria en las entidades
 	public Actividades findActividades(Long id);
-	public Alumno findAlumno(String id); //¿Debe existir métodos para las entidades que extienden Usuario o vale con los del usuario?
+	public Alumno findAlumno(String id); //ï¿½Debe existir mï¿½todos para las entidades que extienden Usuario o vale con los del usuario?
 	public Asignaturas findAsignaturas(Long id);
 	public Centro findCentro(Long id);
 	public Curriculum findCurriculum(Long id);
@@ -92,10 +92,6 @@ public interface Negocio {
 	public Profesor findProfesor(String id);
 	public Servicios findServicios(Long id);
 	public Usuario findUsuario(String id);
-	
-	//
-	
-	
 
 }
 

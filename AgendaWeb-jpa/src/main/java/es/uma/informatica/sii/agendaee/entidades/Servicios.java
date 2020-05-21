@@ -35,7 +35,6 @@ public class Servicios implements Serializable {
 		INGLES,
 		ALEMAN,
 		FRANCES,
-		ESPAÑOL
 	};
 	
 	@Id @GeneratedValue
