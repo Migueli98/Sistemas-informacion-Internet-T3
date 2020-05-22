@@ -32,7 +32,7 @@ public class Usuario implements Serializable {
     };
     
     @Id
-    private String email;
+    protected String email;
 	@Column(nullable = false)
 	private String contrasenia;
 	
@@ -60,16 +60,13 @@ public class Usuario implements Serializable {
 	public Usuario(Long ID, String EMAIL, String PASS, Rol R, String n, String ap) {
 		id=ID;
 		email=EMAIL;
-		contraseña=PASS;
+		contraseï¿½a=PASS;
 		rol = R;
 		nombre = n;
 		apellido = ap;
 	}
 */	
-	   
-	
-	
-	   
+
 	public String getEmail() {
 		return email;
 	}
@@ -106,10 +103,6 @@ public class Usuario implements Serializable {
 		this.rol = rol;
 	}
 
-	
-
-	
-	
 	public List<Inscripciones> getInscripciones() {
 		return inscripciones;
 	}

@@ -375,19 +375,21 @@ Actividades a2 = new Actividades(2L,"Compra de comida a ancianos","Voluntariado"
 	}
 
 	@Override
-	public void updateAlumno(Alumno a) {
+	public void updateAlumno(Alumno a) throws AprendizajeServicioException {
 		// TODO Auto-generated method stub
-		/*Alumno b = findAlumno(a.getEmail());
-		b.setNombre(a.getNombre());
-		b.setApellido(a.getApellido());
-		b.setContrasenia(a.getContrasenia());
-		b.setCreditos(a.getCreditos());
-		b.setCv(a.getCv());
-		b.setHorasLibre(a.getHorasLibre());
-		b.setInformes(a.getInformes());
-		b.setInscripciones(a.getInscripciones());
-		b.setMatriculadoEn(a.getMatriculadoEn());
+		/**Alumno alu = new Alumno();
+		alu.setEmail("alu1");
+		alu.setContrasenia("q");
+		alu.setRol(Rol.ALUMNO);
+		alu.setNombre("Maricon");
+		alu.setApellido("Kiterechu");
+		alu.setCreditos(160);
+		alu.setHorasLibre(10);
+		alu.setCv(null);
+		
+		em.merge(alu);
 		*/
+		
 		em.merge(a);
 	}
 
@@ -442,7 +444,8 @@ Actividades a2 = new Actividades(2L,"Compra de comida a ancianos","Voluntariado"
 	@Override
 	public Alumno findAlumno(String email) {
 		// TODO Auto-generated method stub
-		return em.find(Alumno.class, email);
+		Alumno a = em.find(Alumno.class, email);
+		return a;
 	}
 
 	@Override

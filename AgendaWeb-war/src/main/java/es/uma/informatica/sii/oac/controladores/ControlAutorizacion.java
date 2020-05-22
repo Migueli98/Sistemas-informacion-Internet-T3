@@ -13,6 +13,8 @@ import javax.inject.Named;
 
 import es.uma.informatica.sii.agendaee.entidades.Alumno;
 import es.uma.informatica.sii.agendaee.entidades.Usuario;
+import es.uma.informatica.sii.agendaee.entidades.Usuario.Rol;
+import es.uma.informatica.sii.oac.negocio.AprendizajeServicioException;
 import es.uma.informatica.sii.oac.negocio.Negocio;
 
 
@@ -23,7 +25,6 @@ public class ControlAutorizacion implements Serializable {
 
    private Usuario email;
    private Alumno alumno;
-
    
    @Inject 
    private Negocio bd;
@@ -45,7 +46,8 @@ public class ControlAutorizacion implements Serializable {
        return alumno;
    }
 
-   public String home() {
+
+public String home() {
 	   String cad = "login.xhtml";
 	   
    	if(email.getRol().equals(Usuario.Rol.ADMIN)) {
@@ -97,8 +99,30 @@ public class ControlAutorizacion implements Serializable {
 	   return "miPerfil.xhtml";
    }
    
-   public String modificarPerfilAlumno() {
-	   bd.updateAlumno((Alumno) email);
+   public String modificarPerfilAlumno() throws AprendizajeServicioException {
+	   	alumno = (Alumno) email;
+	   	
+	   	/*
+	   	Alumno alu = new Alumno();
+		alu.setEmail("alu1");
+		alu.setContrasenia("q");
+		alu.setRol(Rol.ALUMNO);
+		alu.setNombre("otra");
+		alu.setApellido("cosa");
+		alu.setCreditos(160);
+		alu.setHorasLibre(10);
+		alu.setCv(null);
+		
+		bd.updateAlumno(alu);
+		*/
+		//bd.refrescarUsuario(alu);
+		
+	   
+		bd.updateAlumno(bd.findAlumno(alumno.getEmail()));
+		bd.refrescarUsuario(alumno);
+		
+	   //bd.updateAlumno();
+	
 	   return "miPerfil.xhtml";
    }
    

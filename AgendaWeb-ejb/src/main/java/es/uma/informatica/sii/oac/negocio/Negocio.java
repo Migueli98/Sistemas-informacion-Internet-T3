@@ -69,7 +69,7 @@ public interface Negocio {
 	
 	//Modificar elementos de las entidades
 	public void updateActividades(Actividades a);
-	public void updateAlumno(Alumno a);
+	public void updateAlumno(Alumno a) throws AprendizajeServicioException;
 	public void updateAsignaturas(Asignaturas a);
 	public void updateCentro(Centro a);
 	public void updateCurriculum(Curriculum a);
