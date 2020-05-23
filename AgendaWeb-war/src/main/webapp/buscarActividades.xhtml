@@ -75,7 +75,8 @@
 							<tr>
 								<th>ID Actividad</th>
 								<th>Nombre Actividad</th>
-								<th>Fecha</th>
+								<th>Fecha Inicio</th>
+								<th>Fecha Fin</th>
 								<th>Localización</th>
 								<th>Descripción</th>
 								<th>Tipo de Actividad</th>
@@ -85,11 +86,12 @@
 
 						<tbody>
 							<ui:repeat var="i"
-								value="#{controladorBuscarActividades.actividades}">
+								value="#{controladorBuscarActividades.getActividadesBP()}">
 								<tr>
 									<td>#{i.idActividad}</td>
 									<td>#{i.nombreActividad}</td>
-									<td>#{i.fechaActividad}</td>
+									<td>#{i.fechaInicioActividad}</td>
+									<td>#{i.fechaFinActividad}</td>
 									<td>#{i.lugarRealizacion}</td>
 									<td>#{i.descripcion}</td>
 									<td>#{i.tipoActividad}</td>
@@ -98,7 +100,7 @@
 									<td><h:form>
 											<h:column>
 												<h:commandButton styleClass="btnVer" value="Ver"
-													action="#{controladorBuscarActividades.verBuscarActividades()}" />
+													action="#{controladorBuscarActividades.verBuscarActividades(i.idActividad)}" />
 											</h:column>
 										</h:form></td>
 

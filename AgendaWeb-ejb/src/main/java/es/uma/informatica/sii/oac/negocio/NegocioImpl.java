@@ -145,16 +145,11 @@ Actividades a2 = new Actividades(2L,"Compra de comida a ancianos","Voluntariado"
 
 	@Override
     public void compruebaLogin(Usuario u)  throws AprendizajeServicioException {
-		Query q = em.createNamedQuery("buscarUsuario").setParameter("email", u.getEmail());
-        List<Usuario> l = q.getResultList();
-        try {
-        	l.get(0);
-        } catch (IndexOutOfBoundsException e){
-        	throw new CuentaInexistenteException();
-        }
-        
-
-        if (!l.get(0).getContrasenia().equals(u.getContrasenia())) {
+		
+		Usuario user = em.find(Usuario.class, u.getEmail());
+        if(user==null){
+            throw new CuentaInexistenteException();
+        }else if(!user.getContrasenia().equals(u.getContrasenia())){
             throw new ContraseniaInvalidaException();
         }
     }
@@ -162,19 +157,29 @@ Actividades a2 = new Actividades(2L,"Compra de comida a ancianos","Voluntariado"
 
     @Override
     public Usuario refrescarUsuario(Usuario u)  throws AprendizajeServicioException {
+    	
     	compruebaLogin(u);
-        Query q = em.createNamedQuery("buscarUsuario").setParameter("email", u.getEmail());
-        List<Usuario> l = q.getResultList();
-        em.refresh(l.get(0));
-        return l.get(0);
+        Usuario user = em.find(Usuario.class, u.getEmail());
+        
+        return user;
     }
     
 
 	@Override
+	public List<Actividades> allActividadesEstado(Actividades.Estado estado) {
+		// TODO Auto-generated method stub
+		Query q = em.createNamedQuery("findActividadesEstado").setParameter("est",estado);
+		List<Actividades> act=q.getResultList();
+		return act;
+	}
+	
+	
+	@Override
 	public List<Actividades> allActividades() {
 		// TODO Auto-generated method stub
-		return em.createNamedQuery("Actividades", Actividades.class).getResultList();
+		return null;
 	}
+	
 
 	@Override
 	public List<Alumno> allAlumno() {
@@ -207,9 +212,12 @@ Actividades a2 = new Actividades(2L,"Compra de comida a ancianos","Voluntariado"
 	}
 
 	@Override
-	public List<Inscripciones> allInscripciones() {
+	public List<Inscripciones> allInscripciones(Usuario u) {
 		// TODO Auto-generated method stub
-		return null;
+		Query q = em.createNamedQuery("findActividadesEstado").setParameter("user",u);
+		List<Inscripciones> ins=q.getResultList();
+		return ins;
+		
 	}
 
 	@Override
@@ -275,7 +283,7 @@ Actividades a2 = new Actividades(2L,"Compra de comida a ancianos","Voluntariado"
 	@Override
 	public void addInscripciones(Inscripciones a) {
 		// TODO Auto-generated method stub
-		
+		em.persist(a);
 	}
 
 	@Override
@@ -432,13 +440,15 @@ Actividades a2 = new Actividades(2L,"Compra de comida a ancianos","Voluntariado"
 	@Override
 	public void updateUsuario(Usuario a) {
 		// TODO Auto-generated method stub
-		
+		em.merge(a);
 	}
 
 	@Override
 	public Actividades findActividades(Long id) {
 		// TODO Auto-generated method stub
-		return null;
+		
+		Actividades act=em.find(Actividades.class, id);
+		return act;
 	}
 
 	@Override
@@ -501,6 +511,8 @@ Actividades a2 = new Actividades(2L,"Compra de comida a ancianos","Voluntariado"
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	
 
     
     

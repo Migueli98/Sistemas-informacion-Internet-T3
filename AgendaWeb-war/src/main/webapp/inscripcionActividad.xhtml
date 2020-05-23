@@ -28,7 +28,7 @@
                             </thead>
                         
                         <tbody>
-                            <ui:repeat var = "i" value="#{controladorActividades.inscripciones}">
+                            <ui:repeat var = "i" value="#{controladorActividades.getInscripciones(controlAutorizacion.getEmail())}">
                                 <tr>                                
                                     <td>#{i.idActividad}</td>
                                     <td>#{i.nombreActividad}</td>

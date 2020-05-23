@@ -7,6 +7,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
@@ -19,6 +20,7 @@ import es.uma.informatica.sii.agendaee.entidades.Alumno;
 import es.uma.informatica.sii.agendaee.entidades.Asignaturas;
 import es.uma.informatica.sii.agendaee.entidades.Curriculum;
 import es.uma.informatica.sii.agendaee.entidades.InformeActividades;
+import es.uma.informatica.sii.agendaee.entidades.Inscripciones;
 import es.uma.informatica.sii.agendaee.entidades.Profesor;
 import es.uma.informatica.sii.agendaee.entidades.Usuario;
 import es.uma.informatica.sii.agendaee.entidades.Usuario.Rol;
@@ -37,7 +39,8 @@ public class controladorActividades implements Serializable {
 	private Actividades actividad;
 	private ArrayList<InformeActividades> informes;
 	private InformeActividades informe;
-	private ArrayList<Actividades> inscripciones;
+	private List<Inscripciones> inscripciones;
+	private List<Inscripciones> ins;
 	private Actividades inscripcion;
 	private ArrayList<Actividades> supervisiones;
 	private Actividades supervision;
@@ -135,13 +138,25 @@ public class controladorActividades implements Serializable {
 
 
 
-		public ArrayList<Actividades> getInscripciones() {
-			return inscripciones;
+		public ArrayList<Actividades> getInscripciones(Usuario u) {
+			
+			ins = bd.allInscripciones(u);
+			List<Actividades> acts = bd.allActividades();
+			for (Actividades a : acts) {
+				for (Inscripciones i : inscripciones) {
+					if(a.equals(i.getActividad())) {
+						actividades.add(a);
+					}
+				}
+				
+			}
+			
+			return actividades;
 		}
 
 
 
-		public void setInscripciones(ArrayList<Actividades> inscripciones) {
+		public void setInscripciones(List<Inscripciones> inscripciones) {
 			this.inscripciones = inscripciones;
 		}
 
@@ -207,16 +222,7 @@ public class controladorActividades implements Serializable {
 	    }
 	    
 		public String cancelarInscripcion(int id){
-	    	boolean encontrado =  false;
-	    	int cont = 0;
-	    	while(!encontrado) {
-	    		Actividades ac = inscripciones.get(cont);
-	    		if(ac.getIdActividad() == (id)) {
-	    			inscripciones.remove(cont);
-	    			encontrado = true;
-	    		}
-	    		cont++;
-	    	}
+	    	
 	        return "inscripcionActividad.xhtml";
 	    }
 		

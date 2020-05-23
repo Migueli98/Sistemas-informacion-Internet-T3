@@ -23,19 +23,23 @@ import es.uma.informatica.sii.oac.negocio.Negocio;
 @SessionScoped
 public class ControlAutorizacion implements Serializable {
 
-   private Usuario email;
-   private Alumno alumno;
-   
+
    @Inject 
    private Negocio bd;
    
+   private Usuario email;
+   private Alumno alumno;
+   
+   public ControlAutorizacion() {
+		
+   }
+   
    public void setEmail(Usuario usuario) {
        this.email = usuario;
-
    }
 
    public Usuario getEmail() {
-       return email;
+       return this.email;
    }
    
    public void setAlumno(Alumno al) {
@@ -87,9 +91,7 @@ public String home() {
    /**
     * Creates a new instance of ControlAutorizacion
     */
-   public ControlAutorizacion() {
-	 
-   }
+   
    
    public String MisActividades(){
        return "MisActividades.xhtml";
@@ -101,7 +103,9 @@ public String home() {
    
    public String modificarPerfilAlumno() throws AprendizajeServicioException {
 	   	alumno = (Alumno) email;
-	   	
+	   	if (email!=null) {
+        	throw new AprendizajeServicioException(""+email.getNombre());
+        }
 	   	/*
 	   	Alumno alu = new Alumno();
 		alu.setEmail("alu1");
@@ -123,6 +127,12 @@ public String home() {
 		
 	   //bd.updateAlumno();
 	
+	   return "miPerfil.xhtml";
+   }
+   
+   public String modificarUsuario() {
+	   
+	   bd.updateUsuario(email);
 	   return "miPerfil.xhtml";
    }
    

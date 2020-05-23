@@ -16,10 +16,10 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
-@NamedQueries({
+/*@NamedQueries({
     @NamedQuery(name="buscarUsuario",query="select u from Usuario u where u.email=:email")
 })
-
+*/
 
 @Entity
 public class Usuario implements Serializable {

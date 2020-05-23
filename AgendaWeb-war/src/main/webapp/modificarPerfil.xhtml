@@ -113,6 +113,7 @@
             <c:when test="#{controlAutorizacion.getEmail().getRol() == 'ADMIN'}">
          		<h1>Mi Perfil (SUPERUSUARIO)</h1>
                 <h:form id="controlAutorizacion">
+                <h:inputHidden value="#{controlAutorizacion.email.email}"></h:inputHidden>
                     <div class="bordeTablaActividades">
                     <table id="tablaListaActividades">
                         
@@ -145,7 +146,7 @@
                        
                   
                 <h:form>            
-					   <h:commandButton styleClass="btnGuardar"  value="Guardar" action="miPerfil.xhtml" />
+					   <h:commandButton styleClass="btnGuardar"  value="Guardar" action="#{controlAutorizacion.modificarUsuario()}" />
                     <h:commandButton styleClass="btnVolver"  value="Volver" action="miPerfil.xhtml" />          			
                 </h:form>
                

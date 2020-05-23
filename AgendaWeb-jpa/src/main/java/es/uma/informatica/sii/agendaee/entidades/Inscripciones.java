@@ -14,6 +14,9 @@ import javax.persistence.*;
  */
 @Entity
 
+@NamedQueries({
+    @NamedQuery(name="findInscripciones",query="select i from Inscripciones i where i.usuario= :user")})
+
 public class Inscripciones implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -30,7 +33,7 @@ public class Inscripciones implements Serializable {
 
 	@Column(nullable = false)
 	@Temporal(TemporalType.DATE)
-	private Date fechaInscripccion;
+	private Date fechaInscripcion;
 	@Enumerated(EnumType.STRING)
 	private estadoInscripcion estado;
 	
@@ -56,12 +59,12 @@ public class Inscripciones implements Serializable {
 		this.id = id;
 	}
 
-	public Date getFechaInscripccion() {
-		return fechaInscripccion;
+	public Date getFechaInscripcion() {
+		return fechaInscripcion;
 	}
 
-	public void setFechaInscripccion(Date fechaInscripccion) {
-		this.fechaInscripccion = fechaInscripccion;
+	public void setFechaInscripcion(Date fechaInscripcion) {
+		this.fechaInscripcion = fechaInscripcion;
 	}
 
 	public estadoInscripcion getEstado() {

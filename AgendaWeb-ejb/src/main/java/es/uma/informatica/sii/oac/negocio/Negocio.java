@@ -6,6 +6,7 @@ import java.util.List;
 import javax.ejb.Local;
 
 import es.uma.informatica.sii.agendaee.entidades.Actividades;
+import es.uma.informatica.sii.agendaee.entidades.Actividades.Estado;
 import es.uma.informatica.sii.agendaee.entidades.Alumno;
 import es.uma.informatica.sii.agendaee.entidades.Asignaturas;
 import es.uma.informatica.sii.agendaee.entidades.Centro;
@@ -30,12 +31,13 @@ public interface Negocio {
 	
 	//Mostrar entidades
 	public List<Actividades> allActividades();
+	public List<Actividades> allActividadesEstado(Estado estado);
 	public List<Alumno> allAlumno();
 	public List<Asignaturas> allAsignaturas();
 	public List<Centro> allCentro();
 	public List<Curriculum> allCurriculum();
 	public List<InformeActividades> allInformeActividades();
-	public List<Inscripciones> allInscripciones();
+	public List<Inscripciones> allInscripciones(Usuario u);
 	public List<Ong> allOng();
 	public List<Profesor> allProfesor();
 	public List<Servicios> allServicios();
@@ -43,6 +45,7 @@ public interface Negocio {
 	
 	//A�adir elementos a las entidades
 	public void addActividades(Actividades a);
+	
 	public void addAlumno(Alumno a);
 	public void addAsignaturas(Asignaturas a);
 	public void addCentro(Centro a);
@@ -93,5 +96,6 @@ public interface Negocio {
 	public Servicios findServicios(Long id);
 	public Usuario findUsuario(String id);
 
+	
 }
 
