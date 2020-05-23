@@ -103,9 +103,7 @@ public String home() {
    
    public String modificarPerfilAlumno() throws AprendizajeServicioException {
 	   	alumno = (Alumno) email;
-	   	if (email!=null) {
-        	throw new AprendizajeServicioException(""+email.getNombre());
-        }
+	   	
 	   	/*
 	   	Alumno alu = new Alumno();
 		alu.setEmail("alu1");
