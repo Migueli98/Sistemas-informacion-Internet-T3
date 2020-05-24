@@ -11,8 +11,8 @@
 	
         <c:choose>
         	<c:when test="#{controlAutorizacion.email.rol == 'ALUMNO' || controlAutorizacion.email.rol == 'PASPDI'}">
-				
 				<h1> Inscripciones </h1>
+				<h:form id="controladorActividades">
 				<div class="bordeTablaActividades">
                     <table id="tablaListaActividades">
                         <thead>
@@ -39,16 +39,17 @@
                                     <td>#{i.estado}</td> 
                                     
                                     <td>
-                                        <h:form> <h:column> <h:commandButton styleClass="btnCancelar" value ="Cancelar Inscripcion" action="#{controladorActividades.cancelarInscripcion(i.idActividad)}"  /></h:column></h:form>
+                                        <h:column> <h:commandButton styleClass="btnCancelar" value ="Cancelar Inscripcion" action="#{controladorActividades.cancelarInscripcion(i.idActividad)}"  /></h:column>
                                     </td>
                                    
-									
+					
 								</tr>
                             </ui:repeat>
                         </tbody>
                     </table>
                                  
                 </div>
+                </h:form>
         	</c:when>
         	
         	

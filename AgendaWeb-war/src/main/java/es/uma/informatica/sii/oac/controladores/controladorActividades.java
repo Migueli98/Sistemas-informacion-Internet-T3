@@ -155,7 +155,6 @@ public class controladorActividades implements Serializable {
 		}
 
 
-
 		public void setInscripciones(List<Inscripciones> inscripciones) {
 			this.inscripciones = inscripciones;
 		}

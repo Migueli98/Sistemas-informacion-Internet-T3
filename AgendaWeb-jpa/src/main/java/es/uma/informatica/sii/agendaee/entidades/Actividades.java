@@ -22,7 +22,9 @@ import javax.persistence.TemporalType;
 
 @Entity
 @NamedQueries({
-    @NamedQuery(name="findActividadesEstado",query="select a from Actividades a where a.estado= :est")})
+    @NamedQuery(name="findActividadesEstado",query="select a from Actividades a where a.estado= :est"),
+    @NamedQuery(name="findActividades",query="select a from Actividades a where a.idActividad= :id"),
+    @NamedQuery(name="findAllActividades",query="select a from Actividades a")})
 
 public class Actividades implements Serializable {
 

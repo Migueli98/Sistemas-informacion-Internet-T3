@@ -17,6 +17,7 @@ import es.uma.informatica.sii.agendaee.entidades.Actividades.Estado;
 import es.uma.informatica.sii.agendaee.entidades.Inscripciones;
 import es.uma.informatica.sii.agendaee.entidades.Inscripciones.estadoInscripcion;
 import es.uma.informatica.sii.agendaee.entidades.Usuario;
+import es.uma.informatica.sii.oac.negocio.AprendizajeServicioException;
 import es.uma.informatica.sii.oac.negocio.Negocio;
 
 
@@ -36,16 +37,16 @@ public class controladorBuscarActividades implements Serializable{
 		return bd.allActividadesEstado(Estado.BUSCANDO_PARTICIPANTES);
 	}
 	
-	public String inscripcion(Usuario u) {
+	public String inscripcion(Long a, Usuario u) throws AprendizajeServicioException {
 		
 		ins = new Inscripciones();
-		
+		if(a == null) throw new AprendizajeServicioException("La actividad es null");
 		Date d = new Date();
 		ins.setFechaInscripcion(d);
 		ins.setEstado(estadoInscripcion.ESPERANDO);
 		ins.setUsuario(u);
-		ins.setActividad(bd.findActividades(actividad.getIdActividad()));
-		ins.setActividad(actividad);
+		
+		ins.setActividad(bd.findActividades(a));
 		
 		bd.addInscripciones(ins);
 		
@@ -86,6 +87,7 @@ public class controladorBuscarActividades implements Serializable{
 	
 	public String verBuscarActividades(Long id){
 		actividad = bd.findActividades(id);
+		
 	    return "verBuscarActividades.xhtml";
 	}
 	

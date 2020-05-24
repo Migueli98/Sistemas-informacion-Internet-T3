@@ -177,7 +177,9 @@ Actividades a2 = new Actividades(2L,"Compra de comida a ancianos","Voluntariado"
 	@Override
 	public List<Actividades> allActividades() {
 		// TODO Auto-generated method stub
-		return null;
+		Query q = em.createNamedQuery("findAllActividades");
+		List<Actividades> act = q.getResultList();
+		return act;
 	}
 	
 
@@ -446,9 +448,10 @@ Actividades a2 = new Actividades(2L,"Compra de comida a ancianos","Voluntariado"
 	@Override
 	public Actividades findActividades(Long id) {
 		// TODO Auto-generated method stub
-		
-		Actividades act=em.find(Actividades.class, id);
-		return act;
+		Query q = em.createNamedQuery("findActividades").setParameter("id", id);
+		List<Actividades> act = q.getResultList();
+
+		return act.get(0);
 	}
 
 	@Override

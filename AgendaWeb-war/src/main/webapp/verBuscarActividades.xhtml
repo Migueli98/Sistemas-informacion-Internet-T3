@@ -9,10 +9,10 @@
     <ui:define name="content">
         <c:choose>
             <c:when test="#{controlAutorizacion.getEmail().getRol() == 'ALUMNO' || controlAutorizacion.getEmail().getRol() == 'PASPDI'}">
-        
-                <h1 var = "i" value="#{controladorBuscarActividades.actividad}">Ver Actividad</h1>  
+        		
+                <h1 >Ver Actividad</h1>  
                                 
-                <h:form id="ListaActividades">
+                <h:form var = "i" value="#{controladorBuscarActividades.actividad}" id="controladorBuscarActividades">
                     <table id="tablaListaActividades">
 						<tr>
 							<td>ID Actividad</td>
@@ -58,18 +58,10 @@
                                             
                         
                     </table>
-                </h:form>
-                    
-                <h:form> 
                     
                     <h:column> <h:commandButton value="Volver"   styleClass="btnVolver"  action="buscarActividades.xhtml" /> </h:column> 
-                 	<h:column> <h:commandButton value="Inscribirse a la actividad"   styleClass="btnCrear"  action="#{controladorBuscarActividades.inscripcion(controlAutorizacion.getEmail())}" /> </h:column> 
+                 	<h:column> <h:commandButton value="Inscribirse a la actividad"   styleClass="btnCrear"  action="#{controladorBuscarActividades.inscripcion(3, controlAutorizacion.getEmail())}" /> </h:column> 
                  	
-                </h:form>
-                
-                <h:form> 
-                    
-                 
                 </h:form>
                  
             </c:when>
@@ -120,9 +112,6 @@
                                             
                         
                     </table>
-                </h:form>
-                    
-                <h:form> 
                     
                     <h:column> <h:commandButton value="Volver"   styleClass="btnVolver"  action="buscarActividades.xhtml" /> </h:column> 
                  
