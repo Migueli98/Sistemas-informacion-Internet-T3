@@ -24,6 +24,7 @@ import es.uma.informatica.sii.agendaee.entidades.Inscripciones;
 import es.uma.informatica.sii.agendaee.entidades.Profesor;
 import es.uma.informatica.sii.agendaee.entidades.Usuario;
 import es.uma.informatica.sii.agendaee.entidades.Usuario.Rol;
+import es.uma.informatica.sii.oac.negocio.AprendizajeServicioException;
 import es.uma.informatica.sii.oac.negocio.Negocio;
 
 
@@ -35,7 +36,7 @@ import es.uma.informatica.sii.oac.negocio.Negocio;
 @RequestScoped
 public class controladorActividades implements Serializable {
 	
-	private ArrayList<Actividades> actividades;
+	//private ArrayList<Actividades> actividades;
 	private Actividades actividad;
 	private ArrayList<InformeActividades> informes;
 	private InformeActividades informe;
@@ -138,13 +139,16 @@ public class controladorActividades implements Serializable {
 
 
 
-		public ArrayList<Actividades> getInscripciones(Usuario u) {
-			
+		public List<Actividades> getInscripciones(Usuario u) throws AprendizajeServicioException {
+			ins = new ArrayList<Inscripciones>();
 			ins = bd.allInscripciones(u);
-			List<Actividades> acts = bd.allActividades();
+			List<Actividades> actividades = new ArrayList<Actividades>();
+			List<Actividades> acts = new ArrayList<Actividades>();
+			acts = bd.allActividades();
+			
 			for (Actividades a : acts) {
-				for (Inscripciones i : inscripciones) {
-					if(a.equals(i.getActividad())) {
+				for (Inscripciones i : ins) {
+					if(a.getIdActividad() ==i.getActividad().getIdActividad()) {
 						actividades.add(a);
 					}
 				}
@@ -173,13 +177,7 @@ public class controladorActividades implements Serializable {
 
 
 
-		public ArrayList<Actividades> getActividades() {
-	        return actividades;
-	    }
-
-	    public void setActividades(ArrayList<Actividades> actividades) {
-	        this.actividades = actividades;
-	    }
+		
 	   
 	    
 	    public ArrayList<InformeActividades> getInformes() {
@@ -207,21 +205,29 @@ public class controladorActividades implements Serializable {
 		}
 
 		public String borrarActividad(int id){
-	    	boolean encontrado =  false;
-	    	int cont = 0;
-	    	while(!encontrado) {
-	    		Actividades ac = actividades.get(cont);
-	    		if(ac.getIdActividad() == (id)) {
-	    			actividades.remove(cont);
-	    			encontrado = true;
-	    		}
-	    		cont++;
-	    	}
+	    	
 	        return "inscripcionActividad.xhtml";
 	    }
 	    
-		public String cancelarInscripcion(int id){
-	    	
+		public String cancelarInscripcion(int id, Usuario u){
+			ins = new ArrayList<Inscripciones>();
+			ins = bd.allInscripciones(u);
+			List<Actividades> acts = new ArrayList<Actividades>();
+			acts = bd.allActividades();
+			
+			
+			for (Actividades a : acts) {
+				for (Inscripciones i : ins) {
+					if((a.getIdActividad() ==i.getActividad().getIdActividad()) && (a.getIdActividad()== id)) {
+						bd.deleteInscripciones(i);
+						
+					}
+				}
+				
+			}
+			
+			
+			
 	        return "inscripcionActividad.xhtml";
 	    }
 		
@@ -230,9 +236,7 @@ public class controladorActividades implements Serializable {
 	        return "ModificarActividades.xhtml";
 	    }
 	 
-	    public Actividades getById(int id){
-	        return actividades.get(id);
-	    }
+	    
 	 
 	    public String verActividades(){
 	       return "verActividades.xhtml";

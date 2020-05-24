@@ -216,7 +216,7 @@ Actividades a2 = new Actividades(2L,"Compra de comida a ancianos","Voluntariado"
 	@Override
 	public List<Inscripciones> allInscripciones(Usuario u) {
 		// TODO Auto-generated method stub
-		Query q = em.createNamedQuery("findActividadesEstado").setParameter("user",u);
+		Query q = em.createNamedQuery("findInscripciones").setParameter("user",u);
 		List<Inscripciones> ins=q.getResultList();
 		return ins;
 		
@@ -283,9 +283,14 @@ Actividades a2 = new Actividades(2L,"Compra de comida a ancianos","Voluntariado"
 	}
 
 	@Override
-	public void addInscripciones(Inscripciones a) {
+	public void addInscripciones(Inscripciones a) throws AprendizajeServicioException{
 		// TODO Auto-generated method stub
+		
+		Query q = em.createNamedQuery("findInscripcionesUserAct").setParameter("user", a.getUsuario()).setParameter("actividad", a.getActividad());
+		List<Inscripciones> ins=q.getResultList();
+		if (ins.size()!=0) throw new AprendizajeServicioException();
 		em.persist(a);
+		
 	}
 
 	@Override
@@ -351,7 +356,7 @@ Actividades a2 = new Actividades(2L,"Compra de comida a ancianos","Voluntariado"
 	@Override
 	public void deleteInscripciones(Inscripciones a) {
 		// TODO Auto-generated method stub
-		
+		em.remove(em.contains(a) ? a : em.merge(a));
 	}
 
 	@Override

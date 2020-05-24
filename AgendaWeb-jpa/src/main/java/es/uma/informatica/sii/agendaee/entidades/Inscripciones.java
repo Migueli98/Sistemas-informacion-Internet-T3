@@ -15,7 +15,9 @@ import javax.persistence.*;
 @Entity
 
 @NamedQueries({
-    @NamedQuery(name="findInscripciones",query="select i from Inscripciones i where i.usuario= :user")})
+    @NamedQuery(name="findInscripciones",query="select i from Inscripciones i where i.usuario= :user"),
+    @NamedQuery(name="findInscripcionesUserAct",query="select i from Inscripciones i where i.usuario= :user and i.actividad= :actividad")
+	})
 
 public class Inscripciones implements Serializable {
 

@@ -51,7 +51,7 @@ public interface Negocio {
 	public void addCentro(Centro a);
 	public void addCurriculum(Curriculum a);
 	public void addInformeActividades(InformeActividades a);
-	public void addInscripciones(Inscripciones a);
+	public void addInscripciones(Inscripciones a) throws AprendizajeServicioException;
 	public void addOng(Ong a);
 	public void addProfesor(Profesor a);
 	public void addServicios(Servicios a);

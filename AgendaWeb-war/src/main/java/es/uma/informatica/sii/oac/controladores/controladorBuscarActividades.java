@@ -9,6 +9,8 @@ import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -18,6 +20,7 @@ import es.uma.informatica.sii.agendaee.entidades.Inscripciones;
 import es.uma.informatica.sii.agendaee.entidades.Inscripciones.estadoInscripcion;
 import es.uma.informatica.sii.agendaee.entidades.Usuario;
 import es.uma.informatica.sii.oac.negocio.AprendizajeServicioException;
+import es.uma.informatica.sii.oac.negocio.CuentaInexistenteException;
 import es.uma.informatica.sii.oac.negocio.Negocio;
 
 
@@ -27,6 +30,7 @@ import es.uma.informatica.sii.oac.negocio.Negocio;
 public class controladorBuscarActividades implements Serializable{
 	private ArrayList<Actividades> actividades;
 	private Actividades actividad;
+	private Actividades actividadSelecc;
 	private Inscripciones ins;
 	
 	   @Inject 
@@ -37,22 +41,30 @@ public class controladorBuscarActividades implements Serializable{
 		return bd.allActividadesEstado(Estado.BUSCANDO_PARTICIPANTES);
 	}
 	
-	public String inscripcion(Long a, Usuario u) throws AprendizajeServicioException {
+	public String inscripcion(Actividades id, Usuario u) throws AprendizajeServicioException {
 		
 		ins = new Inscripciones();
-		if(a == null) throw new AprendizajeServicioException("La actividad es null");
 		Date d = new Date();
 		ins.setFechaInscripcion(d);
 		ins.setEstado(estadoInscripcion.ESPERANDO);
 		ins.setUsuario(u);
-		
-		ins.setActividad(bd.findActividades(a));
-		
-		bd.addInscripciones(ins);
+		ins.setActividad(bd.findActividades(id.getIdActividad()));
+		try {
+			bd.addInscripciones(ins);
+		}catch (AprendizajeServicioException e) {
+			FacesMessage fm = new FacesMessage("Lo sentimos, ya te encuentras inscrito en esta actividad");
+			FacesContext.getCurrentInstance().addMessage("login:user", fm);
+			return "buscarActividades.xhtml";
+		}
 		
 		return "inscripcionActividad.xhtml";
 	}
 	
+
+	public ArrayList<Actividades> getActividades() {
+		return actividades;
+	}
+
 	public void setActividades(ArrayList<Actividades> actividades) {
 		this.actividades = actividades;
 	}
@@ -97,5 +109,15 @@ public class controladorBuscarActividades implements Serializable{
 	public String modificarBuscarActividad(){
         return "modificarBuscarActividad.xhtml";
     }
+
+	public Actividades getActividadSelecc() {
+		return actividadSelecc;
+	}
+
+	public void setActividadSelecc(Actividades actividadSelecc) {
+		this.actividadSelecc = actividadSelecc;
+	}
+	
+	
 	
 }

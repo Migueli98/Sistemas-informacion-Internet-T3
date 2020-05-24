@@ -11,8 +11,9 @@
             <c:when test="#{controlAutorizacion.getEmail().getRol() == 'ALUMNO' || controlAutorizacion.getEmail().getRol() == 'PASPDI'}">
         		
                 <h1 >Ver Actividad</h1>  
-                                
-                <h:form var = "i" value="#{controladorBuscarActividades.actividad}" id="controladorBuscarActividades">
+                          	    
+                <h:form var = "i" value="#{controladorBuscarActividades.actividad}">
+				
                     <table id="tablaListaActividades">
 						<tr>
 							<td>ID Actividad</td>
@@ -60,7 +61,7 @@
                     </table>
                     
                     <h:column> <h:commandButton value="Volver"   styleClass="btnVolver"  action="buscarActividades.xhtml" /> </h:column> 
-                 	<h:column> <h:commandButton value="Inscribirse a la actividad"   styleClass="btnCrear"  action="#{controladorBuscarActividades.inscripcion(3, controlAutorizacion.getEmail())}" /> </h:column> 
+                 	<h:column> <h:commandButton value="Inscribirse a la actividad"   styleClass="btnCrear"  action="#{controladorBuscarActividades.inscripcion(i, controlAutorizacion.getEmail())}" /> </h:column> 
                  	
                 </h:form>
                  

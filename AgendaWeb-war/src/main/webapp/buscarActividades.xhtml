@@ -43,6 +43,7 @@
 
 									<td><h:form>
 											<h:column>
+											 <h:inputHidden value="#{controladorBuscarActividades.actividades}" />
 												<h:commandButton styleClass="btnVer" value="Ver"
 													action="#{controladorBuscarActividades.verBuscarActividades()}" />
 											</h:column>
@@ -99,8 +100,9 @@
 
 									<td><h:form>
 											<h:column>
-												<h:commandButton styleClass="btnVer" value="Ver"
-													action="#{controladorBuscarActividades.verBuscarActividades(i.idActividad)}" />
+												
+												<h:commandButton styleClass="btnVer" value="Inscripcion"
+													action="#{controladorBuscarActividades.inscripcion(i, controlAutorizacion.getEmail())}" />
 											</h:column>
 										</h:form></td>
 

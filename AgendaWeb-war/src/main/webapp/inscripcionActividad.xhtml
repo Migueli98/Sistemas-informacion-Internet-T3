@@ -19,7 +19,8 @@
                                 <tr>
                                         <th>ID Actividad</th>
                                         <th>Nombre Actividad</th>
-                                        <th>Fecha</th>
+                                        <th>Fecha Inicio</th>
+                                        <th>Fecha Fin</th>
                                         <th>Localización</th>
                                         <th>Descripción</th>
                                         <th>Tipo de Actividad</th>
@@ -32,14 +33,15 @@
                                 <tr>                                
                                     <td>#{i.idActividad}</td>
                                     <td>#{i.nombreActividad}</td>
-                                    <td>#{i.fechaActividad}</td>
+                                    <td>#{i.fechaInicioActividad}</td>
+                                    <td>#{i.fechaFinActividad}</td>
                                     <td>#{i.lugarRealizacion}</td>
                                     <td>#{i.descripcion}</td>
                                     <td>#{i.tipoActividad}</td>
                                     <td>#{i.estado}</td> 
                                     
                                     <td>
-                                        <h:column> <h:commandButton styleClass="btnCancelar" value ="Cancelar Inscripcion" action="#{controladorActividades.cancelarInscripcion(i.idActividad)}"  /></h:column>
+                                        <h:column> <h:commandButton styleClass="btnCancelar" value ="Cancelar Inscripcion" action="#{controladorActividades.cancelarInscripcion(i.idActividad, controlAutorizacion.getEmail())}"  /></h:column>
                                     </td>
                                    
 					
