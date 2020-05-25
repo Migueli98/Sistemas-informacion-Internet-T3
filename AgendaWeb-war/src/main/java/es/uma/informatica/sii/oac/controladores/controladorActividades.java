@@ -36,7 +36,7 @@ import es.uma.informatica.sii.oac.negocio.Negocio;
 @RequestScoped
 public class controladorActividades implements Serializable {
 	
-	//private ArrayList<Actividades> actividades;
+	private ArrayList<Actividades> actividades;
 	private Actividades actividad;
 	private ArrayList<InformeActividades> informes;
 	private InformeActividades informe;
@@ -142,20 +142,20 @@ public class controladorActividades implements Serializable {
 		public List<Actividades> getInscripciones(Usuario u) throws AprendizajeServicioException {
 			ins = new ArrayList<Inscripciones>();
 			ins = bd.allInscripciones(u);
-			List<Actividades> actividades = new ArrayList<Actividades>();
+			List<Actividades> acti = new ArrayList<Actividades>();
 			List<Actividades> acts = new ArrayList<Actividades>();
 			acts = bd.allActividades();
 			
 			for (Actividades a : acts) {
 				for (Inscripciones i : ins) {
 					if(a.getIdActividad() ==i.getActividad().getIdActividad()) {
-						actividades.add(a);
+						acti.add(a);
 					}
 				}
 				
 			}
 			
-			return actividades;
+			return acti;
 		}
 
 
@@ -365,6 +365,29 @@ public class controladorActividades implements Serializable {
 
 		public void setProfesores(ArrayList<Usuario> profesores) {
 			this.profesores = profesores;
+		}
+
+		public ArrayList<Actividades> getActividades(Usuario u) {
+			ins = new ArrayList<Inscripciones>();
+			ins = bd.allActividadesEstado(Actividades.Estado.EN_CURSO);
+			List<Actividades> acti = new ArrayList<Actividades>();
+			List<Actividades> acts = new ArrayList<Actividades>();
+			acts = bd.allActividades();
+			
+			for (Actividades a : acts) {
+				for (Inscripciones i : ins) {
+					if(a.getIdActividad() ==i.getActividad().getIdActividad()) {
+						acti.add(a);
+					}
+				}
+				
+			}
+			
+			return acti;
+		}
+
+		public void setActividades(ArrayList<Actividades> actividades) {
+			this.actividades = actividades;
 		}
 		
 		

@@ -42,6 +42,8 @@ public interface Negocio {
 	public List<Profesor> allProfesor();
 	public List<Servicios> allServicios();
 	public List<Usuario> allUsuario();
+	public List<Actividades> allActividadesAlumno(Usuario u);
+
 	
 	//A�adir elementos a las entidades
 	public void addActividades(Actividades a);
@@ -95,6 +97,7 @@ public interface Negocio {
 	public Profesor findProfesor(String id);
 	public Servicios findServicios(Long id);
 	public Usuario findUsuario(String id);
+
 
 	
 }

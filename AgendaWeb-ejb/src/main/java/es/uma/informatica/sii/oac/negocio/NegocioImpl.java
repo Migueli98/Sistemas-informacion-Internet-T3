@@ -182,6 +182,15 @@ Actividades a2 = new Actividades(2L,"Compra de comida a ancianos","Voluntariado"
 		return act;
 	}
 	
+	@Override
+	public List<Actividades> allActividadesAlumno(Usuario u) {
+		// TODO Auto-generated method stub
+		Query q = em.createNamedQuery("findAllActividadesAlumno").setParameter("user",u);;
+		List<Actividades> act = q.getResultList();
+		return act;
+	}
+	
+	
 
 	@Override
 	public List<Alumno> allAlumno() {

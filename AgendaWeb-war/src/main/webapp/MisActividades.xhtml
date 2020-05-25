@@ -1,4 +1,4 @@
-<!--
+
 <ui:composition template="/WEB-INF/templates/plantilla.xhtml" 
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
@@ -20,7 +20,8 @@
                                 <tr>
                                         <th>ID Actividad</th>
                                         <th>Nombre Actividad</th>
-                                        <th>Fecha</th>
+                                        <th>Fecha Inicio</th>
+                                        <th>Fecha Fin</th>
                                         <th>Localización</th>
                                         <th>Descripción</th>
                                         <th>Tipo de Actividad</th>
@@ -33,7 +34,8 @@
                                 <tr>                                
                                     <td>#{i.idActividad}</td>
                                     <td>#{i.nombreActividad}</td>
-                                    <td>#{i.fechaActividad}</td>
+                                    <td>#{i.fechaInicioActividad}</td>
+                                    <td>#{i.fechaFinActividad}</td>                     
                                     <td>#{i.lugarRealizacion}</td>
                                     <td>#{i.descripcion}</td>
                                     <td>#{i.tipoActividad}</td>
@@ -61,4 +63,3 @@
         </c:choose>
      </ui:define>           
 </ui:composition>
--->
