@@ -46,6 +46,8 @@ public class NegocioImpl implements Negocio {
  
 	@Override
 	public void inicializar() {
+		
+		/*
 		// CURRICULUMNS
 		Curriculum c1 = new Curriculum();
 		c1.setExperienciaLaboral("Camarero, bandeja, Ayudante de cocina");
@@ -157,6 +159,7 @@ public class NegocioImpl implements Negocio {
 		as1.setNombreAsignatura("Introduccion a Bases de Datos");
 		em.persist(as1);
 		
+		
 		//PROFESOR
 		Profesor p1 = new Profesor();
 		p1.setEmail("pro1");
@@ -165,11 +168,25 @@ public class NegocioImpl implements Negocio {
 		p1.setNombre("Enrique");
 		p1.setApellido("Soler");
 		p1.setDepartamento("Bases de Datos");
-		List<Asignaturas> imp = new ArrayList<Asignaturas>();
-		imp.add(as1);
-		p1.setImparte(imp);
 		em.persist(p1);
+		*/
 		
+		
+		Profesor p = findProfesor("pro1");
+		
+		//List<Asignaturas> a = new ArrayList<Asignaturas>();
+		Asignaturas a = findAsignaturas(7L);
+		p.getImparte().add(a);
+		em.merge(p);
+		
+		//p1.getImparte().add(as1);
+		//List<Asignaturas> imp = new ArrayList<Asignaturas>();
+		//imp.add(as1);
+		
+		
+		
+		
+		/*
 		//INFORMEACTIVIDAD
 		InformeActividades ia1 = new InformeActividades();
 		ia1.setActividades(a3);
@@ -180,6 +197,7 @@ public class NegocioImpl implements Negocio {
 		ia1.setProfesorAsociado(p1);
 		ia1.setValoracionAlumno("");
 		em.persist(ia1);
+		*/
 	}
 
 /**
@@ -531,7 +549,11 @@ Actividades a2 = new Actividades(2L,"Compra de comida a ancianos","Voluntariado"
 	@Override
 	public Asignaturas findAsignaturas(Long id) {
 		// TODO Auto-generated method stub
-		return null;
+		Query q = em.createNamedQuery("findAsignatura").setParameter("id", id);
+		List<Asignaturas> asig = q.getResultList();
+
+		return asig.get(0);
+		
 	}
 
 	@Override
@@ -568,9 +590,11 @@ Actividades a2 = new Actividades(2L,"Compra de comida a ancianos","Voluntariado"
 	}
 
 	@Override
-	public Profesor findProfesor(String id) {
+	public Profesor findProfesor(String email) {
 		// TODO Auto-generated method stub
-		return null;
+		Profesor p = em.find(Profesor.class, email);
+		return p;
+		
 	}
 
 	@Override

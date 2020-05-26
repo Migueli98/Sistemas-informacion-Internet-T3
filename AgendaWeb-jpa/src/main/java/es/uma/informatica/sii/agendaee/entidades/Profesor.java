@@ -3,6 +3,7 @@ package es.uma.informatica.sii.agendaee.entidades;
 
 
 import java.lang.String;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
@@ -28,6 +29,8 @@ public class Profesor extends Usuario {
 
 	public Profesor() {
 		super();
+		imparte = new ArrayList<Asignaturas>();
+		
 	}   
 	/*
 	public Profesor(Long ID, String EMAIL, String PASS, Rol R, String n, String ap,String d) {
