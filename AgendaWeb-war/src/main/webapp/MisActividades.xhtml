@@ -30,7 +30,7 @@
                             </thead>
                         
                         <tbody>
-                            <ui:repeat var = "i" value="#{controladorActividades.actividades}">
+                            <ui:repeat var = "i" value="#{controladorActividades.getActividades(controlAutorizacion.getEmail())}">
                                 <tr>                                
                                     <td>#{i.idActividad}</td>
                                     <td>#{i.nombreActividad}</td>
@@ -48,7 +48,7 @@
 									<td>
 									<h:form>
 											<h:commandButton styleClass="btnVer" value="Ver Informe"
-												action="#{controladorActividades.verInformeActividad(i.idActividad)}" />
+												action="#{controladorActividades.getInforme(i, controlAutorizacion.getEmail())}" />
 									</h:form>
 									</td>
 								</tr>

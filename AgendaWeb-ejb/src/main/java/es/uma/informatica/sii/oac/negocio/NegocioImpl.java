@@ -127,6 +127,59 @@ public class NegocioImpl implements Negocio {
 		a2.setNombreActividad("Reparto comida puertenia");
 		a2.setTipoActividad(Tipo.FORMACION);
 		em.persist(a2);
+		
+		Actividades a3 = new Actividades();
+		a3.setDescripcion("Enviar paquete a correos");
+		a3.setEstado(Estado.EN_CURSO);
+		try {
+			a3.setFechaInicioActividad(dateformat1.parse("01/06/2020"));
+			a3.setFechaFinActividad(dateformat1.parse("04/06/2020"));
+
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		a3.setLugarRealizacion("Villanueva de Cordoba");
+		a3.setNombreActividad("Reparto correo");
+		a3.setTipoActividad(Tipo.VOLUNTARIADO);
+		em.persist(a3);
+		
+		//CENTRO
+		Centro cen1 = new Centro();
+		cen1.setNombreCentro("Facultad de Informatica");
+		em.persist(cen1);
+		
+		
+		//ASIGNATURA
+		Asignaturas as1 = new Asignaturas();
+		as1.setCentro(cen1);
+		as1.setCreditos(6);
+		as1.setNombreAsignatura("Introduccion a Bases de Datos");
+		em.persist(as1);
+		
+		//PROFESOR
+		Profesor p1 = new Profesor();
+		p1.setEmail("pro1");
+		p1.setContrasenia("q");
+		p1.setRol(Rol.PASPDI);
+		p1.setNombre("Enrique");
+		p1.setApellido("Soler");
+		p1.setDepartamento("Bases de Datos");
+		List<Asignaturas> imp = new ArrayList<Asignaturas>();
+		imp.add(as1);
+		p1.setImparte(imp);
+		em.persist(p1);
+		
+		//INFORMEACTIVIDAD
+		InformeActividades ia1 = new InformeActividades();
+		ia1.setActividades(a3);
+		ia1.setAlumno(al2);
+		ia1.setEstado(InformeActividades.Estado.EN_CURSO);
+		ia1.setInformeONG("");
+		ia1.setInformeProfesor("");
+		ia1.setProfesorAsociado(p1);
+		ia1.setValoracionAlumno("");
+		em.persist(ia1);
 	}
 
 /**
@@ -494,9 +547,12 @@ Actividades a2 = new Actividades(2L,"Compra de comida a ancianos","Voluntariado"
 	}
 
 	@Override
-	public InformeActividades findInformeActividades(Long id) {
+	public InformeActividades findInformeActividades(Actividades a, Usuario u) {
 		// TODO Auto-generated method stub
-		return null;
+		Query q = em.createNamedQuery("findInforme").setParameter("a", a).setParameter("u", u);
+		List<InformeActividades> informes = q.getResultList();
+		
+		return informes.get(0);
 	}
 
 	@Override

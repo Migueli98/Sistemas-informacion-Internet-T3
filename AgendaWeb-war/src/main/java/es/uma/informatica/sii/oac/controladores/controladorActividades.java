@@ -57,8 +57,9 @@ public class controladorActividades implements Serializable {
 	   private Negocio bd;
 	    
 	   
+	   
 	    public controladorActividades() throws ParseException {
-	    	
+	    	actividades = new ArrayList<Actividades>();
             
 	    }
 	    
@@ -170,15 +171,10 @@ public class controladorActividades implements Serializable {
 		}
 
 
-
 		public void setInscripcion(Actividades inscripcion) {
 			this.inscripcion = inscripcion;
 		}
 
-
-
-		
-	   
 	    
 	    public ArrayList<InformeActividades> getInformes() {
 			return informes;
@@ -196,8 +192,10 @@ public class controladorActividades implements Serializable {
 		}
 		
 
-		public InformeActividades getInforme() {
-			return informe;
+		public String getInforme(Actividades a, Usuario u) {			
+			informe = bd.findInformeActividades(a, u);
+			
+			return "verInformeActividad.xhtml";
 		}
 
 		public void setInforme(InformeActividades informe) {
@@ -367,27 +365,37 @@ public class controladorActividades implements Serializable {
 			this.profesores = profesores;
 		}
 
-		public ArrayList<Actividades> getActividades(Usuario u) {
-			ins = new ArrayList<Inscripciones>();
-			ins = bd.allActividadesEstado(Actividades.Estado.EN_CURSO);
-			List<Actividades> acti = new ArrayList<Actividades>();
-			List<Actividades> acts = new ArrayList<Actividades>();
-			acts = bd.allActividades();
+		public List<Actividades> getActividades(Usuario u) {
 			
-			for (Actividades a : acts) {
-				for (Inscripciones i : ins) {
-					if(a.getIdActividad() ==i.getActividad().getIdActividad()) {
-						acti.add(a);
+			List<Actividades> a1 = new ArrayList<Actividades>();
+			a1 = bd.allActividadesEstado(Actividades.Estado.EN_CURSO);
+			List<Actividades> a2 = new ArrayList<Actividades>();
+			a2 = bd.allActividadesEstado(Actividades.Estado.REALIZADA);
+			a1.addAll(a2);
+			List<Inscripciones> in = new ArrayList<Inscripciones>();
+			in = bd.allInscripciones(u);
+			List<Actividades> acti = new ArrayList<Actividades>();
+			
+			
+			for(Actividades a : a1) {
+				for(Inscripciones i : in ) {
+					if(a.getIdActividad() == i.getActividad().getIdActividad()) {
+						actividades.add(a);
 					}
 				}
-				
 			}
 			
-			return acti;
+			
+			return actividades;
 		}
 
+		
 		public void setActividades(ArrayList<Actividades> actividades) {
 			this.actividades = actividades;
+		}
+
+		public ArrayList<Actividades> getActividades() {
+			return actividades;
 		}
 		
 		

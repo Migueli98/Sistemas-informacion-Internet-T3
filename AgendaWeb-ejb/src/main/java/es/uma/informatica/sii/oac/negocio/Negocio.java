@@ -91,7 +91,7 @@ public interface Negocio {
 	public Asignaturas findAsignaturas(Long id);
 	public Centro findCentro(Long id);
 	public Curriculum findCurriculum(Long id);
-	public InformeActividades findInformeActividades(Long id);
+	public InformeActividades findInformeActividades(Actividades a, Usuario u);
 	public Inscripciones findInscripciones(Long id);
 	public Ong findOng(String id);
 	public Profesor findProfesor(String id);

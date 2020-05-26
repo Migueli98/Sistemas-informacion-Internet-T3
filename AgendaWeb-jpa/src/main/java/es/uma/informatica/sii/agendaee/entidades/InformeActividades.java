@@ -12,6 +12,10 @@ import javax.persistence.*;
  */
 @Entity
 
+@NamedQueries({
+    @NamedQuery(name="findInforme", query="select i from InformeActividades i where i.actividades= :a and i.alumno= :u" )
+ 	})
+
 public class InformeActividades implements Serializable {
 
 	public enum Estado {
