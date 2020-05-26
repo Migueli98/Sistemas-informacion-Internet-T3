@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.lang.Integer;
 import java.lang.Long;
 import java.lang.String;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
@@ -30,16 +31,17 @@ public class Asignaturas implements Serializable {
 	@JoinColumn(name = "centro")
 	private Centro centro;
 	
-	@ManyToMany(mappedBy = "matriculadoEn")
+	
+	@ManyToMany(mappedBy = "matriculadoEn") //ok
 	private List<Alumno> estaCursando;
 	
-	@ManyToMany(mappedBy = "imparte")
-	private List<Profesor> impartidoPor;
+	@ManyToMany(mappedBy = "imparte")  //ok
+	private List<Profesor> impartidoPor = new ArrayList<Profesor>();
 	
-	@ManyToMany(mappedBy = "compuestoDe")
+	@ManyToMany(mappedBy = "compuestoDe") //ok
 	private List<Curriculum> incluidasEn;
 	
-	@ManyToMany(mappedBy = "asignaturas")
+	@ManyToMany(mappedBy = "asignaturas") //ok
 	private List<Servicios> servicios;
 	
 	

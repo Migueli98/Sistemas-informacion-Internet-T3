@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -62,7 +63,10 @@ public class Servicios implements Serializable {
 	private List<Actividades> actividades;
 	
 	@ManyToMany
-	@JoinColumn(name ="asignaturas")
+	@JoinTable(name = "jnd_servicios_asignaturas",
+	joinColumns = @JoinColumn(name = "servicios_fk"),
+	inverseJoinColumns = @JoinColumn(name = "asignaturas_fk")
+	)
 	private List<Asignaturas> asignaturas;
 	
 	private static final long serialVersionUID = 1L;

@@ -23,7 +23,11 @@ public class Alumno extends Usuario{
 	@OneToOne(mappedBy="alumno")
 	private Curriculum cv;
 	
-	@ManyToMany
+	@ManyToMany()
+	@JoinTable(name = "jnd_alumno_asignaturas",
+	joinColumns = @JoinColumn(name = "alumno_fk"),
+	inverseJoinColumns = @JoinColumn(name = "asignaturas_fk")
+	)
 	private List<Asignaturas> matriculadoEn;
 	
 	

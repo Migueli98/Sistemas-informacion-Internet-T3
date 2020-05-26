@@ -27,6 +27,7 @@ import es.uma.informatica.sii.agendaee.entidades.Curriculum.diasSemana;
 import es.uma.informatica.sii.agendaee.entidades.Curriculum.idioma;
 import es.uma.informatica.sii.agendaee.entidades.InformeActividades;
 import es.uma.informatica.sii.agendaee.entidades.Inscripciones;
+import es.uma.informatica.sii.agendaee.entidades.Inscripciones.estadoInscripcion;
 import es.uma.informatica.sii.agendaee.entidades.Ong;
 import es.uma.informatica.sii.agendaee.entidades.Profesor;
 import es.uma.informatica.sii.agendaee.entidades.Servicios;
@@ -47,7 +48,7 @@ public class NegocioImpl implements Negocio {
 	@Override
 	public void inicializar() {
 		
-		/*
+		
 		// CURRICULUMNS
 		Curriculum c1 = new Curriculum();
 		c1.setExperienciaLaboral("Camarero, bandeja, Ayudante de cocina");
@@ -168,25 +169,10 @@ public class NegocioImpl implements Negocio {
 		p1.setNombre("Enrique");
 		p1.setApellido("Soler");
 		p1.setDepartamento("Bases de Datos");
+		p1.addAsignatura(as1);
 		em.persist(p1);
-		*/
+
 		
-		
-		Profesor p = findProfesor("pro1");
-		
-		//List<Asignaturas> a = new ArrayList<Asignaturas>();
-		Asignaturas a = findAsignaturas(7L);
-		p.getImparte().add(a);
-		em.merge(p);
-		
-		//p1.getImparte().add(as1);
-		//List<Asignaturas> imp = new ArrayList<Asignaturas>();
-		//imp.add(as1);
-		
-		
-		
-		
-		/*
 		//INFORMEACTIVIDAD
 		InformeActividades ia1 = new InformeActividades();
 		ia1.setActividades(a3);
@@ -197,7 +183,20 @@ public class NegocioImpl implements Negocio {
 		ia1.setProfesorAsociado(p1);
 		ia1.setValoracionAlumno("");
 		em.persist(ia1);
-		*/
+		
+		//INSCRIPCIONES
+		Inscripciones i = new Inscripciones();
+		i.setActividad(a3);
+		i.setEstado(estadoInscripcion.ACEPTADO);
+		try {
+			i.setFechaInscripcion(dateformat1.parse("01/06/2020"));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		i.setUsuario(al2);
+		em.persist(i);
+		
 	}
 
 /**

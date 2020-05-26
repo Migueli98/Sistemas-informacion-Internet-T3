@@ -60,7 +60,7 @@ public class controladorActividades implements Serializable {
 	   
 	    public controladorActividades() throws ParseException {
 	    	actividades = new ArrayList<Actividades>();
-            
+            informe = new InformeActividades();
 	    }
 	    
 	    public String getNombreApellido(Profesor p) {
@@ -397,6 +397,11 @@ public class controladorActividades implements Serializable {
 		public ArrayList<Actividades> getActividades() {
 			return actividades;
 		}
+
+		public InformeActividades getInforme() {
+			return informe;
+		}
+		
 		
 		
 	    

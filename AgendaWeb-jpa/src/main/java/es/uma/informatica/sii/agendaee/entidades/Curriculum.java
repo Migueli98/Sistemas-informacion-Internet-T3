@@ -48,6 +48,10 @@ public class Curriculum implements Serializable {
 	
 
 	@ManyToMany
+	@JoinTable(name = "jnd_curriculum_asignaturas",
+	joinColumns = @JoinColumn(name = "curriculum_fk"),
+	inverseJoinColumns = @JoinColumn(name = "asignaturas_fk")
+	)
 	private List<Asignaturas> compuestoDe;
 	@OneToOne
 	private Alumno alumno;
