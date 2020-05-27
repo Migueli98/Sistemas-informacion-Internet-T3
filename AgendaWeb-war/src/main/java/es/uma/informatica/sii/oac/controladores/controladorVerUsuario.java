@@ -3,6 +3,8 @@ package es.uma.informatica.sii.oac.controladores;
 import java.io.Serializable;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
@@ -11,6 +13,7 @@ import javax.inject.Named;
 
 import es.uma.informatica.sii.agendaee.entidades.Alumno;
 import es.uma.informatica.sii.agendaee.entidades.Curriculum;
+import es.uma.informatica.sii.agendaee.entidades.Curriculum.Idioma;
 import es.uma.informatica.sii.agendaee.entidades.Usuario;
 import es.uma.informatica.sii.oac.negocio.AprendizajeServicioException;
 import es.uma.informatica.sii.oac.negocio.Negocio;
@@ -24,6 +27,8 @@ public class controladorVerUsuario implements Serializable{
 	private ArrayList<Usuario> usuarios;
 	private Usuario usuario;
 	private Curriculum curriculum;
+	private Idioma idioma;
+	private String [] a = null;
     
 	@Inject 
     private Negocio bd;
@@ -88,6 +93,30 @@ public class controladorVerUsuario implements Serializable{
     public String crearUsuario() {
     	return "crearUsuarioAd.xhtml";
     }
+    
+    public String getFavNumber2InString() {
+    	
+    		return Arrays.toString(a);
+    	
+	}
+    
+    public String[] AtoA (Curriculum c) {
+    	
+    	int cont = 0;
+    	for (Idioma i : c.getIdiomas()) {
+    		a[cont] = i.toString();
+    		cont++;
+    	}
+  
+    	return a;
+    }
+    
+    
+
+	public void setIdioma(Idioma idioma) {
+		this.idioma = idioma;
+	}
+    
     
     
     

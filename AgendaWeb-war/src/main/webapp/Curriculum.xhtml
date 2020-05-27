@@ -3,6 +3,7 @@
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                xmlns:f="http://java.sun.com/jsf/core"
                 >
                 
     <ui:define name="title">Modificar Usuario</ui:define>
@@ -71,14 +72,22 @@
                     <table id="tablaListaActividades">
 						<tr>
 							<td>IdCurriculum</td>
-
 							<td><h:outputText value="#{i.id}" /></td>
 						</tr>
 						<tr>
 							<td>Experiencia</td>
-
 							<td><h:inputText value="#{i.experienciaLaboral}" /></td>
 						</tr>
+						<tr>
+							<td>Idiomas</td>
+							<td>
+							<h:selectManyCheckbox value="#{controladorVerUsuario.AtoA(i)}">
+   								<f:selectItems value="#{controladorVerUsuario.}" />
+   							</h:selectManyCheckbox>
+							</td>
+							
+						</tr>
+						
 						
 				
 						       

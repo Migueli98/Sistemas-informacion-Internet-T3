@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -48,7 +49,7 @@ public class Curriculum implements Serializable {
 	
 	
 	@Column(nullable = false)
-	@ElementCollection
+	@ElementCollection(fetch = FetchType.EAGER)
 	private List<Idioma> idiomas = new ArrayList<>();
 	@Column(nullable = false)
 	private String experienciaLaboral;
