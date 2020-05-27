@@ -23,8 +23,9 @@ import es.uma.informatica.sii.agendaee.entidades.Alumno;
 import es.uma.informatica.sii.agendaee.entidades.Asignaturas;
 import es.uma.informatica.sii.agendaee.entidades.Centro;
 import es.uma.informatica.sii.agendaee.entidades.Curriculum;
-import es.uma.informatica.sii.agendaee.entidades.Curriculum.diasSemana;
-import es.uma.informatica.sii.agendaee.entidades.Curriculum.idioma;
+import es.uma.informatica.sii.agendaee.entidades.Curriculum.DiasSemana;
+import es.uma.informatica.sii.agendaee.entidades.Curriculum.Idioma;
+
 import es.uma.informatica.sii.agendaee.entidades.InformeActividades;
 import es.uma.informatica.sii.agendaee.entidades.Inscripciones;
 import es.uma.informatica.sii.agendaee.entidades.Inscripciones.estadoInscripcion;
@@ -52,13 +53,18 @@ public class NegocioImpl implements Negocio {
 		// CURRICULUMNS
 		Curriculum c1 = new Curriculum();
 		c1.setExperienciaLaboral("Camarero, bandeja, Ayudante de cocina");
-		c1.setIdiomas(idioma.FRANCES);
-		c1.setDisponibilidadHoraria(diasSemana.VIERNES);
-		
+		c1.addIdiomas(Idioma.FRANCES);
+		c1.addIdiomas(Idioma.ALEMAN);
+		c1.addDisponibilidadSemanal(DiasSemana.VIERNES);
+		c1.addDisponibilidadSemanal(DiasSemana.MIERCOLES);
+		em.persist(c1);
 		Curriculum c2 = new Curriculum();
-		c2.setExperienciaLaboral("Soy un maquina en todo");
-		c2.setIdiomas(idioma.INGLES);
-		c2.setDisponibilidadHoraria(diasSemana.JUEVES);
+		c2.setExperienciaLaboral("Pintor, Carpintero, Albañil");
+		c2.addIdiomas(Idioma.FRANCES);
+		c2.addIdiomas(Idioma.ALEMAN);
+		c2.addDisponibilidadSemanal(DiasSemana.JUEVES);
+		c2.addDisponibilidadSemanal(DiasSemana.MIERCOLES);
+		em.persist(c2);
 		
 		// ALUMNOS
 		Alumno al1 = new Alumno();
@@ -69,7 +75,7 @@ public class NegocioImpl implements Negocio {
 		al1.setApellido("Martos");
 		al1.setCreditos(160);
 		al1.setHorasLibre(10);
-		al1.setCv(c2);
+		al1.setCv(c1);
 		em.persist(al1);
 		Alumno al2 = new Alumno();
 		al2.setEmail("alu2");
@@ -79,14 +85,9 @@ public class NegocioImpl implements Negocio {
 		al2.setApellido("Valadez");
 		al2.setCreditos(110);
 		al2.setHorasLibre(5);
-		al2.setCv(c1);
+		al2.setCv(c2);
 		em.persist(al2);
 		
-		//CVS CON ALUMNOS
-		c2.setAlumno(al1);
-		c1.setAlumno(al2);
-		em.persist(c1);
-		em.persist(c2);
 		
 		//ADMIN
 		Usuario us = new Usuario();
@@ -564,7 +565,10 @@ Actividades a2 = new Actividades(2L,"Compra de comida a ancianos","Voluntariado"
 	@Override
 	public Curriculum findCurriculum(Long id) {
 		// TODO Auto-generated method stub
-		return null;
+		Query q = em.createNamedQuery("findCurriculum").setParameter("id", id);
+		List<Curriculum> cu = q.getResultList();
+		return cu.get(0);
+		
 	}
 
 	@Override

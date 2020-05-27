@@ -1,9 +1,10 @@
 es\uma\informatica\sii\agendaee\entidades\Actividades.class
+es\uma\informatica\sii\agendaee\entidades\Curriculum$DiasSemana.class
 es\uma\informatica\sii\agendaee\entidades\Inscripciones$estadoInscripcion.class
 es\uma\informatica\sii\agendaee\entidades\Usuario.class
 es\uma\informatica\sii\agendaee\entidades\Usuario$Rol.class
-es\uma\informatica\sii\agendaee\entidades\Curriculum$diasSemana.class
 es\uma\informatica\sii\agendaee\entidades\OAC_EntidadesPU.class
+es\uma\informatica\sii\agendaee\entidades\Curriculum$Idioma.class
 es\uma\informatica\sii\agendaee\entidades\Ong.class
 es\uma\informatica\sii\agendaee\entidades\Curriculum.class
 es\uma\informatica\sii\agendaee\entidades\InformeActividades$Estado.class
@@ -17,5 +18,4 @@ es\uma\informatica\sii\agendaee\entidades\Actividades$Estado.class
 es\uma\informatica\sii\agendaee\entidades\Asignaturas.class
 es\uma\informatica\sii\agendaee\entidades\Inscripciones.class
 es\uma\informatica\sii\agendaee\entidades\Centro.class
-es\uma\informatica\sii\agendaee\entidades\Curriculum$idioma.class
 es\uma\informatica\sii\agendaee\entidades\Servicios.class

@@ -20,8 +20,10 @@ public class Alumno extends Usuario{
 	private Integer creditos;
 	private Integer horasLibre;
 	
-	@OneToOne(mappedBy="alumno")
+	@OneToOne
 	private Curriculum cv;
+	
+	
 	
 	@ManyToMany()
 	@JoinTable(name = "jnd_alumno_asignaturas",

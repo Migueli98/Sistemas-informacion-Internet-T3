@@ -1,23 +1,33 @@
 package es.uma.informatica.sii.agendaee.entidades;
 
 import java.io.Serializable;
-import java.lang.String;
-
+import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 
 /**
  * Entity implementation class for Entity: Curriculum
  *
  */
 @Entity
-
+@NamedQueries({
+    @NamedQuery(name="findCurriculum",query="select cu from Curriculum cu where cu.id= :id")})
 public class Curriculum implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	public enum diasSemana {
+	public enum DiasSemana {
 		LUNES,
 		MARTES,
 		MIERCOLES,
@@ -27,7 +37,7 @@ public class Curriculum implements Serializable {
 		DOMINGO
 	};
 	
-	public enum idioma {
+	public enum Idioma {
 		INGLES,
 		ALEMAN,
 		FRANCES
@@ -38,13 +48,13 @@ public class Curriculum implements Serializable {
 	
 	
 	@Column(nullable = false)
-	@Enumerated(EnumType.STRING)
-	private idioma idiomas;
+	@ElementCollection
+	private List<Idioma> idiomas = new ArrayList<>();
 	@Column(nullable = false)
 	private String experienciaLaboral;
 	@Column(nullable = false)
-	@Enumerated(EnumType.STRING)
-	private diasSemana disponibilidadHoraria;
+	@ElementCollection
+	private List<DiasSemana> disponibilidadSemanal = new ArrayList<>();
 	
 
 	@ManyToMany
@@ -52,24 +62,16 @@ public class Curriculum implements Serializable {
 	joinColumns = @JoinColumn(name = "curriculum_fk"),
 	inverseJoinColumns = @JoinColumn(name = "asignaturas_fk")
 	)
+	
 	private List<Asignaturas> compuestoDe;
-	@OneToOne
+	
+	@OneToOne(mappedBy = "cv")
 	private Alumno alumno;
 	
 	
 	public Curriculum() {
 		super();
-	}   
-	/*
-	public Curriculum(Long id, String idiomas, String eL, String dh, List<Asignaturas> asig) {
-		this.id = id;
-		this.idiomas = idiomas;
-		this.experienciaLaboral = eL;
-		this.disponibilidadHoraria = dh;
-		this.compuestoDe = asig;
-	}
-	*/
-	
+	}  
 	
 	public Long getId() {
 		return id;
@@ -83,7 +85,6 @@ public class Curriculum implements Serializable {
 		return this.experienciaLaboral;
 	}
 
-
 	public Alumno getAlumno() {
 		return alumno;
 	}
@@ -92,26 +93,6 @@ public class Curriculum implements Serializable {
 		this.alumno = alumno;
 	}
 
-	
-
-	public idioma getIdiomas() {
-		return idiomas;
-	}
-
-
-	public void setIdiomas(idioma idiomas) {
-		this.idiomas = idiomas;
-	}
-
-
-	public diasSemana getDisponibilidadHoraria() {
-		return disponibilidadHoraria;
-	}
-
-
-	public void setDisponibilidadHoraria(diasSemana disponibilidadHoraria) {
-		this.disponibilidadHoraria = disponibilidadHoraria;
-	}
 
 
 	public void setExperienciaLaboral(String experienciaLaboral) {
@@ -125,6 +106,43 @@ public class Curriculum implements Serializable {
 
 	public void setCompuestoDe(List<Asignaturas> compuestoDe) {
 		this.compuestoDe = compuestoDe;
+	}
+
+	
+
+	public List<Idioma> getIdiomas() {
+		return idiomas;
+	}
+
+
+	public void setIdiomas(List<Idioma> idiomas) {
+		this.idiomas = idiomas;
+	}
+
+
+	public List<DiasSemana> getDisponibilidadSemanal() {
+		return disponibilidadSemanal;
+	}
+
+
+	public void setDisponibilidadSemanal(List<DiasSemana> disponibilidadSemanal) {
+		this.disponibilidadSemanal = disponibilidadSemanal;
+	}
+	
+	public void addIdiomas(Idioma i) {
+		idiomas.add(i);
+	}
+	
+	public void removeIdiomas(Idioma i) {
+		idiomas.remove(i);
+	}
+	
+	public void addDisponibilidadSemanal(DiasSemana d) {
+		disponibilidadSemanal.add(d);
+	}
+	
+	public void removeDisponibilidadSemanal(DiasSemana d) {
+		disponibilidadSemanal.remove(d);
 	}
 
 
