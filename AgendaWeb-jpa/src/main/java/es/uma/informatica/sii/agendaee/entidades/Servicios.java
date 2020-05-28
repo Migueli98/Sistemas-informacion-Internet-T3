@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 
@@ -20,6 +22,10 @@ import javax.persistence.OneToMany;
  */
 @Entity
 
+@NamedQueries({
+    @NamedQuery(name="findServiciosOng",query="select s from Servicios s where s.ong= :ong"),
+    @NamedQuery(name="findServiciosId",query="select s from Servicios s where s.codigoServicio= :id")
+	})
 public class Servicios implements Serializable {
 	
 	@Id @GeneratedValue

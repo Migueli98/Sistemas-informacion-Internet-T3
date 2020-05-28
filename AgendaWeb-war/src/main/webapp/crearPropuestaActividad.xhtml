@@ -10,67 +10,59 @@
         <c:choose>
             <c:when test="#{controlAutorizacion.getEmail().getRol() == 'ONG'}">
         
-                <h1 var = "i" value="#{controladorPropuestas.actividades}">Crear Actividad</h1>  
+                <ui:repeat var = "i" value="#{controladorPropuestas.actividad}">
                                 
                 <h:form id="ListaActividades">
                     <table id="tablaListaActividades">
-						<tr>
-							<td>ID Actividad</td>
-			
-							<td><h:inputText  value="" /></td>
-						</tr>
+						
 						<tr>
                             <td>Nombre Actividad </td>
 
                        
-                            <td><h:inputText  value="" /></td>
+                            <td><h:inputText  value="i.nombreActividad" /></td>
+                        </tr>
+                        
+                        <tr>
+                            <td>Tipo Actividad </td>
+
+                       
+                            <td><h:inputText  value="i.tipoActividad" /></td>
                         </tr>
 
                         <tr>
-                            <td>Fecha </td>
+                            <td>Fecha Inicio </td>
                          
-                            <td><h:inputText  value="" /></td>
+                            <td><h:inputText  value="i.fechaInicioActividad" /></td>
+                        </tr>
+                        
+                        <tr>
+                            <td>Fecha fin </td>
+                         
+                            <td><h:inputText  value="i.fechaFinActividad" /></td>
                         </tr>
 
                         <tr>
                             <td>Localización </td>
                         
-                            <td><h:inputText  value="" /></td>
+                            <td><h:inputText  value="i.lugarRealizacion" /></td>
                         </tr>
                         
                         <tr>
                             <td>Descripción </td>
                           
-                            <td><h:inputText  value="" /></td>
+                            <td><h:inputText  value="i.descripcion" /></td>
                         </tr>      
-                      
-                        
-                        <tr>
-                            <td>Tipo de actividad </td>
-                            <td><h:inputText  value=""/></td>
-                        </tr>  
-                        
-                        <tr>
-                            <td>Estado de la actividad </td>
-                            <td><h:outputText  value=""/></td>
-                        </tr>
-                                            
+                         
                         
                     </table>
 
                     
                   <br/>
-					<h:column>
-						<h:commandButton value="Guardar" styleClass="#{controladorPropuestas.crearPropuestaActividad(controlAutorizacion.getEmail())}"
-							action="propuestas.xhtml" />
-					</h:column>
-					<h:column>
-						<h:commandButton value="Cancelar" styleClass="btnCancelar"
-							action="propuestas.xhtml" />
-					</h:column>
+					
 
 
 				</h:form>
+				</ui:repeat>
                  
             </c:when>
                

@@ -39,19 +39,19 @@ public class Actividades implements Serializable {
 	      BUSCANDO_PARTICIPANTES
 	    };
 	    
-	public enum Tipo{
+	/*public enum Tipo{
 		VOLUNTARIADO,
 		APYS,
 		FORMACION
 	};
+	*/
 	
 	@Id @GeneratedValue
 	private Long idActividad;
 	@Column(nullable = false)
 	private String nombreActividad;
 	@Column(nullable = false)
-	@Enumerated(EnumType.STRING)
-	private Tipo tipoActividad;
+	private String tipoActividad;
 	@Column(nullable = false)
 	@Temporal(TemporalType.DATE)
 	private Date fechaInicioActividad;
@@ -85,13 +85,13 @@ public class Actividades implements Serializable {
 		return fechaInicioActividad;
 	}
 
-	public Tipo getTipoActividad() {
+	public String getTipoActividad() {
 		return tipoActividad;
 	}
 
 
 
-	public void setTipoActividad(Tipo tipoActividad) {
+	public void setTipoActividad(String tipoActividad) {
 		this.tipoActividad = tipoActividad;
 	}
 

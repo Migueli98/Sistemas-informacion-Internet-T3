@@ -5,19 +5,22 @@
                 xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
                 >
                 
-    <ui:define name="title">Modificar Propuesta Servicio</ui:define>
+    <ui:define name="title">Modificar Servicio</ui:define>
     <ui:define name="content">
         <c:choose>
             <c:when test="#{controlAutorizacion.getEmail().getRol() == 'ONG'}">
         
-                <h1 var = "i" value="#{controladorPropuestas.servicios}">Modificar Propuesta Servicio</h1>  
-                                
+                
+                <ui:repeat var="i" value="#{controladorPropuestas.servicio}"> 
+                       
                 <h:form id="ListaActividades">
+                <h:inputHidden value="#{controladorPropuestas.servicio.codigoServicio}"></h:inputHidden>
+                <h1>Modificar Servicio</h1>
                     <table id="tablaListaActividades">
 						<tr>
 							<td>ID Proyecto</td>
 
-							<td><h:inputText value="#{i.codigoServicio}" /></td>
+							<td><h:outputText value="#{i.codigoServicio}" /></td>
 						</tr>
 						<tr>
                             <td>Tipo de Servicio </td>
@@ -38,7 +41,12 @@
                         <tr>
                             <td>Numero de horas necesarias </td>
                             <td><h:inputText  value="#{i.numHoras}"/></td>
-                        </tr>      
+                        </tr>   
+                        
+                         <tr>
+                            <td>Numero de participantes </td>
+                            <td><h:inputText  value="#{i.numParticipantes}"/></td>
+                        </tr>    
                       
                         
                         <tr>
@@ -48,22 +56,20 @@
                                             
                         
                     </table>
-                </h:form>
+                
                     
-                <h:form> 
                     
                   <br/>
-					<h:column>
+					
 						<h:commandButton value="Guardar" styleClass="btnGuardar"
-							action="propuestas.xhtml" />
-					</h:column>
-					<h:column>
+							action="#{controladorPropuestas.guardarServicio(controlAutorizacion.getEmail())}" />
+					
 						<h:commandButton value="Cancelar" styleClass="btnCancelar"
-							action="propuestas.xhtml" />
-					</h:column>
-
+							action="serviciosActivos.xhtml" />
 
 				</h:form>
+				</ui:repeat>
+				
                  
             </c:when>
                

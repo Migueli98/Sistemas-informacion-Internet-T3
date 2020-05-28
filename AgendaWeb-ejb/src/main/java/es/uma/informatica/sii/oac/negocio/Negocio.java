@@ -96,6 +96,7 @@ public interface Negocio {
 	public Ong findOng(String id);
 	public Profesor findProfesor(String id);
 	public Servicios findServicios(Long id);
+	public List<Servicios> findServiciosOng(Ong ong);
 	public Usuario findUsuario(String id);
 
 

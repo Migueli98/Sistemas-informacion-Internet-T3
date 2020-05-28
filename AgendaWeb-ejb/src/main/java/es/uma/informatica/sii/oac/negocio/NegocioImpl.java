@@ -18,7 +18,6 @@ import javax.persistence.Query;
 
 import es.uma.informatica.sii.agendaee.entidades.Actividades;
 import es.uma.informatica.sii.agendaee.entidades.Actividades.Estado;
-import es.uma.informatica.sii.agendaee.entidades.Actividades.Tipo;
 import es.uma.informatica.sii.agendaee.entidades.Alumno;
 import es.uma.informatica.sii.agendaee.entidades.Asignaturas;
 import es.uma.informatica.sii.agendaee.entidades.Centro;
@@ -144,7 +143,7 @@ public class NegocioImpl implements Negocio {
 		}
 		a1.setLugarRealizacion("Puerto de la Torre");
 		a1.setNombreActividad("Recogida puertenia");
-		a1.setTipoActividad(Tipo.VOLUNTARIADO);
+		a1.setTipoActividad("VOLUNTARIADO");
 		em.persist(a1);
 		
 		Actividades a2 = new Actividades();
@@ -160,7 +159,7 @@ public class NegocioImpl implements Negocio {
 		}
 		a2.setLugarRealizacion("Puerto de la Torre");
 		a2.setNombreActividad("Reparto comida puertenia");
-		a2.setTipoActividad(Tipo.FORMACION);
+		a2.setTipoActividad("FORMACION");
 		em.persist(a2);
 		
 		Actividades a3 = new Actividades();
@@ -176,7 +175,7 @@ public class NegocioImpl implements Negocio {
 		}
 		a3.setLugarRealizacion("Villanueva de Cordoba");
 		a3.setNombreActividad("Reparto correo");
-		a3.setTipoActividad(Tipo.VOLUNTARIADO);
+		a3.setTipoActividad("VOLUNTARIADO");
 		em.persist(a3);
 		
 		
@@ -388,7 +387,6 @@ Actividades a2 = new Actividades(2L,"Compra de comida a ancianos","Voluntariado"
 		
 		Query q = em.createNamedQuery("findInscripcionesUserAct").setParameter("user", a.getUsuario()).setParameter("actividad", a.getActividad());
 		List<Inscripciones> ins=q.getResultList();
-		if (ins.size()!=0) throw new AprendizajeServicioException();
 		em.persist(a);
 		
 	}
@@ -474,7 +472,7 @@ Actividades a2 = new Actividades(2L,"Compra de comida a ancianos","Voluntariado"
 	@Override
 	public void deleteServicios(Servicios a) {
 		// TODO Auto-generated method stub
-		
+		em.remove(em.contains(a) ? a : em.merge(a));
 	}
 
 	@Override
@@ -529,7 +527,7 @@ Actividades a2 = new Actividades(2L,"Compra de comida a ancianos","Voluntariado"
 	@Override
 	public void updateServicios(Servicios a) {
 		// TODO Auto-generated method stub
-		
+		em.merge(a);
 	}
 
 	@Override
@@ -612,7 +610,19 @@ Actividades a2 = new Actividades(2L,"Compra de comida a ancianos","Voluntariado"
 	@Override
 	public Servicios findServicios(Long id) {
 		// TODO Auto-generated method stub
-		return null;
+		Query q = em.createNamedQuery("findServiciosId").setParameter("id", id);
+		List<Servicios> ser = q.getResultList();
+		
+		return ser.get(0);
+	}
+	
+	public List<Servicios> findServiciosOng(Ong ong) {
+		
+		Query q = em.createNamedQuery("findServiciosOng").setParameter("ong", ong);
+		List<Servicios> ser = q.getResultList();
+		
+		return ser;
+		
 	}
 
 	@Override

@@ -12,8 +12,10 @@
         <c:choose>
         	<c:when test="#{controlAutorizacion.getEmail().getRol() == 'ONG'}">
 
-				<h1> Servicios Activos </h1>
+				<h1> Servicios</h1>
 				<div class="bordeTablaActividades">
+				
+				<h:form>
                     <table id="tablaListaActividades">
                         <thead>
                                 <tr>
@@ -22,35 +24,40 @@
                                    <th>Nombre</th>
                                    <th>Descripcion</th>
                                    <th>Numero de horas necesario</th>
+                                   <th>Numero de participantes</th>
                                    <th>Zona</th>
                                               
                                 </tr>
                             </thead>
                         
                         <tbody>
-                            <ui:repeat var = "i" value="#{controladorServiciosActivos.servicios}">
+                            <ui:repeat var = "i" value="#{controladorPropuestas.getServicios(controlAutorizacion.getEmail())}">
                                 <tr>                                
                                     <td>#{i.codigoServicio}</td>
                                     <td>#{i.tipoServicio}</td>
                                     <td>#{i.nombre}</td>
                                     <td>#{i.descripcion}</td>
                                     <td>#{i.numHoras}</td>
+                                    <td>#{i.numParticipantes}</td>
                                     <td>#{i.zona}</td>
                                     
                                     
+                                    <td>                                     
+                                        <h:column> <h:commandButton styleClass="btnModificar" value="Modificar" action="#{controladorPropuestas.modificarServicio(i.codigoServicio)}" /> </h:column>
+                                    </td>
+                                    <td>          
+                                        <h:column> <h:commandButton styleClass="btnBorrar" value="Borrar" action="#{controladorPropuestas.borrarServicio(i.codigoServicio)}" /> </h:column>
+                                    </td>
+                                    <td>          
+                                        <h:column> <h:commandButton styleClass="btnCrear" value="Crear propuesta actividad" action="#{controladorPropuestas.inicializarPropuestaActividad()}" /> </h:column>
+                                    </td>
                                     
-                                    <td>
-                                        <h:form> <h:column> <h:commandButton styleClass="btnVer" value ="Ver Servicio" action="#{controladorServiciosActivos.verServiciosActivos()}"  /></h:column></h:form>
-                                    </td>
-                                    <td>
-                                        <h:form> <h:column> <h:commandButton styleClass="btnVer" value ="Ver Actividades" action="#{controladorServiciosActivos.actividadesServicios()}"  /></h:column></h:form>
-                                    </td>
                                 </tr>
                             </ui:repeat>
                         </tbody>
                     </table>
-                    
-                   
+                 </h:form>
+                    <h:form> <h:column> <h:commandButton styleClass="btnCrear" value="Crear Servicio" action="crearServicio.xhtml" /> </h:column> </h:form>
                 </div>
                
                 
