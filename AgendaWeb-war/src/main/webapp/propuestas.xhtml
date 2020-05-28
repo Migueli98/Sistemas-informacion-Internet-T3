@@ -1,4 +1,4 @@
-<!--<ui:composition template="/WEB-INF/templates/plantilla.xhtml" 
+<ui:composition template="/WEB-INF/templates/plantilla.xhtml" 
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
@@ -15,6 +15,7 @@
 				<h1> Propuestas </h1>
 				<div class="bordeTablaActividades">
 				<h4> Servicios </h4>
+				<h:form>
                     <table id="tablaListaActividades">
                         <thead>
                                 <tr>
@@ -41,25 +42,26 @@
                                     
                                     
                                     <td>
-                                        <h:form> <h:column> <h:commandButton styleClass="btnVer" value ="Ver" action="#{controladorPropuestas.verPropuestaServicio()}"  /></h:column></h:form>
+                                        <h:column> <h:commandButton styleClass="btnVer" value ="Ver" action="#{controladorPropuestas.verPropuestaServicio()}"  /></h:column>
                                     </td>
                                     <td>                                     
-                                        <h:form> <h:column> <h:commandButton styleClass="btnModificar" value="Modificar" action="#{controladorPropuestas.modificarPropuestaServicio()}" /> </h:column> </h:form>
+                                        <h:column> <h:commandButton styleClass="btnModificar" value="Modificar" action="#{controladorPropuestas.modificarPropuestaServicio()}" /> </h:column>
                                     </td>
                                     <td>          
-                                        <h:form> <h:column> <h:commandButton styleClass="btnBorrar" value="Borrar" action="#{controladorPropuestas.borrarPropuestaServicio(i.codigoServicio)}" /> </h:column> </h:form>
+                                        <h:column> <h:commandButton styleClass="btnBorrar" value="Borrar" action="#{controladorPropuestas.borrarPropuestaServicio(i.codigoServicio)}" /> </h:column>
                                     </td>
                                     
                                 </tr>
                             </ui:repeat>
                         </tbody>
                     </table>
-                    
-                    <h:form> <h:column> <h:commandButton styleClass="btnCrear" value="Crear Servicio" action="#{controladorPropuestas.crearPropuestaServicio()}" /> </h:column> </h:form>
+                 </h:form>
+                    <h:form> <h:column> <h:commandButton styleClass="btnCrear" value="Crear Servicio" action="crearPropuestaServicio.xhtml" /> </h:column> </h:form>
                 </div>
                 
                 <div class="bordeTablaActividades">
                 <h4> Actividades </h4>
+                <h:form>
                     <table id="tablaListaActividades">
                         <thead>
                                 <tr>
@@ -86,21 +88,21 @@
                                     
                                     
                                    <td>
-                                        <h:form> <h:column> <h:commandButton styleClass="btnVer" value ="Ver" action="#{controladorPropuestas.verPropuestaActividad()}"  /></h:column></h:form>
+                                        <h:column> <h:commandButton styleClass="btnVer" value ="Ver" action="#{controladorPropuestas.verPropuestaActividad()}"  /></h:column>
                                     </td>
                                     <td>                                     
-                                        <h:form> <h:column> <h:commandButton styleClass="btnModificar" value="Modificar" action="#{controladorPropuestas.modificarPropuestaActividad()}" /> </h:column> </h:form>
+                                        <h:column> <h:commandButton styleClass="btnModificar" value="Modificar" action="#{controladorPropuestas.modificarPropuestaActividad()}" /> </h:column> 
                                     </td>
                                     <td>          
-                                        <h:form> <h:column> <h:commandButton styleClass="btnBorrar" value="Borrar" action="#{controladorPropuestas.borrarPropuestaActividad(i.idActividad)}" /> </h:column> </h:form>
+                                        <h:column> <h:commandButton styleClass="btnBorrar" value="Borrar" action="#{controladorPropuestas.borrarPropuestaActividad(i.idActividad)}" /> </h:column>
                                     </td>
                                     
                                 </tr>
                             </ui:repeat>
                         </tbody>
                     </table>
-                    
-                    <h:form> <h:column> <h:commandButton styleClass="btnCrear" value="Crear Actividad" action="#{controladorPropuestas.crearPropuestaActividad()}" /> </h:column> </h:form>
+                    </h:form>
+                   <h:form>	<h:column> <h:commandButton styleClass="btnCrear" value="Crear Actividad" action="crearPropuestaActividad.xhtml" /> </h:column> </h:form>
                 </div>
                 
         	</c:when>
@@ -110,6 +112,7 @@
 				<h1> Solicitudes </h1>
 				<div class="bordeTablaActividades">
 				<h4> Servicios </h4>
+				<h:form>
                     <table id="tablaListaActividades">
                         <thead>
                                 <tr>
@@ -136,7 +139,7 @@
                                     
                                     
                                     <td>
-                                        <h:form> <h:column> <h:commandButton styleClass="btnVer" value ="Ver" action="#{controladorPropuestas.verPropuestaServicio()}"  /></h:column></h:form>
+                                        <h:column> <h:commandButton styleClass="btnVer" value ="Ver" action="#{controladorPropuestas.verPropuestaServicio()}"  /></h:column>
                                     </td>
                                     
                                     
@@ -144,12 +147,13 @@
                             </ui:repeat>
                         </tbody>
                     </table>
-                    
+                    </h:form>
                     
                 </div>
                 
                 <div class="bordeTablaActividades">
                 <h4> Actividades </h4>
+                <h:form>
                     <table id="tablaListaActividades">
                         <thead>
                                 <tr>
@@ -176,7 +180,7 @@
                                     
                                     
                                    <td>
-                                        <h:form> <h:column> <h:commandButton styleClass="btnVer" value ="Ver" action="#{controladorPropuestas.verPropuestaActividad()}"  /></h:column></h:form>
+                                        <h:column> <h:commandButton styleClass="btnVer" value ="Ver" action="#{controladorPropuestas.verPropuestaActividad()}"  /></h:column>
                                     </td>
                                     
                                     
@@ -185,10 +189,10 @@
                         </tbody>
                     </table>
                     
-                    
+                    </h:form>
                 </div>
                 
         	</c:when>
         </c:choose>
      </ui:define>           
-</ui:composition>-->
+</ui:composition>

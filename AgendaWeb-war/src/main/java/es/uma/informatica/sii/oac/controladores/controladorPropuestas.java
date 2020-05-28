@@ -6,10 +6,13 @@ import java.util.ArrayList;
 
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import es.uma.informatica.sii.agendaee.entidades.Actividades;
+import es.uma.informatica.sii.agendaee.entidades.Ong;
 import es.uma.informatica.sii.agendaee.entidades.Servicios;
+import es.uma.informatica.sii.oac.negocio.Negocio;
 
 
 
@@ -20,6 +23,9 @@ public class controladorPropuestas implements Serializable{
 	private Actividades actividad;
 	private ArrayList<Servicios> servicios;
 	private Servicios servicio;
+	
+	@Inject
+	Negocio bd;
 	
 	public controladorPropuestas() throws ParseException{
 		
@@ -117,12 +123,25 @@ public class controladorPropuestas implements Serializable{
     }
     
     //MODIFICAR
-    public String crearPropuestaActividad(){
-       return "crearPropuestaActividad.xhtml";
+    public String crearPropuestaActividad(Ong email){
+    	
+    	
+       return "propuestas.xhtml";
     }
     
-    public String crearPropuestaServicio(){
-        return "crearPropuestaServicio.xhtml";
+    public String crearPropuestaServicio(Ong email){
+    	Servicios s = new Servicios();
+    	s.setOng(email);
+    	s.setDescripcion(servicio.getDescripcion());
+    	s.setTipoServicio(servicio.getTipoServicio());
+    	s.setNombre(servicio.getNombre());
+    	s.setNumHoras(servicio.getNumHoras());
+    	s.setZona(servicio.getZona());
+    
+    	
+    	servicios.add(s);
+    	bd.addServicios(s);
+        return "propuestas.xhtml";
      }
     
     

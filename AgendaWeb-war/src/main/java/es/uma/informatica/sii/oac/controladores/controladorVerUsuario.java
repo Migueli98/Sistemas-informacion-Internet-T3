@@ -74,7 +74,7 @@ public class controladorVerUsuario implements Serializable{
 		
 		Curriculum c = bd.findCurriculum(al.getCv().getId());
 		c.setDisponibilidad(curriculum.getDisponibilidad());
-		c.setExperienciaLaboral(curriculum.getDisponibilidad());
+		c.setExperienciaLaboral(curriculum.getExperienciaLaboral());
 		c.setIdiomas(curriculum.getIdiomas());
 		bd.updateCurriculum(c);
 		return "miPerfil.xhtml";

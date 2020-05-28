@@ -48,18 +48,43 @@ public class NegocioImpl implements Negocio {
 	@Override
 	public void inicializar() {
 		
+		//CENTRO
+		Centro cen1 = new Centro();
+		cen1.setNombreCentro("Facultad de Informatica");
+		em.persist(cen1);
+		
+		
+		//ASIGNATURA
+		Asignaturas as1 = new Asignaturas();
+		as1.setCentro(cen1);
+		as1.setCreditos(6);
+		as1.setNombreAsignatura("Introduccion a Bases de Datos");
+		em.persist(as1);
+		
+		Asignaturas as2 = new Asignaturas();
+		as2.setCentro(cen1);
+		as2.setCreditos(6);
+		as2.setNombreAsignatura("Analisis y DiseÃ±o de Algoritmos");
+		em.persist(as2);
 		
 		// CURRICULUMNS
 		Curriculum c1 = new Curriculum();
 		c1.setExperienciaLaboral("Camarero, bandeja, Ayudante de cocina");
 		c1.setIdiomas("Frances, Aleman, Ingles");
-		c1.setDisponibilidad("Lunes por la mañana y viernes por la tarde");
+		c1.setDisponibilidad("Lunes por la maï¿½ana y viernes por la tarde");
+		List<Asignaturas> asig1 = new ArrayList<>();
+		asig1.add(as1);
+		c1.setCompuestoDe(asig1);
 		em.persist(c1);
 		
 		Curriculum c2 = new Curriculum();
-		c2.setExperienciaLaboral("Pintor, Carpintero, Albañil");
+		c2.setExperienciaLaboral("Pintor, Carpintero, Albaï¿½il");
 		c2.setIdiomas("Ingles, Frances");
 		c2.setDisponibilidad("Fin de semana");
+		List<Asignaturas> asig2 = new ArrayList<>();
+		asig2.add(as1);
+		asig2.add(as2);
+		c2.setCompuestoDe(asig2);
 		em.persist(c2);
 		
 		// ALUMNOS
@@ -84,6 +109,16 @@ public class NegocioImpl implements Negocio {
 		al2.setCv(c2);
 		em.persist(al2);
 		
+		//ONG
+		Ong ong1 = new Ong();
+		ong1.setEmail("ong1");
+		ong1.setContrasenia("q");
+		ong1.setRol(Rol.ONG);
+		ong1.setCiudad("Murcia");
+		ong1.setPais("EspaÃ±a");
+		ong1.setPaginaWeb("www.miemtrasmenosmirasmenosves.com");
+		ong1.setNombreONG("Caritas");
+		em.persist(ong1);
 		
 		//ADMIN
 		Usuario us = new Usuario();
@@ -144,18 +179,7 @@ public class NegocioImpl implements Negocio {
 		a3.setTipoActividad(Tipo.VOLUNTARIADO);
 		em.persist(a3);
 		
-		//CENTRO
-		Centro cen1 = new Centro();
-		cen1.setNombreCentro("Facultad de Informatica");
-		em.persist(cen1);
 		
-		
-		//ASIGNATURA
-		Asignaturas as1 = new Asignaturas();
-		as1.setCentro(cen1);
-		as1.setCreditos(6);
-		as1.setNombreAsignatura("Introduccion a Bases de Datos");
-		em.persist(as1);
 		
 		
 		//PROFESOR
@@ -383,7 +407,7 @@ Actividades a2 = new Actividades(2L,"Compra de comida a ancianos","Voluntariado"
 
 	@Override
 	public void addServicios(Servicios a) {
-		// TODO Auto-generated method stub
+		em.persist(a);
 		
 	}
 
@@ -468,8 +492,6 @@ Actividades a2 = new Actividades(2L,"Compra de comida a ancianos","Voluntariado"
 	@Override
 	public void updateAlumno(Alumno a) throws AprendizajeServicioException {
 		// TODO Auto-generated method stub
-		
-		
 		em.merge(a);
 	}
 
@@ -495,7 +517,7 @@ Actividades a2 = new Actividades(2L,"Compra de comida a ancianos","Voluntariado"
 	@Override
 	public void updateOng(Ong a) {
 		// TODO Auto-generated method stub
-		
+		em.merge(a);
 	}
 
 	@Override
@@ -573,9 +595,10 @@ Actividades a2 = new Actividades(2L,"Compra de comida a ancianos","Voluntariado"
 	}
 
 	@Override
-	public Ong findOng(String id) {
+	public Ong findOng(String email) {
 		// TODO Auto-generated method stub
-		return null;
+		Ong a = em.find(Ong.class, email);
+		return a;
 	}
 
 	@Override

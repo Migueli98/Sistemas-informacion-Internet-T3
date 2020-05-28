@@ -21,39 +21,19 @@ import javax.persistence.OneToMany;
 @Entity
 
 public class Servicios implements Serializable {
-
-	private enum diasSemana {
-		LUNES,
-		MARTES,
-		MIERCOLES,
-		JUEVES,
-		VIERNES,
-		SABADO,
-		DOMINGO
-	};
-	
-	private enum idioma {
-		INGLES,
-		ALEMAN,
-		FRANCES,
-	};
 	
 	@Id @GeneratedValue
 	private Long codigoServicio;
-	@Column(nullable = false)
+	//@Column(nullable = false)
 	private String tipoServicio;
-	@Column(nullable = false)
+	//@Column(nullable = false)
 	private String nombre;
 	private String descripcion;
 	private Integer numParticipantes;
-	@Column(nullable = false)
+	//@Column(nullable = false)
 	private Integer numHoras;
-	@Column(nullable = false)
+	//@Column(nullable = false)
 	private String zona;
-	
-	private idioma idiomas;
-	private String experienciaLaboral;
-	private diasSemana disponibilidadHoraria;
 	
 	@ManyToOne
 	@JoinColumn(name = "ong")
@@ -156,30 +136,6 @@ public class Servicios implements Serializable {
 		this.asignaturas = asignaturas;
 	}
 
-	public idioma getIdiomas() {
-		return idiomas;
-	}
-
-	public void setIdiomas(idioma idiomas) {
-		this.idiomas = idiomas;
-	}
-
-	public String getExperienciaLaboral() {
-		return experienciaLaboral;
-	}
-
-	public void setExperienciaLaboral(String experienciaLaboral) {
-		this.experienciaLaboral = experienciaLaboral;
-	}
-
-	public diasSemana getDisponibilidadHoraria() {
-		return disponibilidadHoraria;
-	}
-
-	public void setDisponibilidadHoraria(diasSemana disponibilidadHoraria) {
-		this.disponibilidadHoraria = disponibilidadHoraria;
-	}
-	
 	
 	
    

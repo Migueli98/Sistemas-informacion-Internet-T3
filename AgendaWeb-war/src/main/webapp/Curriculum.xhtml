@@ -38,6 +38,29 @@
                     </table>
                     </div>
                     
+                    <ui:repeat var="j" value= "#{i.compuestoDe}">
+                    
+                    <div class="bordeTablaActividades">
+                    <table id="tablaListaActividades">
+						<tr>
+							<td>Codigo Asignatura</td>
+							<td><h:outputText value="#{j.codigoAsignatura}" /></td>
+						</tr>
+						
+						<tr>
+							<td>Nombre Asignatura</td>
+							<td><h:outputText value="#{j.nombreAsignatura}" /></td>
+						</tr>
+						
+						<tr>
+							<td>Creditos</td>
+							<td><h:outputText value="#{j.creditos}" /></td>
+						</tr>
+                    
+                    </table>
+                    </div>
+                    </ui:repeat>
+                    
                     <h:commandButton styleClass="btnGuardar"  value="Guardar" action="#{controladorVerUsuario.modificarCurriculum(controlAutorizacion.getEmail())}" />
                     <h:commandButton styleClass="btnBorrar"  value="Cancelar cambios" action="miPerfil.xhtml" />
                     

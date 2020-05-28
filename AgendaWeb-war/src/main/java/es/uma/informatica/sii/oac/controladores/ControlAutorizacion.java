@@ -5,13 +5,16 @@
 package es.uma.informatica.sii.oac.controladores;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import es.uma.informatica.sii.agendaee.entidades.Actividades;
 import es.uma.informatica.sii.agendaee.entidades.Alumno;
+import es.uma.informatica.sii.agendaee.entidades.Ong;
 import es.uma.informatica.sii.agendaee.entidades.Usuario;
 import es.uma.informatica.sii.agendaee.entidades.Usuario.Rol;
 import es.uma.informatica.sii.oac.negocio.AprendizajeServicioException;
@@ -29,6 +32,7 @@ public class ControlAutorizacion implements Serializable {
    
    private Usuario email;
    private Alumno alumno;
+   private Ong ong;
    
    public ControlAutorizacion() {
 		
@@ -49,7 +53,13 @@ public class ControlAutorizacion implements Serializable {
    public Alumno getAlumno() {
        return alumno;
    }
-
+   public Ong getOng() {
+		return ong;
+   }
+	
+   public void setOng(Ong ong) {
+		this.ong = ong;
+   }
 
 public String home() {
 	   String cad = "login.xhtml";
@@ -101,25 +111,20 @@ public String home() {
 	   return "miPerfil.xhtml";
    }
    
+   /*public boolean comprobarBd() throws AprendizajeServicioException {
+	   List<Actividades> act = bd.allActividades();
+	   boolean sol = true;
+	   
+	   if(act != null) {
+		   sol = false;
+	   }
+	   
+	   return sol;
+   }*/
+   
    public String modificarPerfilAlumno() throws AprendizajeServicioException {
 	   	alumno = (Alumno) email;
 	   	
-	   	/*
-	   	Alumno alu = new Alumno();
-		alu.setEmail("alu1");
-		alu.setContrasenia("q");
-		alu.setRol(Rol.ALUMNO);
-		alu.setNombre("otra");
-		alu.setApellido("cosa");
-		alu.setCreditos(160);
-		alu.setHorasLibre(10);
-		alu.setCv(null);
-		
-		bd.updateAlumno(alu);
-		*/
-		//bd.refrescarUsuario(alu);
-		
-	   
 		bd.updateAlumno(bd.findAlumno(alumno.getEmail()));
 		bd.refrescarUsuario(alumno);
 		
@@ -128,9 +133,20 @@ public String home() {
 	   return "miPerfil.xhtml";
    }
    
-   public String modificarUsuario() {
+   public String modificarPerfilOng() throws AprendizajeServicioException {
+	   	ong = (Ong) email;
+	   	
+		bd.updateOng(bd.findOng(ong.getEmail()));
+		bd.refrescarUsuario(ong);
+		
+	
+	   return "miPerfil.xhtml";
+  }
+   
+   public String modificarUsuario() throws AprendizajeServicioException {
 	   
 	   bd.updateUsuario(email);
+	   bd.refrescarUsuario(email);
 	   return "miPerfil.xhtml";
    }
    

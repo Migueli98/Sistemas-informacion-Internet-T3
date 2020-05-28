@@ -41,7 +41,7 @@ public class Curriculum implements Serializable {
 	private String disponibilidad;
 	
 
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "jnd_curriculum_asignaturas",
 	joinColumns = @JoinColumn(name = "curriculum_fk"),
 	inverseJoinColumns = @JoinColumn(name = "asignaturas_fk")
