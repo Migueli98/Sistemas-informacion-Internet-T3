@@ -28,34 +28,17 @@ public class Curriculum implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	public enum DiasSemana {
-		LUNES,
-		MARTES,
-		MIERCOLES,
-		JUEVES,
-		VIERNES,
-		SABADO,
-		DOMINGO
-	};
 	
-	public enum Idioma {
-		INGLES,
-		ALEMAN,
-		FRANCES
-	};
 	
 	@Id @GeneratedValue
 	private Long id;
 	
 	
 	@Column(nullable = false)
-	@ElementCollection(fetch = FetchType.EAGER)
-	private List<Idioma> idiomas = new ArrayList<>();
-	@Column(nullable = false)
+	private String idiomas;
 	private String experienciaLaboral;
 	@Column(nullable = false)
-	@ElementCollection
-	private List<DiasSemana> disponibilidadSemanal = new ArrayList<>();
+	private String disponibilidad;
 	
 
 	@ManyToMany
@@ -109,43 +92,21 @@ public class Curriculum implements Serializable {
 		this.compuestoDe = compuestoDe;
 	}
 
-	
-
-	public List<Idioma> getIdiomas() {
+	public String getIdiomas() {
 		return idiomas;
 	}
 
-
-	public void setIdiomas(List<Idioma> idiomas) {
+	public void setIdiomas(String idiomas) {
 		this.idiomas = idiomas;
 	}
 
-
-	public List<DiasSemana> getDisponibilidadSemanal() {
-		return disponibilidadSemanal;
+	public String getDisponibilidad() {
+		return disponibilidad;
 	}
 
-
-	public void setDisponibilidadSemanal(List<DiasSemana> disponibilidadSemanal) {
-		this.disponibilidadSemanal = disponibilidadSemanal;
+	public void setDisponibilidad(String disponibilidad) {
+		this.disponibilidad = disponibilidad;
 	}
-	
-	public void addIdiomas(Idioma i) {
-		idiomas.add(i);
-	}
-	
-	public void removeIdiomas(Idioma i) {
-		idiomas.remove(i);
-	}
-	
-	public void addDisponibilidadSemanal(DiasSemana d) {
-		disponibilidadSemanal.add(d);
-	}
-	
-	public void removeDisponibilidadSemanal(DiasSemana d) {
-		disponibilidadSemanal.remove(d);
-	}
-
 
 	@Override
 	public int hashCode() {

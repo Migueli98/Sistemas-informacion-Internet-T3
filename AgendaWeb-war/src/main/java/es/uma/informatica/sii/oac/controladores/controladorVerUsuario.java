@@ -13,7 +13,7 @@ import javax.inject.Named;
 
 import es.uma.informatica.sii.agendaee.entidades.Alumno;
 import es.uma.informatica.sii.agendaee.entidades.Curriculum;
-import es.uma.informatica.sii.agendaee.entidades.Curriculum.Idioma;
+
 import es.uma.informatica.sii.agendaee.entidades.Usuario;
 import es.uma.informatica.sii.oac.negocio.AprendizajeServicioException;
 import es.uma.informatica.sii.oac.negocio.Negocio;
@@ -27,7 +27,7 @@ public class controladorVerUsuario implements Serializable{
 	private ArrayList<Usuario> usuarios;
 	private Usuario usuario;
 	private Curriculum curriculum;
-	private Idioma idioma;
+
 	private String [] a = null;
     
 	@Inject 
@@ -61,11 +61,23 @@ public class controladorVerUsuario implements Serializable{
  
     
     
-	public String getCurriculum(Alumno a) throws AprendizajeServicioException {
-		//Curriculum cv = new Curriculum();
+	public String getCurriculum(Alumno a) {
+		
 		curriculum = bd.findCurriculum(a.getCv().getId());
-		//if(cv!=null) throw new AprendizajeServicioException(""+cv.getExperienciaLaboral());
+		
 		return "Curriculum.xhtml";
+	}
+	
+	public String modificarCurriculum(Usuario a) throws AprendizajeServicioException {
+		Alumno al = bd.findAlumno(a.getEmail());
+		
+		
+		Curriculum c = bd.findCurriculum(al.getCv().getId());
+		c.setDisponibilidad(curriculum.getDisponibilidad());
+		c.setExperienciaLaboral(curriculum.getDisponibilidad());
+		c.setIdiomas(curriculum.getIdiomas());
+		bd.updateCurriculum(c);
+		return "miPerfil.xhtml";
 	}
 
 	public void setCurriculum(Curriculum curriculum) {
@@ -94,28 +106,7 @@ public class controladorVerUsuario implements Serializable{
     	return "crearUsuarioAd.xhtml";
     }
     
-    public String getFavNumber2InString() {
-    	
-    		return Arrays.toString(a);
-    	
-	}
-    
-    public String[] AtoA (Curriculum c) {
-    	
-    	int cont = 0;
-    	for (Idioma i : c.getIdiomas()) {
-    		a[cont] = i.toString();
-    		cont++;
-    	}
   
-    	return a;
-    }
-    
-    
-
-	public void setIdioma(Idioma idioma) {
-		this.idioma = idioma;
-	}
     
     
     

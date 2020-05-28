@@ -23,8 +23,7 @@ import es.uma.informatica.sii.agendaee.entidades.Alumno;
 import es.uma.informatica.sii.agendaee.entidades.Asignaturas;
 import es.uma.informatica.sii.agendaee.entidades.Centro;
 import es.uma.informatica.sii.agendaee.entidades.Curriculum;
-import es.uma.informatica.sii.agendaee.entidades.Curriculum.DiasSemana;
-import es.uma.informatica.sii.agendaee.entidades.Curriculum.Idioma;
+
 
 import es.uma.informatica.sii.agendaee.entidades.InformeActividades;
 import es.uma.informatica.sii.agendaee.entidades.Inscripciones;
@@ -53,17 +52,14 @@ public class NegocioImpl implements Negocio {
 		// CURRICULUMNS
 		Curriculum c1 = new Curriculum();
 		c1.setExperienciaLaboral("Camarero, bandeja, Ayudante de cocina");
-		c1.addIdiomas(Idioma.FRANCES);
-		c1.addIdiomas(Idioma.ALEMAN);
-		c1.addDisponibilidadSemanal(DiasSemana.VIERNES);
-		c1.addDisponibilidadSemanal(DiasSemana.MIERCOLES);
+		c1.setIdiomas("Frances, Aleman, Ingles");
+		c1.setDisponibilidad("Lunes por la mañana y viernes por la tarde");
 		em.persist(c1);
+		
 		Curriculum c2 = new Curriculum();
 		c2.setExperienciaLaboral("Pintor, Carpintero, Albañil");
-		c2.addIdiomas(Idioma.FRANCES);
-		c2.addIdiomas(Idioma.ALEMAN);
-		c2.addDisponibilidadSemanal(DiasSemana.JUEVES);
-		c2.addDisponibilidadSemanal(DiasSemana.MIERCOLES);
+		c2.setIdiomas("Ingles, Frances");
+		c2.setDisponibilidad("Fin de semana");
 		em.persist(c2);
 		
 		// ALUMNOS
@@ -472,18 +468,7 @@ Actividades a2 = new Actividades(2L,"Compra de comida a ancianos","Voluntariado"
 	@Override
 	public void updateAlumno(Alumno a) throws AprendizajeServicioException {
 		// TODO Auto-generated method stub
-		/**Alumno alu = new Alumno();
-		alu.setEmail("alu1");
-		alu.setContrasenia("q");
-		alu.setRol(Rol.ALUMNO);
-		alu.setNombre("Maricon");
-		alu.setApellido("Kiterechu");
-		alu.setCreditos(160);
-		alu.setHorasLibre(10);
-		alu.setCv(null);
 		
-		em.merge(alu);
-		*/
 		
 		em.merge(a);
 	}
@@ -503,6 +488,7 @@ Actividades a2 = new Actividades(2L,"Compra de comida a ancianos","Voluntariado"
 	@Override
 	public void updateCurriculum(Curriculum a) {
 		// TODO Auto-generated method stub
+		em.merge(a);
 		
 	}
 
