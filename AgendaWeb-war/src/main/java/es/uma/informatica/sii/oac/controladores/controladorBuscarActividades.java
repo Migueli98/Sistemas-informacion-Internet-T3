@@ -97,7 +97,7 @@ public class controladorBuscarActividades implements Serializable{
         return actividades.get(id);
     }
 	
-	public String verBuscarActividades(Long id){
+	public String verBuscarActividades(Long id) throws AprendizajeServicioException{
 		actividad = bd.findActividades(id);
 		
 	    return "verBuscarActividades.xhtml";

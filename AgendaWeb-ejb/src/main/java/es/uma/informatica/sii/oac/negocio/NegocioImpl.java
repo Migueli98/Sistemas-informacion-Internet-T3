@@ -127,60 +127,7 @@ public class NegocioImpl implements Negocio {
 		//us.setNombre("Francisco");
 		//us.setApellido("Chicano");
 		em.persist(us);
-		
-		//ACTIVIDADES
-		Actividades a1 = new Actividades();
-		a1.setDescripcion("Recogida puertenia");
-		a1.setEstado(Estado.BUSCANDO_PARTICIPANTES);
-		SimpleDateFormat dateformat1 = new SimpleDateFormat("dd/MM/yyyy");
-		try {
-			a1.setFechaInicioActividad(dateformat1.parse("01/06/2020"));
-			a1.setFechaFinActividad(dateformat1.parse("04/06/2020"));
 
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		a1.setLugarRealizacion("Puerto de la Torre");
-		a1.setNombreActividad("Recogida puertenia");
-		a1.setTipoActividad("VOLUNTARIADO");
-		em.persist(a1);
-		
-		Actividades a2 = new Actividades();
-		a2.setDescripcion("Reparto comida");
-		a2.setEstado(Estado.BUSCANDO_PARTICIPANTES);
-		try {
-			a2.setFechaInicioActividad(dateformat1.parse("01/06/2020"));
-			a2.setFechaFinActividad(dateformat1.parse("04/06/2020"));
-
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		a2.setLugarRealizacion("Puerto de la Torre");
-		a2.setNombreActividad("Reparto comida puertenia");
-		a2.setTipoActividad("FORMACION");
-		em.persist(a2);
-		
-		Actividades a3 = new Actividades();
-		a3.setDescripcion("Enviar paquete a correos");
-		a3.setEstado(Estado.EN_CURSO);
-		try {
-			a3.setFechaInicioActividad(dateformat1.parse("01/06/2020"));
-			a3.setFechaFinActividad(dateformat1.parse("04/06/2020"));
-
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		a3.setLugarRealizacion("Villanueva de Cordoba");
-		a3.setNombreActividad("Reparto correo");
-		a3.setTipoActividad("VOLUNTARIADO");
-		em.persist(a3);
-		
-		
-		
-		
 		//PROFESOR
 		Profesor p1 = new Profesor();
 		p1.setEmail("pro1");
@@ -191,32 +138,6 @@ public class NegocioImpl implements Negocio {
 		p1.setDepartamento("Bases de Datos");
 		p1.addAsignatura(as1);
 		em.persist(p1);
-
-		
-		//INFORMEACTIVIDAD
-		InformeActividades ia1 = new InformeActividades();
-		ia1.setActividades(a3);
-		ia1.setAlumno(al2);
-		ia1.setEstado(InformeActividades.Estado.EN_CURSO);
-		ia1.setInformeONG("");
-		ia1.setInformeProfesor("");
-		ia1.setProfesorAsociado(p1);
-		ia1.setValoracionAlumno("");
-		em.persist(ia1);
-		
-		//INSCRIPCIONES
-		Inscripciones i = new Inscripciones();
-		i.setActividad(a3);
-		i.setEstado(estadoInscripcion.ACEPTADO);
-		try {
-			i.setFechaInscripcion(dateformat1.parse("01/06/2020"));
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		i.setUsuario(al2);
-		em.persist(i);
-		
 	}
 
 	@Override
@@ -330,6 +251,12 @@ public class NegocioImpl implements Negocio {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	public List<Inscripciones> allInscripciones(){
+		Query q = em.createNamedQuery("findAllInscripciones");
+		List<Inscripciones> ins=q.getResultList();
+		return ins;
+	}
 
 	@Override
 	public void addActividades(Actividades a) {
@@ -391,8 +318,7 @@ public class NegocioImpl implements Negocio {
 
 	@Override
 	public void addServicios(Servicios a) {
-		em.persist(a);
-		
+		em.persist(a);	
 	}
 
 	@Override
@@ -402,9 +328,9 @@ public class NegocioImpl implements Negocio {
 	}
 
 	@Override
-	public void deleteActividades(Actividades a) {
-		// TODO Auto-generated method stub
-		
+	public void deleteActividades(Actividades a) throws AprendizajeServicioException{
+		// TODO Auto-generated method stub	
+		em.remove(em.contains(a) ? a : em.merge(a));
 	}
 
 	@Override
@@ -523,11 +449,10 @@ public class NegocioImpl implements Negocio {
 	}
 
 	@Override
-	public Actividades findActividades(Long id) {
+	public Actividades findActividades(Long id) throws AprendizajeServicioException{
 		// TODO Auto-generated method stub
 		Query q = em.createNamedQuery("findActividades").setParameter("id", id);
 		List<Actividades> act = q.getResultList();
-
 		return act.get(0);
 	}
 

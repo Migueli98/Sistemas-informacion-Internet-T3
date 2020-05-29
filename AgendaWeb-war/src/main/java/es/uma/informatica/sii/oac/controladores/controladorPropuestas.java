@@ -8,6 +8,8 @@ import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -40,22 +42,26 @@ public class controladorPropuestas implements Serializable{
 		actividad = new Actividades();
 		fechaI = "dd/mm/yyyy";
 		fechaF = "dd/mm/yyyy";
+		actividades = new ArrayList<Actividades>();
 	}
 
-	public List<Actividades> getActividades(Ong ong) {
+	public List<Actividades> getActividades(Ong ong) throws AprendizajeServicioException {
 		
+		List <Actividades> activ = new ArrayList<Actividades>();
 		List<Servicios> serv = new ArrayList<Servicios>();
+		Servicios ns = new Servicios();
+		actividades = new ArrayList<Actividades>();
 		serv = bd.findServiciosOng(ong);
-		for(Servicios s : serv) {
-			List <Actividades> activ = bd.findAllActividades();
+		
+		for(Servicios s : serv) {	
+			activ = bd.allActividades();
 			for(Actividades a : activ) {
-				Servicios ns = bd.findServicios(a.getServicio());
+				ns = bd.findServicios(a.getServicio().getCodigoServicio());
 				if(ns.getCodigoServicio() == s.getCodigoServicio()) {
 					actividades.add(a);
 				}
 			}
-		}
-		
+		}		
 		return actividades;
 	}
 
@@ -156,12 +162,8 @@ public class controladorPropuestas implements Serializable{
     public Actividades inicializarPropuestaActividad() throws ParseException{
     	
     	
-    	actividad.setNombreActividad("");
-    	
+    	actividad.setNombreActividad("");  	
     	actividad.setTipoActividad("");
-    /*	SimpleDateFormat dateformat1 = new SimpleDateFormat("dd/MM/yyyy");
-    	actividad.setFechaInicioActividad(dateformat1.parse("01/01/2001"));
-    	actividad.setFechaFinActividad(dateformat1.parse("02/01/2001"));*/
     	actividad.setLugarRealizacion("");
     	actividad.setDescripcion("");
     	actividad.setEstado(Estado.PENDIENTE);
@@ -223,4 +225,17 @@ public class controladorPropuestas implements Serializable{
     	bd.addActividades(actividad);
     	return "propuestas.xhtml";
     }
+    
+    public String borrarActividad(Long a) throws AprendizajeServicioException{	
+    				
+    			if(bd.findActividades(a).getEstado() == Estado.EN_CURSO) { 	
+    				FacesMessage fm = new FacesMessage("No se puede eliminar una actividad en curso");
+    	            FacesContext.getCurrentInstance().addMessage("login:pass", fm);
+                	return "propuestas.xhtml";
+    			}else{
+    				bd.deleteActividades(bd.findActividades(a));
+    			}
+        return "propuestas.xhtml";
+    }
+  
 }

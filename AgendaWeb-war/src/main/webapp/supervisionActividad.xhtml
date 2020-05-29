@@ -1,4 +1,4 @@
-<!--<ui:composition template="/WEB-INF/templates/plantilla.xhtml" 
+<ui:composition template="/WEB-INF/templates/plantilla.xhtml" 
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
@@ -7,50 +7,48 @@
                 
             
 	<ui:define name="title">Supervisiones</ui:define>
+
     <ui:define name="content">
 	
         <c:choose>
         	<c:when test="#{controlAutorizacion.email.rol == 'ONG' || controlAutorizacion.email.rol == 'PASPDI'}">
 				
 				<h1>Supervisiones</h1>
+				<h:form>
 				<div class="bordeTablaActividades">
                     <table id="tablaListaActividades">
                         <thead>
                                 <tr>
                                         <th>ID Actividad</th>
-                                        <th>Nombre Actividad</th>
-                                        <th>Fecha</th>
-                                        <th>Localización</th>
-                                        <th>Descripción</th>
-                                        <th>Tipo de Actividad</th>
-                                        <th>Estado Actividad</th>                             
+                                        <th>Fecha Inscripcion</th>
+                                        <th>Estado</th>
+                                        <th>Actividad</th>
+                                                                
                                 </tr>
                             </thead>
                         
                         <tbody>
-                            <ui:repeat var = "i" value="#{controladorActividades.supervisiones}">
+                            <ui:repeat var = "i" value="#{controladorActividades.getInscripciones(controlAutorizacion.getEmail())}">
                                 <tr>                                
-                                    <td>#{i.idActividad}</td>
-                                    <td>#{i.nombreActividad}</td>
-                                    <td>#{i.fechaActividad}</td>
-                                    <td>#{i.lugarRealizacion}</td>
-                                    <td>#{i.descripcion}</td>
-                                    <td>#{i.tipoActividad}</td>
-                                    <td>#{i.estado}</td> 
+                                    <td>#{i.id}</td>
+                                    <td>#{i.fechaInscripcion}</td>
+                                    <td>#{i.estado}</td>
+                                    <td>#{i.actividad.nombreActividad}</td>
                                     
                                     <td>
-                                        <h:form> <h:column> <h:commandButton styleClass="btnVer" value ="Ver Participantes" action="#{controladorActividades.usuariosInscritos(i.idActividad)}"  /></h:column></h:form>
+                                        <h:column> <h:commandButton styleClass="btnVer" value ="Ver Curriculum" action="#{controladorActividades.verCurriculum(i.usuario.email)}"  /></h:column>
                                     </td>
                                
 								</tr>
                             </ui:repeat>
                         </tbody>
                     </table>
-                                 
-                </div>
+                    </div>
+                  </h:form>               
+                
         	</c:when>
         	
         	
         </c:choose>
      </ui:define>           
-</ui:composition>-->
+</ui:composition>

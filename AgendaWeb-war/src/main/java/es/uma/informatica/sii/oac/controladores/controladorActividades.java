@@ -21,7 +21,9 @@ import es.uma.informatica.sii.agendaee.entidades.Asignaturas;
 import es.uma.informatica.sii.agendaee.entidades.Curriculum;
 import es.uma.informatica.sii.agendaee.entidades.InformeActividades;
 import es.uma.informatica.sii.agendaee.entidades.Inscripciones;
+import es.uma.informatica.sii.agendaee.entidades.Ong;
 import es.uma.informatica.sii.agendaee.entidades.Profesor;
+import es.uma.informatica.sii.agendaee.entidades.Servicios;
 import es.uma.informatica.sii.agendaee.entidades.Usuario;
 import es.uma.informatica.sii.agendaee.entidades.Usuario.Rol;
 import es.uma.informatica.sii.oac.negocio.AprendizajeServicioException;
@@ -116,10 +118,39 @@ public class controladorActividades implements Serializable {
 
 
 
-		public ArrayList<Actividades> getSupervisiones() {
-			return supervisiones;
+		public List<Inscripciones> getInscripciones(Ong ong) {
+			
+			List <Inscripciones> inscrip = new ArrayList<>();
+			List<Inscripciones> resultado = new ArrayList<>();
+			
+			List <Actividades> activ = new ArrayList<Actividades>();
+			List<Servicios> serv = new ArrayList<Servicios>();
+			Servicios ns = new Servicios();
+			List<Actividades> activ2 = new ArrayList<Actividades>();
+			serv = bd.findServiciosOng(ong);
+			
+			for(Servicios s : serv) {	
+				activ = bd.allActividades();
+				for(Actividades a : activ) {
+					ns = bd.findServicios(a.getServicio().getCodigoServicio());
+					if(ns.getCodigoServicio() == s.getCodigoServicio()) {
+						activ2.add(a);
+					}
+				}
+			}
+			
+			inscrip = bd.allInscripciones();
+			
+			for(Inscripciones i : inscrip) {				
+				for(Actividades a : activ2) {
+					if(a.getIdActividad() == i.getActividad().getIdActividad()) resultado.add(i);	
+				}
+			}
+			
+			return resultado;
 		}
 
+		
 
 
 		public void setSupervisiones(ArrayList<Actividades> supervisiones) {
@@ -298,21 +329,6 @@ public class controladorActividades implements Serializable {
 	    	return "usuariosInscritos.xhtml";
 	    }
 
-	   /* 
-	    public String borrarUsuarioInscrito(String email){
-	    	boolean encontrado =  false;
-	    	int cont = 0;
-	    	while(!encontrado) {
-	    		Usuario ac = usuariosActividad.get(cont);
-	    		if(ac.getId() == (id)) {
-	    			usuariosActividad.remove(cont);
-	    			encontrado = true;
-	    		}
-	    		cont++;
-	    	}
-	        return "usuariosInscritos.xhtml";
-	    }
-*/
 	    
 	    public String evaluarUsuarioActividad(Long idAct) {
 	    	usuariosActividad = new ArrayList<Usuario>();
@@ -402,7 +418,11 @@ public class controladorActividades implements Serializable {
 			return informe;
 		}
 		
-		
+		public String verCurriculum(Long id){
+			
+			
+			return "Curriculum.xhtml";
+		}
 		
 	    
 }

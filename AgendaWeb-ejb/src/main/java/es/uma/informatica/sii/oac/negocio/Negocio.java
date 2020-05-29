@@ -44,6 +44,7 @@ public interface Negocio {
 	public List<Usuario> allUsuario();
 	public List<Actividades> allActividadesAlumno(Usuario u);
 
+
 	
 	//A�adir elementos a las entidades
 	public void addActividades(Actividades a);
@@ -60,7 +61,7 @@ public interface Negocio {
 	public void addUsuario(Usuario a);
 	
 	//Eliminar elementos de las entidades
-	public void deleteActividades(Actividades a);
+	public void deleteActividades(Actividades a) throws AprendizajeServicioException;
 	public void deleteAlumno(Alumno a);
 	public void deleteAsignaturas(Asignaturas a);
 	public void deleteCentro(Centro a);
@@ -86,7 +87,7 @@ public interface Negocio {
 	public void updateUsuario(Usuario a);
 
 	//Buscar por clave primaria en las entidades
-	public Actividades findActividades(Long id);
+	public Actividades findActividades(Long id) throws AprendizajeServicioException;
 	public Alumno findAlumno(String id); //�Debe existir m�todos para las entidades que extienden Usuario o vale con los del usuario?
 	public Asignaturas findAsignaturas(Long id);
 	public Centro findCentro(Long id);
@@ -99,7 +100,8 @@ public interface Negocio {
 	public List<Servicios> findServiciosOng(Ong ong);
 	public Usuario findUsuario(String id);
 
-	public List<Actividades> findAllActividades();
+	public List<Inscripciones> allInscripciones();
+
 
 
 	
