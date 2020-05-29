@@ -61,7 +61,8 @@ public class controladorPropuestas implements Serializable{
 		
 		return servicios;
 	}
-
+	
+	
 	public void setServicios(ArrayList<Servicios> servicios) {
 		this.servicios = servicios;
 	}
@@ -132,7 +133,7 @@ public class controladorPropuestas implements Serializable{
     }
     
     //MODIFICAR
-    public String inicializarPropuestaActividad() throws ParseException{
+    public Actividades inicializarPropuestaActividad() throws ParseException{
     	
     	
     	actividad.setNombreActividad("");
@@ -148,7 +149,7 @@ public class controladorPropuestas implements Serializable{
     	
     	
     	
-       return "crearPropuestaActividad.xhtml";
+       return actividad;
     }
     
     public Servicios inicializarS(Ong ong) {
@@ -160,21 +161,14 @@ public class controladorPropuestas implements Serializable{
 		servicio.setNumParticipantes(0);
 		servicio.setZona("");
 		servicio.setOng(ong);
-    	return servicio;
+    	
+		return servicio;
     }
     
     
     
     public String crearPropuestaServicio(Ong email){
-    	/*Servicios s = new Servicios();
-    	s.setOng(email);
-    	s.setDescripcion(servicio.getDescripcion());
-    	s.setTipoServicio(servicio.getTipoServicio());
-    	s.setNombre(servicio.getNombre());
-    	s.setNumHoras(servicio.getNumHoras());
-    	s.setZona(servicio.getZona());
-*/
-    	//servicio.setOng(email);
+    	
     	bd.addServicios(servicio);
     	
         return "serviciosActivos.xhtml";
@@ -183,10 +177,7 @@ public class controladorPropuestas implements Serializable{
     
     public String guardarServicio(Ong ong) throws AprendizajeServicioException {
     	
-    	//servicio = bd.findServicios(codigo);
-    	//servicio = bd.findServicios(servicio.getCodigoServicio());
-    	//if(servicio==null) throw new AprendizajeServicioException("servicio es null");
-    	//if (servicio!=null) throw new AprendizajeServicioException(""+servicio.getCodigoServicio());
+    
     	servicio.setOng(ong);
     	bd.updateServicios(servicio);
     	
@@ -194,4 +185,19 @@ public class controladorPropuestas implements Serializable{
     	return "serviciosActivos.xhtml";
     }
     
+    public String crearPropuestaActividad(Long id) {
+    	
+    	servicio = bd.findServicios(id);
+    	
+    	
+    	return "crearPropuestaActividad.xhtml";
+    }
+    
+    public String crearPropuestaActividad() {
+    	
+    	actividad.setServicio(servicio);
+    	bd.addActividades(actividad);
+    	
+    	return "propuestas.xhtml";
+    }
 }

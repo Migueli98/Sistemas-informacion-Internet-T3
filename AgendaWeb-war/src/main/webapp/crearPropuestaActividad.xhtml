@@ -10,7 +10,7 @@
         <c:choose>
             <c:when test="#{controlAutorizacion.getEmail().getRol() == 'ONG'}">
         
-                <ui:repeat var = "i" value="#{controladorPropuestas.actividad}">
+                <ui:repeat var = "i" value="#{controladorPropuestas.inicializarPropuestaActividad()}">
                                 
                 <h:form id="ListaActividades">
                     <table id="tablaListaActividades">
@@ -19,38 +19,38 @@
                             <td>Nombre Actividad </td>
 
                        
-                            <td><h:inputText  value="i.nombreActividad" /></td>
+                            <td><h:inputText  value="#{i.nombreActividad}" /></td>
                         </tr>
                         
                         <tr>
                             <td>Tipo Actividad </td>
 
                        
-                            <td><h:inputText  value="i.tipoActividad" /></td>
+                            <td><h:inputText  value="#{i.tipoActividad}" /></td>
                         </tr>
 
                         <tr>
                             <td>Fecha Inicio </td>
                          
-                            <td><h:inputText  value="i.fechaInicioActividad" /></td>
+                            <td><h:inputText  value="#{i.fechaInicioActividad}" /></td>
                         </tr>
                         
                         <tr>
                             <td>Fecha fin </td>
                          
-                            <td><h:inputText  value="i.fechaFinActividad" /></td>
+                            <td><h:inputText  value="#{i.fechaFinActividad}" /></td>
                         </tr>
 
                         <tr>
                             <td>Localización </td>
                         
-                            <td><h:inputText  value="i.lugarRealizacion" /></td>
+                            <td><h:inputText  value="#{i.lugarRealizacion}" /></td>
                         </tr>
                         
                         <tr>
                             <td>Descripción </td>
                           
-                            <td><h:inputText  value="i.descripcion" /></td>
+                            <td><h:inputText  value="#{i.descripcion}" /></td>
                         </tr>      
                          
                         
@@ -59,7 +59,13 @@
                     
                   <br/>
 					
-
+						<h:commandButton value="Guardar" styleClass="btnGuardar"
+							action="#{controladorPropuestas.crearPropuestaActividad()}" />
+					
+					
+						<h:commandButton value="Cancelar" styleClass="btnCancelar"
+							action="serviciosActivos.xhtml" />
+					
 
 				</h:form>
 				</ui:repeat>
