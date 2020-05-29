@@ -99,6 +99,8 @@ public interface Negocio {
 	public List<Servicios> findServiciosOng(Ong ong);
 	public Usuario findUsuario(String id);
 
+	public List<Actividades> findAllActividades();
+
 
 	
 }

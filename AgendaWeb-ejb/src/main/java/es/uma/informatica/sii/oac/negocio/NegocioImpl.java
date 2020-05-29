@@ -219,20 +219,6 @@ public class NegocioImpl implements Negocio {
 		
 	}
 
-/**
-Curriculum c1 = new Curriculum(1L, "Español, Inglés, Italiano", "Camarero, Enfermero, Pintor", "Lunes, Martes, Miércoles", asignaturas);
-Curriculum c2 = new Curriculum(2L, "Chino, Inglés, Italiano", "Albañil, Médico, Pintor", "Miércoles, Jueves, Viernes", asignaturas);
-Alumno alu1 = new Alumno(100L, "javiolea@uma.es", "q", Rol.ALUMNO, "Javi", "Olea", 120, 5, c1);
-Alumno alu2 = new Alumno(101L,"miguelvaldez@uma.es", "q", Rol.ALUMNO, "Miguel", "Valadez",108,3, c2);
-Alumno alu3 = new Alumno(102L,"marta@uma.es", "q", Rol.ALUMNO, "Marta", "Romero",30,5, c1);
-usuarios.add(alu1);
-usuarios.add(alu2);
-usuarios.add(alu3);
-SimpleDateFormat dateformat1 = new SimpleDateFormat("dd/MM/yyyy");
-Actividades a1 = new Actividades(1L,"Recogida Puerteña","Voluntariado",dateformat1.parse("01/05/2021"), "Puerto de la Torre","Recoger basura",Estado.BUSCANDO_PARTICIPANTES);
-Actividades a2 = new Actividades(2L,"Compra de comida a ancianos","Voluntariado",dateformat1.parse("05/10/2021"), "Teatinos","Ayudar ancianos Clínico",Estado.BUSCANDO_PARTICIPANTES);
- */
-
 	@Override
     public void compruebaLogin(Usuario u)  throws AprendizajeServicioException {
 		
@@ -348,7 +334,7 @@ Actividades a2 = new Actividades(2L,"Compra de comida a ancianos","Voluntariado"
 	@Override
 	public void addActividades(Actividades a) {
 		// TODO Auto-generated method stub
-		
+		em.persist(a);
 	}
 
 	@Override

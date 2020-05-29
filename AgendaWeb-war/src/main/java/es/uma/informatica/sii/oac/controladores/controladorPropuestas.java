@@ -28,6 +28,8 @@ public class controladorPropuestas implements Serializable{
 	private List<Servicios> servicios;
 	private Servicios servicio;
 	private Long codigo;
+	private String fechaI;
+	private String fechaF;
 	
 	@Inject
 	Negocio bd;
@@ -36,10 +38,24 @@ public class controladorPropuestas implements Serializable{
 		servicio = new Servicios();
 		servicios = new ArrayList<Servicios>();
 		actividad = new Actividades();
-		
+		fechaI = "dd/mm/yyyy";
+		fechaF = "dd/mm/yyyy";
 	}
 
-	public List<Actividades> getActividades() {
+	public List<Actividades> getActividades(Ong ong) {
+		
+		List<Servicios> serv = new ArrayList<Servicios>();
+		serv = bd.findServiciosOng(ong);
+		for(Servicios s : serv) {
+			List <Actividades> activ = bd.findAllActividades();
+			for(Actividades a : activ) {
+				Servicios ns = bd.findServicios(a.getServicio());
+				if(ns.getCodigoServicio() == s.getCodigoServicio()) {
+					actividades.add(a);
+				}
+			}
+		}
+		
 		return actividades;
 	}
 
@@ -54,7 +70,8 @@ public class controladorPropuestas implements Serializable{
 	public void setActividad(Actividades actividad) {
 		this.actividad = actividad;
 	}
-
+	
+	
 	public List<Servicios> getServicios(Ong ong) {
 		
 		servicios = bd.findServiciosOng(ong);
@@ -75,20 +92,23 @@ public class controladorPropuestas implements Serializable{
 		this.servicio = servicio;
 	}
 	
-	//BORRAR
-	public String borrarPropuestaActividad(int id){
-    	boolean encontrado =  false;
-    	int cont = 0;
-    	while(!encontrado) {
-    		Actividades ac = actividades.get(cont);
-    		if(ac.getIdActividad() == (id)) {
-    			actividades.remove(cont);
-    			encontrado = true;
-    		}
-    		cont++;
-    	}
-        return "propuestas.xhtml";
-    }
+	public String getFechaI() {
+		return fechaI;
+	}
+
+	public void setFechaI(String fechaI) {
+		this.fechaI = fechaI;
+	}
+
+	public String getFechaF() {
+		return fechaF;
+	}
+
+	public void setFechaF(String fechaF) {
+		this.fechaF = fechaF;
+	}
+
+	
 	
 	public String borrarServicio(Long id){
     	
@@ -138,10 +158,10 @@ public class controladorPropuestas implements Serializable{
     	
     	actividad.setNombreActividad("");
     	
-    	actividad.setTipoActividad("HOLA");
-    	SimpleDateFormat dateformat1 = new SimpleDateFormat("dd/MM/yyyy");
+    	actividad.setTipoActividad("");
+    /*	SimpleDateFormat dateformat1 = new SimpleDateFormat("dd/MM/yyyy");
     	actividad.setFechaInicioActividad(dateformat1.parse("01/01/2001"));
-    	actividad.setFechaFinActividad(dateformat1.parse("02/01/2001"));
+    	actividad.setFechaFinActividad(dateformat1.parse("02/01/2001"));*/
     	actividad.setLugarRealizacion("");
     	actividad.setDescripcion("");
     	actividad.setEstado(Estado.PENDIENTE);
@@ -193,11 +213,14 @@ public class controladorPropuestas implements Serializable{
     	return "crearPropuestaActividad.xhtml";
     }
     
-    public String crearPropuestaActividad() {
-    	
+    public String crearPropuestaActividad() throws ParseException, AprendizajeServicioException {
+    
+    	servicio = bd.findServicios(servicio.getCodigoServicio());
     	actividad.setServicio(servicio);
+    	SimpleDateFormat dateformat1 = new SimpleDateFormat("dd/MM/yyyy");
+    	actividad.setFechaInicioActividad(dateformat1.parse(fechaI));
+    	actividad.setFechaFinActividad(dateformat1.parse(fechaF));
     	bd.addActividades(actividad);
-    	
     	return "propuestas.xhtml";
     }
 }

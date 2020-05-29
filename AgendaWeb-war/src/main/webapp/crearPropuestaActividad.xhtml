@@ -13,6 +13,7 @@
                 <ui:repeat var = "i" value="#{controladorPropuestas.inicializarPropuestaActividad()}">
                                 
                 <h:form id="ListaActividades">
+                <h:inputHidden value="#{controladorPropuestas.servicio.codigoServicio}"></h:inputHidden>
                     <table id="tablaListaActividades">
 						
 						<tr>
@@ -32,13 +33,13 @@
                         <tr>
                             <td>Fecha Inicio </td>
                          
-                            <td><h:inputText  value="#{i.fechaInicioActividad}" /></td>
+                            <td><h:inputText  value="#{controladorPropuestas.fechaI}" /></td>
                         </tr>
                         
                         <tr>
                             <td>Fecha fin </td>
                          
-                            <td><h:inputText  value="#{i.fechaFinActividad}" /></td>
+                            <td><h:inputText  value="#{controladorPropuestas.fechaF}" /></td>
                         </tr>
 
                         <tr>

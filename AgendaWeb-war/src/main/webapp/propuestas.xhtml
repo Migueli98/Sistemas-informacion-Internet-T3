@@ -15,7 +15,7 @@
 				<h1> Propuestas </h1>
 				
                 
-                <div class="bordeTablaActividades">
+               <div class="bordeTablaActividades">
                 <h4> Actividades </h4>
                 <h:form>
                     <table id="tablaListaActividades">
@@ -27,12 +27,14 @@
                                         <th>Localización</th>
                                         <th>Descripción</th>
                                         <th>Tipo de Actividad</th>
-                                        <th>Estado Actividad</th>                             
+                                        <th>Estado Actividad</th> 
+                                        <th>Servicio </th>     
+                                                                 
                                 </tr>
                             </thead>
                         
                         <tbody>
-                            <ui:repeat var = "i" value="#{controladorPropuestas.actividades}">
+                            <ui:repeat var = "i" value="#{controladorPropuestas.getActividades(controlAutorizacion.getEmail())}">
                                 <tr>                                
                                     <td>#{i.idActividad}</td>
                                     <td>#{i.nombreActividad}</td>
@@ -41,24 +43,20 @@
                                     <td>#{i.descripcion}</td>
                                     <td>#{i.tipoActividad}</td>
                                     <td>#{i.estado}</td> 
+                                    <td>#{i.servicio}</td> 
                                     
                                     
                                    <td>
                                         <h:column> <h:commandButton styleClass="btnVer" value ="Ver" action="#{controladorPropuestas.verPropuestaActividad()}"  /></h:column>
                                     </td>
-                                    <td>                                     
-                                        <h:column> <h:commandButton styleClass="btnModificar" value="Modificar" action="#{controladorPropuestas.modificarPropuestaActividad()}" /> </h:column> 
-                                    </td>
-                                    <td>          
-                                        <h:column> <h:commandButton styleClass="btnBorrar" value="Borrar" action="#{controladorPropuestas.borrarPropuestaActividad(i.idActividad)}" /> </h:column>
-                                    </td>
+                                    
                                     
                                 </tr>
                             </ui:repeat>
                         </tbody>
                     </table>
+                    
                     </h:form>
-                   <h:form>	<h:column> <h:commandButton styleClass="btnCrear" value="Crear Actividad" action="crearPropuestaActividad.xhtml" /> </h:column> </h:form>
                 </div>
                 
         	</c:when>
@@ -119,12 +117,14 @@
                                         <th>Localización</th>
                                         <th>Descripción</th>
                                         <th>Tipo de Actividad</th>
-                                        <th>Estado Actividad</th>                             
+                                        <th>Estado Actividad</th> 
+                                        <th>Servicio </th>     
+                                                                 
                                 </tr>
                             </thead>
                         
                         <tbody>
-                            <ui:repeat var = "i" value="#{controladorPropuestas.actividades}">
+                            <ui:repeat var = "i" value="#{controladorPropuestas.getActividades(controlAutorizacion.getEmail())}">
                                 <tr>                                
                                     <td>#{i.idActividad}</td>
                                     <td>#{i.nombreActividad}</td>
@@ -133,6 +133,7 @@
                                     <td>#{i.descripcion}</td>
                                     <td>#{i.tipoActividad}</td>
                                     <td>#{i.estado}</td> 
+                                    <td>#{i.servicio}</td> 
                                     
                                     
                                    <td>
