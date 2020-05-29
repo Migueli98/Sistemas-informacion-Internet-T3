@@ -64,6 +64,31 @@ public class controladorPropuestas implements Serializable{
 		}		
 		return actividades;
 	}
+	
+	public List<Actividades> getPropuestasActividades(){
+		
+		List<Actividades> ac = new ArrayList<Actividades>();
+		List<Actividades> res = new ArrayList<Actividades>();
+		ac = bd.allActividades();
+		for(Actividades a : ac) {
+			if (a.getEstado()==Estado.PENDIENTE) {
+				res.add(a);
+			}
+		}
+		
+		
+		return res;
+	}
+	
+	public String aceptarPropuestaActividad(Long id) throws AprendizajeServicioException {
+		
+		Actividades a = new Actividades();
+		a = bd.findActividades(id);
+		a.setEstado(Estado.BUSCANDO_PARTICIPANTES);
+		bd.updateActividades(a);
+		
+		return "propuestas.xhtml";
+	}
 
 	public void setActividades(ArrayList<Actividades> actividades) {
 		this.actividades = actividades;
@@ -168,6 +193,9 @@ public class controladorPropuestas implements Serializable{
     	actividad.setDescripcion("");
     	actividad.setEstado(Estado.PENDIENTE);
     	actividad.setServicio(servicio);
+    	actividad.setIdiomas("");
+    	actividad.setExperienciaLaboral("");
+    	actividad.setDisponibilidad("");
     	
     	
     	
@@ -238,4 +266,13 @@ public class controladorPropuestas implements Serializable{
         return "propuestas.xhtml";
     }
   
+    public String iniciarActividad(Long id) throws AprendizajeServicioException {
+    	
+    	Actividades a = new Actividades();
+    	a = bd.findActividades(id);
+    	a.setEstado(Estado.EN_CURSO);
+    	bd.updateActividades(a);
+    	
+    	return "propuestas.xhtml";
+    }
 }

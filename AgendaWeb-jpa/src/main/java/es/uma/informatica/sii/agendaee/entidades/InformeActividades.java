@@ -97,12 +97,7 @@ public class InformeActividades implements Serializable {
 	public void setProfe(Profesor profe) {
 		this.profesorAsociado = profe;
 	}
-	public Alumno getAlumn() {
-		return alumno;
-	}
-	public void setAlumn(Alumno alumn) {
-		this.alumno = alumn;
-	}
+	
 	public Actividades getAct() {
 		return actividades;
 	}

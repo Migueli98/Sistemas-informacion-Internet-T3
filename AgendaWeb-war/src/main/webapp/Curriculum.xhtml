@@ -1,81 +1,113 @@
 <ui:composition template="/WEB-INF/templates/plantilla.xhtml"
-                xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:h="http://xmlns.jcp.org/jsf/html"
-                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-                xmlns:f="http://java.sun.com/jsf/core"
-                >
-                
-    <ui:define name="title">Modificar Curriculum</ui:define>
-    <ui:define name="content">
-        <c:choose>
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core">
 
-            <c:when test="#{controlAutorizacion.getEmail().getRol() == 'ALUMNO'}">
-        
-                <h1>Mi Curriculum</h1>
-				<ui:repeat var="i" value= "#{controladorVerUsuario.curriculum}">  
-                                
-                <h:form id="bordeTablaActividades">
-                	<div class="bordeTablaActividades">
-                    <table id="tablaListaActividades">
-						<tr>
-							<td>IdCurriculum</td>
-							<td><h:outputText value="#{i.id}" /></td>
-						</tr>
-						<tr>
-							<td>Experiencia Laboral</td>
-							<td><h:inputText value="#{i.experienciaLaboral}" /></td>
-						</tr>
-						<tr>
-							<td>Idiomas</td>
-							<td><h:inputText value="#{i.idiomas}" /></td>
-						</tr>
-						<tr>
-							<td>Disponibilidad</td>
-							<td><h:inputText value="#{i.disponibilidad}" /></td>
-						</tr>
+	<ui:define name="title">Modificar Curriculum</ui:define>
+	<ui:define name="content">
+		<c:choose>
+			<c:when test="#{controlAutorizacion.getEmail().getRol() == 'ONG'}">
 
-                    </table>
-                    </div>
-                    
-                    <ui:repeat var="j" value= "#{i.compuestoDe}">
-                    
-                    <div class="bordeTablaActividades">
-                    <h4>Mis asignaturas</h4>
-                    <table id="tablaListaActividades">
-						<tr>
-							<td>Codigo Asignatura</td>
-							<td><h:outputText value="#{j.codigoAsignatura}" /></td>
-						</tr>
-						
-						<tr>
-							<td>Nombre Asignatura</td>
-							<td><h:outputText value="#{j.nombreAsignatura}" /></td>
-						</tr>
-						
-						<tr>
-							<td>Creditos</td>
-							<td><h:outputText value="#{j.creditos}" /></td>
-						</tr>
-                    
-                    </table>
-                    </div>
-                    </ui:repeat>
-                    
-                    <h:commandButton styleClass="btnGuardar"  value="Guardar" action="#{controladorVerUsuario.modificarCurriculum(controlAutorizacion.getEmail())}" />
-                    <h:commandButton styleClass="btnBorrar"  value="Cancelar cambios" action="miPerfil.xhtml" />
-                    
-                </h:form>
-                   
+				<h1>Curriculum</h1>
+				<ui:repeat var="i" value="#{controladorActividades.curriculum}">
+
+					<h:form id="bordeTablaActividades">
+						<div class="bordeTablaActividades">
+							<table id="tablaListaActividades">
+
+								<tr>
+									<td>Experiencia Laboral</td>
+									<td><h:outputText value="#{i.experienciaLaboral}" /></td>
+								</tr>
+								<tr>
+									<td>Idiomas</td>
+									<td><h:outputText value="#{i.idiomas}" /></td>
+								</tr>
+								<tr>
+									<td>Disponibilidad</td>
+									<td><h:outputText value="#{i.disponibilidad}" /></td>
+								</tr>
+
+							</table>
+						</div>
+
+						<h:commandButton styleClass="btnVer" value="Volver"
+							action="supervisionActividad.xhtml" />
+
+					</h:form>
 				</ui:repeat>
-				
-				
-                 
-            </c:when>   
-       
-            <c:otherwise>
-                <ui:include src="/WEB-INF/templates/errorAutorizacion.xhtml"/>
-            </c:otherwise>
-        </c:choose>
-    </ui:define>
+
+			</c:when>
+
+
+			<c:when test="#{controlAutorizacion.getEmail().getRol() == 'ALUMNO'}">
+
+				<h1>Mi Curriculum</h1>
+				<ui:repeat var="i" value="#{controladorVerUsuario.curriculum}">
+
+					<h:form id="bordeTablaActividades">
+						<div class="bordeTablaActividades">
+							<table id="tablaListaActividades">
+								<tr>
+									<td>IdCurriculum</td>
+									<td><h:outputText value="#{i.id}" /></td>
+								</tr>
+								<tr>
+									<td>Experiencia Laboral</td>
+									<td><h:inputText value="#{i.experienciaLaboral}" /></td>
+								</tr>
+								<tr>
+									<td>Idiomas</td>
+									<td><h:inputText value="#{i.idiomas}" /></td>
+								</tr>
+								<tr>
+									<td>Disponibilidad</td>
+									<td><h:inputText value="#{i.disponibilidad}" /></td>
+								</tr>
+
+							</table>
+						</div>
+
+						<ui:repeat var="j" value="#{i.compuestoDe}">
+
+							<div class="bordeTablaActividades">
+								<h4>Mis asignaturas</h4>
+								<table id="tablaListaActividades">
+									<tr>
+										<td>Codigo Asignatura</td>
+										<td><h:outputText value="#{j.codigoAsignatura}" /></td>
+									</tr>
+
+									<tr>
+										<td>Nombre Asignatura</td>
+										<td><h:outputText value="#{j.nombreAsignatura}" /></td>
+									</tr>
+
+									<tr>
+										<td>Creditos</td>
+										<td><h:outputText value="#{j.creditos}" /></td>
+									</tr>
+
+								</table>
+							</div>
+						</ui:repeat>
+
+						<h:commandButton styleClass="btnGuardar" value="Guardar"
+							action="#{controladorVerUsuario.modificarCurriculum(controlAutorizacion.getEmail())}" />
+						<h:commandButton styleClass="btnBorrar" value="Cancelar cambios"
+							action="miPerfil.xhtml" />
+
+					</h:form>
+
+				</ui:repeat>
+
+			</c:when>
+
+			<c:otherwise>
+				<ui:include src="/WEB-INF/templates/errorAutorizacion.xhtml" />
+			</c:otherwise>
+		</c:choose>
+	</ui:define>
 </ui:composition>

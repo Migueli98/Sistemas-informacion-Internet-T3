@@ -16,6 +16,7 @@ import javax.inject.Named;
 
 import es.uma.informatica.sii.agendaee.entidades.Actividades;
 import es.uma.informatica.sii.agendaee.entidades.Actividades.Estado;
+import es.uma.informatica.sii.agendaee.entidades.Inscripciones.estadoInscripcion;
 import es.uma.informatica.sii.agendaee.entidades.Alumno;
 import es.uma.informatica.sii.agendaee.entidades.Asignaturas;
 import es.uma.informatica.sii.agendaee.entidades.Curriculum;
@@ -54,6 +55,8 @@ public class controladorActividades implements Serializable {
 	private ArrayList<Usuario> usuariosActividad;
 	private ArrayList<Actividades> evaluacionActividades;
 	private ArrayList<Usuario> profesores;
+	private Curriculum curriculum;
+	private Alumno a;
 	
 	   @Inject 
 	   private Negocio bd;
@@ -63,6 +66,8 @@ public class controladorActividades implements Serializable {
 	    public controladorActividades() throws ParseException {
 	    	actividades = new ArrayList<Actividades>();
             informe = new InformeActividades();
+            curriculum= new Curriculum();
+            a = new Alumno();
 	    }
 	    
 	    public String getNombreApellido(Profesor p) {
@@ -254,11 +259,30 @@ public class controladorActividades implements Serializable {
 				}
 				
 			}
-			
-			
-			
+
 	        return "inscripcionActividad.xhtml";
 	    }
+		
+		public String aceptarSolicitud(Long id) {
+			
+			
+			Inscripciones i = new Inscripciones();
+			i = bd.findInscripciones(id);
+			i.setEstado(estadoInscripcion.ACEPTADO);
+			
+			bd.updateInscripciones(i);
+			
+			InformeActividades in = new InformeActividades(); 
+			in.setAct(i.getActividad());
+			in.setAlumno((Alumno) i.getUsuario());
+			in.setInformeONG("");
+			in.setInformeProfesor("");
+			in.setValoracionAlumno("");
+			in.setEstado(InformeActividades.Estado.EN_CURSO);
+			bd.addInformeActividades(in);
+			
+			return "supervisionActividad.xhtml";
+		}
 		
 		
 	    public String modificarActividad(){
@@ -311,37 +335,7 @@ public class controladorActividades implements Serializable {
 	    	return "supervisionActividad.xhtml";
 	    }
 	    
-	    /*public String usuariosInscritos(Long idAct) {
-	    	return "usuariosInscritos.xhtml";
-	    }*/
-	    
-
-	    public String usuariosInscritos(Long idAct) {
-	    	usuariosActividad = new ArrayList<Usuario>();
-	    	Iterator<InformeActividades> i = informes.iterator();
-	    	boolean encontrado = false;
-	    	while (i.hasNext() && !encontrado) {
-	    		InformeActividades iA = i.next();
-	    		if (iA.getAct().getIdActividad()==idAct) {
-	    			usuariosActividad.add(iA.getAlumn());
-	    		}
-	    	}
-	    	return "usuariosInscritos.xhtml";
-	    }
-
-	    
-	    public String evaluarUsuarioActividad(Long idAct) {
-	    	usuariosActividad = new ArrayList<Usuario>();
-	    	Iterator<InformeActividades> i = informes.iterator();
-	    	boolean encontrado = false;
-	    	while (i.hasNext() && !encontrado) {
-	    		InformeActividades iA = i.next();
-	    		if (iA.getAct().getIdActividad()==idAct) {
-	    			usuariosActividad.add(iA.getAlumn());
-	    		}
-	    	}
-	    	return "evaluarUsuarioActividad.xhtml";
-	    }
+	   
 	    
 	    public String evaluarParticipante() {
 	    	return "evaluarParticipante.xhtml";
@@ -351,7 +345,16 @@ public class controladorActividades implements Serializable {
 			return usuariosActividad;
 		}
 
+		
 
+
+		public Curriculum getCurriculum() {
+			return curriculum;
+		}
+
+		public void setCurriculum(Curriculum curriculum) {
+			this.curriculum = curriculum;
+		}
 
 		public void setUsuariosActividad(ArrayList<Usuario> usuariosActividad) {
 			this.usuariosActividad = usuariosActividad;
@@ -418,8 +421,11 @@ public class controladorActividades implements Serializable {
 			return informe;
 		}
 		
-		public String verCurriculum(Long id){
+		public String verCurriculum(String email){
 			
+			
+			a = bd.findAlumno(email);
+			curriculum = a.getCv();
 			
 			return "Curriculum.xhtml";
 		}

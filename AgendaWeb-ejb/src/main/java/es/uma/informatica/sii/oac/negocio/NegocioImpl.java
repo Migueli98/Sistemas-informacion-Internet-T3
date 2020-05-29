@@ -291,6 +291,7 @@ public class NegocioImpl implements Negocio {
 	@Override
 	public void addInformeActividades(InformeActividades a) {
 		// TODO Auto-generated method stub
+		em.persist(a);
 		
 	}
 
@@ -396,7 +397,7 @@ public class NegocioImpl implements Negocio {
 	@Override
 	public void updateActividades(Actividades a) {
 		// TODO Auto-generated method stub
-		
+		em.merge(a);
 	}
 
 	@Override
@@ -445,6 +446,10 @@ public class NegocioImpl implements Negocio {
 	@Override
 	public void updateUsuario(Usuario a) {
 		// TODO Auto-generated method stub
+		em.merge(a);
+	}
+	
+	public void updateInscripciones(Inscripciones a) {
 		em.merge(a);
 	}
 
@@ -500,7 +505,11 @@ public class NegocioImpl implements Negocio {
 	@Override
 	public Inscripciones findInscripciones(Long id) {
 		// TODO Auto-generated method stub
-		return null;
+		Query q = em.createNamedQuery("findInscripcionesId").setParameter("id", id);
+		List<Inscripciones> ins = q.getResultList();
+		
+		return ins.get(0);
+		
 	}
 
 	@Override

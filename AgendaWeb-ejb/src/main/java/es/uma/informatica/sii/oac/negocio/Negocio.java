@@ -80,7 +80,7 @@ public interface Negocio {
 	public void updateCentro(Centro a);
 	public void updateCurriculum(Curriculum a);
 	//public void updateInformeActividades(InformeActividades a);
-	//public void updateInscripciones(Inscripciones a);
+	public void updateInscripciones(Inscripciones a);
 	public void updateOng(Ong a);
 	public void updateProfesor(Profesor a);
 	public void updateServicios(Servicios a);

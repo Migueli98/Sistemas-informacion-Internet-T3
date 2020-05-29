@@ -63,6 +63,9 @@ public class Actividades implements Serializable {
 	private String descripcion; 
 	@Enumerated(EnumType.STRING)
 	private Estado estado;
+	private String idiomas;
+	private String experienciaLaboral;
+	private String disponibilidad;
 
 
 	@ManyToOne(fetch = FetchType.EAGER)
@@ -169,6 +172,31 @@ public class Actividades implements Serializable {
 	public void setInscripciones(List<Inscripciones> inscripciones) {
 		this.inscripciones = inscripciones;
 	}
+
+	public String getIdiomas() {
+		return idiomas;
+	}
+
+	public void setIdiomas(String idiomas) {
+		this.idiomas = idiomas;
+	}
+
+	public String getExperienciaLaboral() {
+		return experienciaLaboral;
+	}
+
+	public void setExperienciaLaboral(String experienciaLaboral) {
+		this.experienciaLaboral = experienciaLaboral;
+	}
+
+	public String getDisponibilidad() {
+		return disponibilidad;
+	}
+
+	public void setDisponibilidad(String disponibilidad) {
+		this.disponibilidad = disponibilidad;
+	}
+	
 	
 	
 	

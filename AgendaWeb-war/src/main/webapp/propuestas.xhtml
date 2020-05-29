@@ -10,7 +10,7 @@
     <ui:define name="content">
 	
         <c:choose>
-        	<c:when test="#{controlAutorizacion.getEmail().getRol() == 'ONG'}">
+        	<c:when test="#{controlAutorizacion.getEmail().getRol() == 'ONG'}">	
 
 				<h1> Actividades </h1>
 				
@@ -51,6 +51,9 @@
                                    <td>
                                         <h:column> <h:commandButton styleClass="btnBorrar" value ="Borrar" action="#{controladorPropuestas.borrarActividad(i.idActividad)}"  /></h:column>
                                     </td>
+                                    <td>
+                                        <h:column> <h:commandButton styleClass="btnGuardar" value ="Iniciar actividad" action="#{controladorPropuestas.iniciarActividad(i.idActividad)}"  /></h:column>
+                                    </td>
                                     
                                     
                                 </tr>
@@ -80,14 +83,18 @@
                                         <th>Localización</th>
                                         <th>Descripción</th>
                                         <th>Tipo de Actividad</th>
-                                        <th>Estado Actividad</th> 
-                                        <th>Servicio </th>     
+                                        <th>Estado Actividad</th>
+                                        <th>Idiomas </th>
+                                        <th>Experiencia Laboral </th>
+                                        <th>Disponibilidad </th>
+                                        <th>Servicio </th>
+                                             
                                                                  
                                 </tr>
                             </thead>
                         
                         <tbody>
-                            <ui:repeat var = "i" value="#{controladorPropuestas.getActividades(controlAutorizacion.getEmail())}">
+                            <ui:repeat var = "i" value="#{controladorPropuestas.getPropuestasActividades()}">
                                 <tr>                                
                                     <td>#{i.idActividad}</td>
                                     <td>#{i.nombreActividad}</td>
@@ -97,11 +104,17 @@
                                     <td>#{i.descripcion}</td>
                                     <td>#{i.tipoActividad}</td>
                                     <td>#{i.estado}</td> 
+                                    <td>#{i.idiomas}</td>
+                                    <td>#{i.experienciaLaboral}</td>
+                                    <td>#{i.disponibilidad}</td>   
                                     <td>#{i.servicio.nombre}</td>   
                                     
                                     
                                    <td>
-                                        <h:column> <h:commandButton styleClass="btnVer" value ="Ver" action="#{controladorPropuestas.verPropuestaActividad()}"  /></h:column>
+                                        <h:column> <h:commandButton styleClass="btnGuardar" value ="Aceptar" action="#{controladorPropuestas.aceptarPropuestaActividad(i.idActividad)}"  /></h:column>
+                                    </td>
+                                    <td>
+                                        <h:column> <h:commandButton styleClass="btnBorrar" value ="Cancelar" action="#{controladorPropuestas.cancelarPropuestaActividad(i.idActividad)}"  /></h:column>
                                     </td>
                                     
                                     
@@ -113,50 +126,7 @@
                     </h:form>
                 </div>
                 
-                <div class="bordeTablaActividades">
-                <h4> Actividades </h4>
-                <h:form>
-                    <table id="tablaListaActividades">
-                        <thead>
-                                <tr>
-                                        <th>ID Actividad</th>
-                                        <th>Nombre Actividad</th>
-                                        <th>Fecha</th>
-                                        <th>Localización</th>
-                                        <th>Descripción</th>
-                                        <th>Tipo de Actividad</th>
-                                        <th>Estado Actividad</th> 
-                                        <th>Servicio </th>     
-                                                                 
-                                </tr>
-                            </thead>
-                        
-                        <tbody>
-                            <ui:repeat var = "i" value="#{controladorPropuestas.getActividades(controlAutorizacion.getEmail())}">
-                                <tr>                                
-                                    <td>#{i.idActividad}</td>
-                                    <td>#{i.nombreActividad}</td>
-                                    <td>#{i.fechaActividad}</td>
-                                    <td>#{i.lugarRealizacion}</td>
-                                    <td>#{i.descripcion}</td>
-                                    <td>#{i.tipoActividad}</td>
-                                    <td>#{i.estado}</td> 
-                                    <td>#{i.servicio}</td> 
-                                    
-                                    
-                                   <td>
-                                        <h:column> <h:commandButton styleClass="btnVer" value ="Ver" action="#{controladorPropuestas.verPropuestaActividad()}"  /></h:column>
-                                    </td>
-                                    
-                                    
-                                </tr>
-                            </ui:repeat>
-                        </tbody>
-                    </table>
-                    
-                    </h:form>
-                </div>
-                
+               
         	</c:when>
         </c:choose>
      </ui:define>           

@@ -19,10 +19,13 @@
                     <table id="tablaListaActividades">
                         <thead>
                                 <tr>
-                                        <th>ID Actividad</th>
+                                        <th>ID Inscripcion</th>
                                         <th>Fecha Inscripcion</th>
                                         <th>Estado</th>
                                         <th>Actividad</th>
+                                        <th>Idiomas requeridos</th>
+                                        <th>Experiencia laboral requerida</th>
+                                        <th>Disponibilidad requerida</th>
                                                                 
                                 </tr>
                             </thead>
@@ -34,10 +37,21 @@
                                     <td>#{i.fechaInscripcion}</td>
                                     <td>#{i.estado}</td>
                                     <td>#{i.actividad.nombreActividad}</td>
+                                    <td>#{i.actividad.idiomas}</td>
+                                    <td>#{i.actividad.experienciaLaboral}</td>
+                                    <td>#{i.actividad.disponibilidad}</td>
+                                    
                                     
                                     <td>
                                         <h:column> <h:commandButton styleClass="btnVer" value ="Ver Curriculum" action="#{controladorActividades.verCurriculum(i.usuario.email)}"  /></h:column>
                                     </td>
+                                    <td>
+                                        <h:column> <h:commandButton styleClass="btnGuardar" value ="Aceptar solicitud" action="#{controladorActividades.aceptarSolicitud(i.id)}"  /></h:column>
+                                    </td>
+                                    <td>
+                                        <h:column> <h:commandButton styleClass="btnBorrar" value ="Denegar solicitud" action="#{controladorActividades.denegarSolicitud(i.id)}"  /></h:column>
+                                    </td>
+                                    
                                
 								</tr>
                             </ui:repeat>
