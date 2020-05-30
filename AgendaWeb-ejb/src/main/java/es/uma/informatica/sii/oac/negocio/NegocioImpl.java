@@ -215,8 +215,9 @@ public class NegocioImpl implements Negocio {
 
 	@Override
 	public List<InformeActividades> allInformeActividades() {
-		// TODO Auto-generated method stub
-		return null;
+		Query q = em.createNamedQuery("findAllInformeActividades");
+		List<InformeActividades> infact = q.getResultList();
+		return infact;
 	}
 
 	@Override
@@ -452,6 +453,10 @@ public class NegocioImpl implements Negocio {
 	public void updateInscripciones(Inscripciones a) {
 		em.merge(a);
 	}
+	
+	public void updateInforme(InformeActividades informe) {
+		em.merge(informe);
+	}
 
 	@Override
 	public Actividades findActividades(Long id) throws AprendizajeServicioException{
@@ -536,7 +541,7 @@ public class NegocioImpl implements Negocio {
 		return ser.get(0);
 	}
 	
-	public List<Servicios> findServiciosOng(Ong ong) {
+	public List<Servicios> findServiciosOng(Usuario ong) {
 		
 		Query q = em.createNamedQuery("findServiciosOng").setParameter("ong", ong);
 		List<Servicios> ser = q.getResultList();
@@ -549,6 +554,13 @@ public class NegocioImpl implements Negocio {
 	public Usuario findUsuario(String id) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public InformeActividades findInformeActividadesId(Long id) {
+		Query q = em.createNamedQuery("findInformeId").setParameter("id", id);
+		List<InformeActividades> inf = q.getResultList();
+		return inf.get(0);
 	}
 
 	

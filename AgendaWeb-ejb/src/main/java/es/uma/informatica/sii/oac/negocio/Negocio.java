@@ -43,7 +43,7 @@ public interface Negocio {
 	public List<Servicios> allServicios();
 	public List<Usuario> allUsuario();
 	public List<Actividades> allActividadesAlumno(Usuario u);
-
+	public List<Inscripciones> allInscripciones();
 
 	
 	//A�adir elementos a las entidades
@@ -84,6 +84,7 @@ public interface Negocio {
 	public void updateOng(Ong a);
 	public void updateProfesor(Profesor a);
 	public void updateServicios(Servicios a);
+	public void updateInforme(InformeActividades informe);
 	public void updateUsuario(Usuario a);
 
 	//Buscar por clave primaria en las entidades
@@ -97,10 +98,15 @@ public interface Negocio {
 	public Ong findOng(String id);
 	public Profesor findProfesor(String id);
 	public Servicios findServicios(Long id);
-	public List<Servicios> findServiciosOng(Ong ong);
+	public List<Servicios> findServiciosOng(Usuario ong);
 	public Usuario findUsuario(String id);
+	public InformeActividades findInformeActividadesId(Long id);
+	
+	
 
-	public List<Inscripciones> allInscripciones();
+	
+
+	
 
 
 

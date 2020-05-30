@@ -75,8 +75,7 @@ public class controladorPropuestas implements Serializable{
 				res.add(a);
 			}
 		}
-		
-		
+
 		return res;
 	}
 	
@@ -85,6 +84,15 @@ public class controladorPropuestas implements Serializable{
 		Actividades a = new Actividades();
 		a = bd.findActividades(id);
 		a.setEstado(Estado.BUSCANDO_PARTICIPANTES);
+		bd.updateActividades(a);
+		
+		return "propuestas.xhtml";
+	}
+	
+	public String denegarPropuestaActividad(Long id) throws AprendizajeServicioException {
+		Actividades a = new Actividades();
+		a = bd.findActividades(id);
+		a.setEstado(Estado.RECHAZADA);
 		bd.updateActividades(a);
 		
 		return "propuestas.xhtml";
@@ -142,15 +150,22 @@ public class controladorPropuestas implements Serializable{
 	
 	
 	public String borrarServicio(Long id){
-    	
+    
+		List<Actividades> act = new ArrayList<Actividades>();
+		act = bd.allActividades();
+		
+		for(Actividades a : act) {
+			if(a.getServicio().getCodigoServicio() == id) {
+				FacesMessage fm = new FacesMessage("No se puede borrar un servicio con actividades asignadas");
+	            FacesContext.getCurrentInstance().addMessage("login:pass", fm);
+	        	return "serviciosActivos.xhtml";
+			}
+		}
 		
 		bd.deleteServicios(bd.findServicios(id));
-    	
+		
         return "serviciosActivos.xhtml";
     }
-    
-	
-	
 	
 	//MODIFICAR
     public String modificarPropuestaActividad(){
@@ -159,8 +174,7 @@ public class controladorPropuestas implements Serializable{
     
     public String modificarServicio(Long id){
     	
-    	codigo = id;
-    	servicio = bd.findServicios(codigo);
+    	servicio = bd.findServicios(id);
     	
         return "modificarServicio.xhtml";
     }
@@ -256,13 +270,13 @@ public class controladorPropuestas implements Serializable{
     
     public String borrarActividad(Long a) throws AprendizajeServicioException{	
     				
-    			if(bd.findActividades(a).getEstado() == Estado.EN_CURSO) { 	
-    				FacesMessage fm = new FacesMessage("No se puede eliminar una actividad en curso");
-    	            FacesContext.getCurrentInstance().addMessage("login:pass", fm);
-                	return "propuestas.xhtml";
-    			}else{
-    				bd.deleteActividades(bd.findActividades(a));
-    			}
+		if(bd.findActividades(a).getEstado() == Estado.EN_CURSO) { 	
+			FacesMessage fm = new FacesMessage("No se puede eliminar una actividad en curso");
+	        FacesContext.getCurrentInstance().addMessage("login:pass", fm);
+	    	return "propuestas.xhtml";
+		}else{
+			bd.deleteActividades(bd.findActividades(a));
+		}
         return "propuestas.xhtml";
     }
   
@@ -270,9 +284,18 @@ public class controladorPropuestas implements Serializable{
     	
     	Actividades a = new Actividades();
     	a = bd.findActividades(id);
-    	a.setEstado(Estado.EN_CURSO);
-    	bd.updateActividades(a);
     	
+    	if(a.getEstado() == Estado.BUSCANDO_PARTICIPANTES || a.getEstado() == Estado.ACEPTADA) {
+    		a.setEstado(Estado.EN_CURSO);
+    		bd.updateActividades(a);
+    	}else {
+    		FacesMessage fm = new FacesMessage("No se puede inciar una actividad con este estado: "+ a.getEstado());
+            FacesContext.getCurrentInstance().addMessage("login:pass", fm);
+        	return "propuestas.xhtml";
+    	}
+
     	return "propuestas.xhtml";
     }
+    
+    
 }

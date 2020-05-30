@@ -1,4 +1,4 @@
-<!--<ui:composition template="/WEB-INF/templates/plantilla.xhtml"
+<ui:composition template="/WEB-INF/templates/plantilla.xhtml"
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
@@ -15,45 +15,42 @@
 
 				<h1>Valoraciones</h1>
 				<div class="bordeTablaActividades">
+				<h:form id="ListaActividades">
 					<table id="tablaListaActividades">
 						<thead>
 							<tr>
-								<th>ID Actividad</th>
 								<th>Nombre Actividad</th>
-								<th>Fecha</th>
-								<th>Localización</th>
-								<th>Descripción</th>
-								<th>Tipo de Actividad</th>
-								<th>Estado Actividad</th>
+								<th>Nombre participante</th>
+								<th>Apellido participante</th>
+								<th>Valoracion</th>
 							</tr>
 						</thead>
 
 						<tbody>
 							<ui:repeat var="i"
-								value="#{controladorValoraciones.actividades}">
+								value="#{controladorValoraciones.valoraciones(controlAutorizacion.getEmail())}">
+								<h:inputHidden value="#{i.informeONG}"></h:inputHidden>
 								<tr>
-									<td>#{i.idActividad}</td>
-									<td>#{i.nombreActividad}</td>
-									<td>#{i.fechaActividad}</td>
-									<td>#{i.lugarRealizacion}</td>
-									<td>#{i.descripcion}</td>
-									<td>#{i.tipoActividad}</td>
-									<td>#{i.estado}</td>
-
-									<td><h:form>
+									<td>#{i.actividades.nombreActividad}</td>
+									<td>#{i.alumno.nombre}</td>
+									<td>#{i.alumno.apellido}</td>
+									<td> <h:inputText value= #{i.informeONG}/></td>
+							<!--  POR TERMINAR :) -->
+									<td>
 											<h:column>
-												<h:commandButton styleClass="btnVer" value="Ver"
-													action="#{controladorValoraciones.verValoracion(i.idActividad)}" />
+												<h:commandButton styleClass="btnGuardar" value="Guardar"
+													action="#{controladorValoraciones.valorar(i)}" />
 											</h:column>
-										</h:form></td>
+									</td>
 									
 								</tr>
 							</ui:repeat>
 						</tbody>
 					</table>
+					</h:form>
 				</div>
 			</c:when>
 			
 			</c:choose>
      </ui:define>           
-</ui:composition>-->
+</ui:composition>

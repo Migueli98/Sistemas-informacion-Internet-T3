@@ -14,18 +14,19 @@
 				
 				<h1>Informes Actividad</h1>
 				<ui:repeat var="j" value= "#{controladorActividades.informe}">
-				
+					<h:form id="ListaActividades">
+						<table id="tablaListaActividades">
+							<h:inputHidden value="#{controladorActividades.informe.idInforme}"></h:inputHidden>
+							<h:inputHidden value="#{controladorActividades.informe.valoracionAlumno}"></h:inputHidden>
 				
 
-					<h:form id="ListaActividades">
-							<table id="tablaListaActividades">
+					
 								<tr>
 									<td>ID Informe Actividad</td>
 									<td><h:outputText value="#{j.idInforme}" /></td>
 								</tr>
 								<tr>
 									<td>Estado</td>
-
 									<td><h:outputText value="#{j.estado}" /></td>
 								</tr>
 								<tr>
@@ -56,14 +57,14 @@
 								
 								<tr>
 									<td>Valoracion</td>
-									<td><h:inputText value="j.act.valoracionAlumno" p:placeholder="tu valoracion..." /></td>
+									<td><h:inputText value="#{j.valoracionAlumno}" p:placeholder="tu valoracion..." /></td>
 								</tr>
 									
 							</table>
 							
 							
-							 <h:commandButton styleClass="btnGuardar" value ="Guardar" action="#{controladorActividades.guardarValoracion()}"  />
-							 <h:commandButton styleClass="btnVolver" value ="Volver" action="#{controladorActividades.guardarValoracion()}"  />
+							 <h:commandButton styleClass="btnGuardar" value ="Guardar" action="#{controladorActividades.guardarValoracion(controladorActividades.informe.idInforme)}"  />
+							 <h:commandButton styleClass="btnVolver" value ="Volver" action="MisActividades.xhtml"  />
 							
 						</h:form>
 

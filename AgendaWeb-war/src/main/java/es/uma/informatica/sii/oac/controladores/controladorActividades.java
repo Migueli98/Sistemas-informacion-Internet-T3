@@ -273,7 +273,7 @@ public class controladorActividades implements Serializable {
 			bd.updateInscripciones(i);
 			
 			InformeActividades in = new InformeActividades(); 
-			in.setAct(i.getActividad());
+			in.setActividades(i.getActividad());
 			in.setAlumno((Alumno) i.getUsuario());
 			in.setInformeONG("");
 			in.setInformeProfesor("");
@@ -295,7 +295,12 @@ public class controladorActividades implements Serializable {
 	       return "verActividades.xhtml";
 	     }
 	    
-	    public String guardarValoracion() {
+	    public String guardarValoracion(Long id) throws AprendizajeServicioException {
+	    	InformeActividades i = bd.findInformeActividadesId(id);
+	    	i.setValoracionAlumno(informe.getValoracionAlumno());
+	    	
+	    	bd.updateInforme(i);
+	    	
 	    	return "MisActividades.xhtml";
 	    }
 	     
@@ -316,7 +321,7 @@ public class controladorActividades implements Serializable {
             Boolean encontrado = false;
             while (i.hasNext() && !encontrado) {
                 informe = i.next();
-                if (informe.getAct().getIdActividad()==id) {
+                if (informe.getActividades().getIdActividad()==id) {
                     encontrado = true;
                 }
             }
@@ -335,8 +340,6 @@ public class controladorActividades implements Serializable {
 	    	return "supervisionActividad.xhtml";
 	    }
 	    
-	   
-	    
 	    public String evaluarParticipante() {
 	    	return "evaluarParticipante.xhtml";
 	    }
@@ -344,9 +347,6 @@ public class controladorActividades implements Serializable {
 		public ArrayList<Usuario> getUsuariosActividad() {
 			return usuariosActividad;
 		}
-
-		
-
 
 		public Curriculum getCurriculum() {
 			return curriculum;
@@ -360,25 +360,17 @@ public class controladorActividades implements Serializable {
 			this.usuariosActividad = usuariosActividad;
 		}
 
-
-
 		public ArrayList<Actividades> getEvaluacionActividades() {
 			return evaluacionActividades;
 		}
-
-
 
 		public void setEvaluacionActividades(ArrayList<Actividades> evaluacionActividades) {
 			this.evaluacionActividades = evaluacionActividades;
 		}
 
-
-
 		public ArrayList<Usuario> getProfesores() {
 			return profesores;
 		}
-
-
 
 		public void setProfesores(ArrayList<Usuario> profesores) {
 			this.profesores = profesores;

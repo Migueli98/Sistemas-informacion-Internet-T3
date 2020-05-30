@@ -13,7 +13,9 @@ import javax.persistence.*;
 @Entity
 
 @NamedQueries({
-    @NamedQuery(name="findInforme", query="select i from InformeActividades i where i.actividades= :a and i.alumno= :u" )
+    @NamedQuery(name="findInforme", query="select i from InformeActividades i where i.actividades= :a and i.alumno= :u"),
+    @NamedQuery(name="findInformeId", query="select i from InformeActividades i where i.idInforme= :id"),
+    @NamedQuery(name="findAllInformeActividades", query="select i from InformeActividades i")
  	})
 
 public class InformeActividades implements Serializable {
@@ -63,84 +65,89 @@ public class InformeActividades implements Serializable {
         act = a;
     }
 	*/
+
+	
+	
 	public Long getIdInforme() {
-		return this.idInforme;
+		return idInforme;
 	}
+
 
 	public void setIdInforme(Long idInforme) {
 		this.idInforme = idInforme;
-	}   
-	public String getInformeProfesor() {
-		return this.informeProfesor;
 	}
+
+
+	public String getInformeProfesor() {
+		return informeProfesor;
+	}
+
 
 	public void setInformeProfesor(String informeProfesor) {
 		this.informeProfesor = informeProfesor;
-	}   
-	public String getInformeONG() {
-		return this.informeONG;
 	}
+
+
+	public String getInformeONG() {
+		return informeONG;
+	}
+
 
 	public void setInformeONG(String informeONG) {
 		this.informeONG = informeONG;
-	}   
-	public String getValoracionAlumno() {
-		return this.valoracionAlumno;
 	}
+
+
+	public String getValoracionAlumno() {
+		return valoracionAlumno;
+	}
+
 
 	public void setValoracionAlumno(String valoracionAlumno) {
 		this.valoracionAlumno = valoracionAlumno;
 	}
-	public Profesor getProfe() {
-		return profesorAsociado;
-	}
-	public void setProfe(Profesor profe) {
-		this.profesorAsociado = profe;
-	}
-	
-	public Actividades getAct() {
-		return actividades;
-	}
-	
-	public String getNombreAct() {
-		return actividades.getNombreActividad();
-	}
-	
-	public void setAct(Actividades act) {
-		this.actividades = act;
-	}
-	
+
+
 	public Estado getEstado() {
 		return estado;
 	}
+
+
 	public void setEstado(Estado estado) {
 		this.estado = estado;
 	}
+
+
 	public Profesor getProfesorAsociado() {
 		return profesorAsociado;
 	}
+
+
 	public void setProfesorAsociado(Profesor profesorAsociado) {
 		this.profesorAsociado = profesorAsociado;
 	}
+
+
 	public Alumno getAlumno() {
 		return alumno;
 	}
+
+
 	public void setAlumno(Alumno alumno) {
 		this.alumno = alumno;
 	}
+
+
 	public Actividades getActividades() {
 		return actividades;
 	}
+
+
 	public void setActividades(Actividades actividades) {
 		this.actividades = actividades;
 	}
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((idInforme == null) ? 0 : idInforme.hashCode());
-		return result;
-	}
+
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -158,6 +165,12 @@ public class InformeActividades implements Serializable {
 		return true;
 	}
 	
-	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((idInforme == null) ? 0 : idInforme.hashCode());
+		return result;
+	}
 	
 }
