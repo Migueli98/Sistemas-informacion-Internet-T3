@@ -22,6 +22,10 @@ import javax.persistence.OneToMany;
 */
 
 @Entity
+
+@NamedQueries({
+    @NamedQuery(name="findAllUsuarios",query="select u from Usuario u"),
+	})
 public class Usuario implements Serializable {
     
     public enum Rol {

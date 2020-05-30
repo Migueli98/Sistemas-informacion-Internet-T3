@@ -111,16 +111,12 @@ public String home() {
 	   return "miPerfil.xhtml";
    }
    
-   /*public boolean comprobarBd() throws AprendizajeServicioException {
-	   List<Actividades> act = bd.allActividades();
-	   boolean sol = true;
+   public boolean isInicializadaBd() throws AprendizajeServicioException {
 	   
-	   if(act != null) {
-		   sol = false;
-	   }
+	   List<Usuario> usu = bd.allUsuario();
 	   
-	   return sol;
-   }*/
+	   return usu.isEmpty();
+   }
    
    public String modificarPerfilAlumno() throws AprendizajeServicioException {
 	   	alumno = (Alumno) email;

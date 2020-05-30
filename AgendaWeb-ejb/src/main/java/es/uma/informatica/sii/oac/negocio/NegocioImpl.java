@@ -249,8 +249,10 @@ public class NegocioImpl implements Negocio {
 
 	@Override
 	public List<Usuario> allUsuario() {
-		// TODO Auto-generated method stub
-		return null;
+		Query q = em.createNamedQuery("findAllUsuarios");
+		List<Usuario> usu = q.getResultList();
+		return usu;
+		
 	}
 	
 	public List<Inscripciones> allInscripciones(){
