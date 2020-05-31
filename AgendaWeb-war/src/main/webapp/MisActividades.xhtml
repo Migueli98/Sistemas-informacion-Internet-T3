@@ -11,7 +11,7 @@
     <ui:define name="content">
 	
         <c:choose>
-        	<c:when test="#{controlAutorizacion.email.rol == 'ALUMNO' || controlAutorizacion.email.rol == 'PASPDI'}">
+        	<c:when test="#{controlAutorizacion.email.rol == 'ALUMNO'}">
 				
 				<h1> Mis Actividades </h1>
 				<div class="bordeTablaActividades">
@@ -41,9 +41,7 @@
                                     <td>#{i.tipoActividad}</td>
                                     <td>#{i.estado}</td> 
                                     
-                                    <td>
-                                        <h:form> <h:column> <h:commandButton styleClass="btnVer" value ="Ver" action="#{controladorActividades.verActividades()}"  /></h:column></h:form>
-                                    </td>
+                                
                                    
 									<td>
 									<h:form>
@@ -51,6 +49,45 @@
 												action="#{controladorActividades.getInforme(i, controlAutorizacion.getEmail())}" />
 									</h:form>
 									</td>
+								</tr>
+                            </ui:repeat>
+                        </tbody>
+                    </table>
+                                 
+                </div>
+        	</c:when>
+			
+			<c:when test="#{controlAutorizacion.email.rol == 'PASPDI'}">
+				
+				<h1> Mis Actividades </h1>
+				<div class="bordeTablaActividades">
+                    <table id="tablaListaActividades">
+                        <thead>
+                                <tr>
+                                        <th>ID Actividad</th>
+                                        <th>Nombre Actividad</th>
+                                        <th>Fecha Inicio</th>
+                                        <th>Fecha Fin</th>
+                                        <th>Localización</th>
+                                        <th>Descripción</th>
+                                        <th>Tipo de Actividad</th>
+                                        <th>Estado Actividad</th>                             
+                                </tr>
+                            </thead>
+                        
+                        <tbody>
+                            <ui:repeat var = "i" value="#{controladorActividades.getActividades(controlAutorizacion.getEmail())}">
+                                <tr>                                
+                                    <td>#{i.idActividad}</td>
+                                    <td>#{i.nombreActividad}</td>
+                                    <td>#{i.fechaInicioActividad}</td>
+                                    <td>#{i.fechaFinActividad}</td>                     
+                                    <td>#{i.lugarRealizacion}</td>
+                                    <td>#{i.descripcion}</td>
+                                    <td>#{i.tipoActividad}</td>
+                                    <td>#{i.estado}</td> 
+                                    
+                                   
 								</tr>
                             </ui:repeat>
                         </tbody>

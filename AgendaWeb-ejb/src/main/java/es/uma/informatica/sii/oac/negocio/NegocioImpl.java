@@ -304,7 +304,12 @@ public class NegocioImpl implements Negocio {
 		
 		Query q = em.createNamedQuery("findInscripcionesUserAct").setParameter("user", a.getUsuario()).setParameter("actividad", a.getActividad());
 		List<Inscripciones> ins=q.getResultList();
-		em.persist(a);
+		if(ins.isEmpty()) {
+			em.persist(a);
+		} else {
+			throw new AprendizajeServicioException();
+		}
+		
 		
 	}
 
