@@ -7,8 +7,6 @@
   	<class>es.uma.informatica.sii.agendaee.entidades.Ong</class>
   	<class>es.uma.informatica.sii.agendaee.entidades.Servicios</class>
   	<class>es.uma.informatica.sii.agendaee.entidades.Alumno</class>
-  	<class>es.uma.informatica.sii.agendaee.entidades.Asignaturas</class>
-  	<class>es.uma.informatica.sii.agendaee.entidades.Centro</class>
   	<class>es.uma.informatica.sii.agendaee.entidades.Curriculum</class>
   	<class>es.uma.informatica.sii.agendaee.entidades.Profesor</class>
   	<class>es.uma.informatica.sii.agendaee.entidades.InformeActividades</class>

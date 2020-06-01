@@ -11,7 +11,9 @@ import javax.persistence.*;
  *
  */
 @Entity
-
+@NamedQueries({
+    @NamedQuery(name="findAllOng",query="select u from Ong u"),
+	})
 public class Ong extends Usuario {
 
 	private String nombreONG;

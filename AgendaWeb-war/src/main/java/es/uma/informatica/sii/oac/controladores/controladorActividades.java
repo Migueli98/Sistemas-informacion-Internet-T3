@@ -18,7 +18,7 @@ import es.uma.informatica.sii.agendaee.entidades.Actividades;
 import es.uma.informatica.sii.agendaee.entidades.Actividades.Estado;
 import es.uma.informatica.sii.agendaee.entidades.Inscripciones.estadoInscripcion;
 import es.uma.informatica.sii.agendaee.entidades.Alumno;
-import es.uma.informatica.sii.agendaee.entidades.Asignaturas;
+
 import es.uma.informatica.sii.agendaee.entidades.Curriculum;
 import es.uma.informatica.sii.agendaee.entidades.InformeActividades;
 import es.uma.informatica.sii.agendaee.entidades.Inscripciones;
@@ -50,8 +50,7 @@ public class controladorActividades implements Serializable {
 	private Actividades supervision;
 	private ArrayList<Usuario> usuarios;
 	private Usuario usuario;
-	private ArrayList<Asignaturas> asignaturas;
-	private Asignaturas asignatura;
+	
 	private ArrayList<Usuario> usuariosActividad;
 	private ArrayList<Actividades> evaluacionActividades;
 	private ArrayList<Usuario> profesores;
@@ -75,27 +74,7 @@ public class controladorActividades implements Serializable {
 	    }
 	    
 
-	    public ArrayList<Asignaturas> getAsignaturas() {
-			return asignaturas;
-		}
-
-
-
-		public void setAsignaturas(ArrayList<Asignaturas> asignaturas) {
-			this.asignaturas = asignaturas;
-		}
-
-
-
-		public Asignaturas getAsignatura() {
-			return asignatura;
-		}
-
-
-
-		public void setAsignatura(Asignaturas asignatura) {
-			this.asignatura = asignatura;
-		}
+	   
 
 
 

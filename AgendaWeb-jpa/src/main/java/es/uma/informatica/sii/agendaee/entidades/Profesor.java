@@ -20,12 +20,7 @@ public class Profesor extends Usuario {
 	
 	private String departamento;
 	
-	@ManyToMany()
-	@JoinTable(name = "jnd_profesor_asignaturas",
-	joinColumns = @JoinColumn(name = "profesor_fk"),
-	inverseJoinColumns = @JoinColumn(name = "asignaturas_fk")
-	)
-	private List<Asignaturas> imparte = new ArrayList<Asignaturas>();
+	
 	
 	@OneToMany(mappedBy="profesorAsociado")
 	private List<InformeActividades> informes;
@@ -57,22 +52,7 @@ public class Profesor extends Usuario {
 	public void setDepartamento(String departamento) {
 		this.departamento = departamento;
 	}
-	public List<Asignaturas> getImparte() {
-		return imparte;
-	}
-	public void setImparte(List<Asignaturas> imparte) {
-		this.imparte = imparte;
-	}
 	
-	public void addAsignatura(Asignaturas a) {
-		imparte.add(a);
-		a.getImpartidoPor().add(this);
-	}
-	
-	public void removeAsignatura(Asignaturas a) {
-		imparte.remove(a);
-		a.getImpartidoPor().remove(this);
-	}
 
 
 	@Override

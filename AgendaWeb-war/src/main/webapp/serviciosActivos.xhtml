@@ -63,6 +63,54 @@
                 
         	</c:when>
         	
+        	<c:when test="#{controlAutorizacion.getEmail().getRol() == 'ADMIN'}">
+
+				<h1> Servicios</h1>
+				<div class="bordeTablaActividades">
+				
+				<h:form>
+                    <table id="tablaListaActividades">
+                        <thead>
+                                <tr>
+                                   <th>ID Proyecto</th>
+                                   <th>Tipo de servicio</th>
+                                   <th>Nombre</th>
+                                   <th>Descripcion</th>
+                                   <th>Numero de horas necesario</th>
+                                   <th>Numero de participantes</th>
+                                   <th>Zona</th>
+                                              
+                                </tr>
+                            </thead>
+                        
+                        <tbody>
+                            <ui:repeat var = "i" value="#{controladorPropuestas.getAllServicios()}">
+                                <tr>                                
+                                    <td>#{i.codigoServicio}</td>
+                                    <td>#{i.tipoServicio}</td>
+                                    <td>#{i.nombre}</td>
+                                    <td>#{i.descripcion}</td>
+                                    <td>#{i.numHoras}</td>
+                                    <td>#{i.numParticipantes}</td>
+                                    <td>#{i.zona}</td>
+                                    
+                                    
+                                    
+                                    <td>          
+                                        <h:column> <h:commandButton styleClass="btnBorrar" value="Borrar" action="#{controladorPropuestas.borrarServicio(i.codigoServicio)}" /> </h:column>
+                                    </td>
+                                    
+                                    
+                                </tr>
+                            </ui:repeat>
+                        </tbody>
+                    </table>
+                 </h:form>
+                </div>
+               
+                
+        	</c:when>
+        	
         </c:choose>
      </ui:define>           
 </ui:composition>

@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -24,7 +25,8 @@ import javax.persistence.OneToMany;
 
 @NamedQueries({
     @NamedQuery(name="findServiciosOng",query="select s from Servicios s where s.ong= :ong"),
-    @NamedQuery(name="findServiciosId",query="select s from Servicios s where s.codigoServicio= :id")
+    @NamedQuery(name="findServiciosId",query="select s from Servicios s where s.codigoServicio= :id"),
+    @NamedQuery(name="findAllServicios",query="select s from Servicios s")
 	})
 public class Servicios implements Serializable {
 	
@@ -48,12 +50,7 @@ public class Servicios implements Serializable {
 	@OneToMany(mappedBy="servicio")
 	private List<Actividades> actividades;
 	
-	@ManyToMany
-	@JoinTable(name = "jnd_servicios_asignaturas",
-	joinColumns = @JoinColumn(name = "servicios_fk"),
-	inverseJoinColumns = @JoinColumn(name = "asignaturas_fk")
-	)
-	private List<Asignaturas> asignaturas;
+
 	
 	private static final long serialVersionUID = 1L;
 
@@ -134,14 +131,34 @@ public class Servicios implements Serializable {
 		this.actividades = actividades;
 	}
 
-	public List<Asignaturas> getAsignaturas() {
-		return asignaturas;
+	
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((codigoServicio == null) ? 0 : codigoServicio.hashCode());
+		return result;
 	}
 
-	public void setAsignaturas(List<Asignaturas> asignaturas) {
-		this.asignaturas = asignaturas;
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Servicios other = (Servicios) obj;
+		if (codigoServicio == null) {
+			if (other.codigoServicio != null)
+				return false;
+		} else if (!codigoServicio.equals(other.codigoServicio))
+			return false;
+		return true;
 	}
 
+	
 	
 	
    

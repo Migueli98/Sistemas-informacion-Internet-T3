@@ -8,8 +8,8 @@ import javax.ejb.Local;
 import es.uma.informatica.sii.agendaee.entidades.Actividades;
 import es.uma.informatica.sii.agendaee.entidades.Actividades.Estado;
 import es.uma.informatica.sii.agendaee.entidades.Alumno;
-import es.uma.informatica.sii.agendaee.entidades.Asignaturas;
-import es.uma.informatica.sii.agendaee.entidades.Centro;
+
+
 import es.uma.informatica.sii.agendaee.entidades.Curriculum;
 import es.uma.informatica.sii.agendaee.entidades.InformeActividades;
 import es.uma.informatica.sii.agendaee.entidades.Inscripciones;
@@ -33,8 +33,7 @@ public interface Negocio {
 	public List<Actividades> allActividades();
 	public List<Actividades> allActividadesEstado(Estado estado);
 	public List<Alumno> allAlumno();
-	public List<Asignaturas> allAsignaturas();
-	public List<Centro> allCentro();
+
 	public List<Curriculum> allCurriculum();
 	public List<InformeActividades> allInformeActividades();
 	public List<Inscripciones> allInscripciones(Usuario u);
@@ -50,8 +49,6 @@ public interface Negocio {
 	public void addActividades(Actividades a);
 	
 	public void addAlumno(Alumno a);
-	public void addAsignaturas(Asignaturas a);
-	public void addCentro(Centro a);
 	public void addCurriculum(Curriculum a);
 	public void addInformeActividades(InformeActividades a);
 	public void addInscripciones(Inscripciones a) throws AprendizajeServicioException;
@@ -63,8 +60,6 @@ public interface Negocio {
 	//Eliminar elementos de las entidades
 	public void deleteActividades(Actividades a) throws AprendizajeServicioException;
 	public void deleteAlumno(Alumno a);
-	public void deleteAsignaturas(Asignaturas a);
-	public void deleteCentro(Centro a);
 	public void deleteCurriculum(Curriculum a);
 	public void deleteInformeActividades(InformeActividades a);
 	public void deleteInscripciones(Inscripciones a);
@@ -76,8 +71,6 @@ public interface Negocio {
 	//Modificar elementos de las entidades
 	public void updateActividades(Actividades a);
 	public void updateAlumno(Alumno a) throws AprendizajeServicioException;
-	public void updateAsignaturas(Asignaturas a);
-	public void updateCentro(Centro a);
 	public void updateCurriculum(Curriculum a);
 	//public void updateInformeActividades(InformeActividades a);
 	public void updateInscripciones(Inscripciones a);
@@ -90,8 +83,6 @@ public interface Negocio {
 	//Buscar por clave primaria en las entidades
 	public Actividades findActividades(Long id) throws AprendizajeServicioException;
 	public Alumno findAlumno(String id); //�Debe existir m�todos para las entidades que extienden Usuario o vale con los del usuario?
-	public Asignaturas findAsignaturas(Long id);
-	public Centro findCentro(Long id);
 	public Curriculum findCurriculum(Long id);
 	public InformeActividades findInformeActividades(Actividades a, Usuario u);
 	public Inscripciones findInscripciones(Long id);

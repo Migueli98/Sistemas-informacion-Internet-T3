@@ -118,6 +118,12 @@ public class controladorPropuestas implements Serializable{
 		return servicios;
 	}
 	
+	public List<Servicios> getAllServicios(){
+		
+		servicios = bd.allServicios();
+		return servicios;
+	}
+	
 	
 	public void setServicios(ArrayList<Servicios> servicios) {
 		this.servicios = servicios;

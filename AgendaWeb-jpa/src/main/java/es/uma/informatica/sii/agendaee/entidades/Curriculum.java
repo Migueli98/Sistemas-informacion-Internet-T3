@@ -41,13 +41,7 @@ public class Curriculum implements Serializable {
 	private String disponibilidad;
 	
 
-	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "jnd_curriculum_asignaturas",
-	joinColumns = @JoinColumn(name = "curriculum_fk"),
-	inverseJoinColumns = @JoinColumn(name = "asignaturas_fk")
-	)
 	
-	private List<Asignaturas> compuestoDe;
 	
 	@OneToOne(mappedBy = "cv")
 	private Alumno alumno;
@@ -84,13 +78,7 @@ public class Curriculum implements Serializable {
 	}   
 	
 
-	public List<Asignaturas> getCompuestoDe() {
-		return compuestoDe;
-	}
-
-	public void setCompuestoDe(List<Asignaturas> compuestoDe) {
-		this.compuestoDe = compuestoDe;
-	}
+	
 
 	public String getIdiomas() {
 		return idiomas;
@@ -107,7 +95,8 @@ public class Curriculum implements Serializable {
 	public void setDisponibilidad(String disponibilidad) {
 		this.disponibilidad = disponibilidad;
 	}
-
+	
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

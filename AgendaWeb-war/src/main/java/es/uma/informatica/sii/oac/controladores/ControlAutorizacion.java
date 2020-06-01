@@ -5,6 +5,7 @@
 package es.uma.informatica.sii.oac.controladores;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.enterprise.context.SessionScoped;
@@ -33,9 +34,13 @@ public class ControlAutorizacion implements Serializable {
    private Usuario email;
    private Alumno alumno;
    private Ong ong;
+   private Ong ongAd;
+   private List<Ong> ongs;
    
    public ControlAutorizacion() {
-		
+		ong = new Ong();
+		ongAd = new Ong();
+		ongs = new ArrayList<Ong>();
    }
    
    public void setEmail(Usuario usuario) {
@@ -46,6 +51,16 @@ public class ControlAutorizacion implements Serializable {
        return this.email;
    }
    
+   
+   
+   public Ong getOngAd() {
+	return ongAd;
+}
+
+   public void setOngAd(Ong ongAd) {
+	this.ongAd = ongAd;
+   }
+
    public void setAlumno(Alumno al) {
        alumno = al;
    }
@@ -139,11 +154,69 @@ public String home() {
 	   return "miPerfil.xhtml";
   }
    
+   public String modificarOngAd(String ong) throws AprendizajeServicioException {
+	 
+	   ongAd = bd.findOng(ong);
+	   
+
+	   return "modificarOngAd.xhtml";
+ }
+   
+   public String guardarModificacionOng (String ong) throws AprendizajeServicioException {
+
+	   bd.updateOng(ongAd);
+	   
+	   return "verOngsAd.xhtml";
+   }
+   
+   public String borrarOng(String ong) {
+	   
+	   bd.deleteOng(bd.findOng(ong));
+	   
+	   return "verOngsAd.xhtml";
+   }
+   
+   public List<Ong> verOngsAd(){
+	   
+	   ongs = bd.allOng();
+	   return ongs;
+   }
+   
+   public String verOngs() {
+	   return "verOngsAd.xhtml";
+   }
+   
    public String modificarUsuario() throws AprendizajeServicioException {
 	   
 	   bd.updateUsuario(email);
 	   bd.refrescarUsuario(email);
 	   return "miPerfil.xhtml";
+   }
+   
+   public Ong inicializarOng() {
+	   ongAd.setEmail("");
+	   ongAd.setRol(Rol.ONG);
+	   ongAd.setNombreONG("");
+	   ongAd.setContrasenia("");
+	   ongAd.setDireccion("");
+	   ongAd.setTelefono("999999999");
+	   ongAd.setCiudad("");
+	   ongAd.setPais("");
+	   ongAd.setPaginaWeb("");
+
+	   return ongAd;
+   }
+   
+
+   public String crearOng() {
+	   return "crearOngAd.xhtml";
+   }
+   
+   public String persistOng() {
+	   
+	   bd.addOng(ongAd);
+	   
+	   return "verOngsAd.xhtml";
    }
    
    public String proyectosAdPP() {
@@ -154,9 +227,7 @@ public String home() {
 	   return "verUsuariosAd.xhtml";
    }
    
-   public String verOngs() {
-	   return "verOngsAd.xhtml";
-   }
+
    
    public String verBuscarActividades() {
 	   return "buscarActividades.xhtml";
@@ -185,11 +256,7 @@ public String home() {
    public String valoraciones() {
 	   return "valoraciones.xhtml";
    }
-   
-   public String asignaturas() {
-	   return "asignaturas.xhtml";
-   }
-   
+
    public String asignarProfesores() {
 	   return "asignarProfesores.xhtml";
    }

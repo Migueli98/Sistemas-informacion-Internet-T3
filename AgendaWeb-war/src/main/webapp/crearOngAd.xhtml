@@ -1,4 +1,4 @@
-<!--
+
 <ui:composition template="/WEB-INF/templates/plantilla.xhtml"
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
@@ -11,50 +11,56 @@
         <c:choose>
             <c:when test="#{controlAutorizacion.getEmail().getRol() == 'ADMIN'}">
         
-                <h1 var = "i" value="#{controladorVerOng.ongs}">Crear Ong</h1>  
+                <h1>Crear Ong</h1>  
+                <ui:repeat var = "i" value="#{controlAutorizacion.inicializarOng()}">         
                                 
                 <h:form id="ListaActividades">
                     <table id="tablaListaActividades">
 						<tr>
-							<td>IdOng</td>
+							<td>email ong</td>
 
-							<td><h:inputText value="" /></td>
+							<td><h:inputText value="#{i.email}" /></td>
 						</tr>
 						<tr>
                             <td>Nombre </td>
 
-                            <td><h:inputText  value=""/></td>
+                            <td><h:inputText  value="#{i.nombreONG}"/></td>
                         </tr>
-
                         <tr>
-                            <td>Email </td>
-                            <td><h:inputText  value=""/></td>
+                            <td>Nombre </td>
+
+                            <td><h:inputText  value="#{i.contrasenia}"/></td>
                         </tr>
+                        
 
                         <tr>
                             <td>Direccion </td>
-                            <td><h:inputText  value=""/></td>
+                            <td><h:inputText  value="#{i.direccion}"/></td>
                         </tr>
                         
                         <tr>
                             <td>Ciudad </td>
-                            <td><h:inputText  value=""/></td>
+                            <td><h:inputText  value="#{i.ciudad}"/></td>
                         </tr>      
 						<tr>
                             <td>Pais </td>
-                            <td><h:inputText  value=""/></td>
+                            <td><h:inputText  value="#{i.pais}"/></td>
+                        </tr> 
+                        <tr>
+                        	<td>Telefono </td>
+                            <td><h:inputText  value="#{i.telefono}"/></td>
                         </tr> 
                                             
                         
                     </table>
-                </h:form>
+                
                     
-                <h:form> 
+                
                     
                   <br/>
 					<h:column>
 						<h:commandButton value="Guardar" styleClass="btnGuardar"
-							action="verOngsAd.xhtml" />
+							action="#{controlAutorizacion.persistOng()}" />
 					</h:column>
 					<h:column>
 						<h:commandButton value="Cancelar" styleClass="btnCancelar"
@@ -63,6 +69,7 @@
 
 
 				</h:form>
+				</ui:repeat>
                  
             </c:when>
                
@@ -73,4 +80,3 @@
         </c:choose>
     </ui:define>
 </ui:composition>
--->

@@ -25,12 +25,6 @@ public class Alumno extends Usuario{
 	
 	
 	
-	@ManyToMany()
-	@JoinTable(name = "jnd_alumno_asignaturas",
-	joinColumns = @JoinColumn(name = "alumno_fk"),
-	inverseJoinColumns = @JoinColumn(name = "asignaturas_fk")
-	)
-	private List<Asignaturas> matriculadoEn;
 	
 	
 	@OneToMany(mappedBy="alumno")
@@ -76,18 +70,15 @@ public class Alumno extends Usuario{
 	public void setCv(Curriculum cv) {
 		this.cv = cv;
 	}
-	public List<Asignaturas> getMatriculadoEn() {
-		return matriculadoEn;
-	}
-	public void setMatriculadoEn(List<Asignaturas> matriculadoEn) {
-		this.matriculadoEn = matriculadoEn;
-	}
+	
 	public List<InformeActividades> getInformes() {
 		return informes;
 	}
 	public void setInformes(List<InformeActividades> informes) {
 		this.informes = informes;
 	}
+	
+	
 	
 	@Override
 	public boolean equals(Object obj) {

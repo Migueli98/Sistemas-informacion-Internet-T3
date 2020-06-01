@@ -19,8 +19,7 @@ import javax.persistence.Query;
 import es.uma.informatica.sii.agendaee.entidades.Actividades;
 import es.uma.informatica.sii.agendaee.entidades.Actividades.Estado;
 import es.uma.informatica.sii.agendaee.entidades.Alumno;
-import es.uma.informatica.sii.agendaee.entidades.Asignaturas;
-import es.uma.informatica.sii.agendaee.entidades.Centro;
+
 import es.uma.informatica.sii.agendaee.entidades.Curriculum;
 
 
@@ -47,48 +46,26 @@ public class NegocioImpl implements Negocio {
 	@Override
 	public void inicializar() {
 		
-		//CENTRO
-		Centro cen1 = new Centro();
-		cen1.setNombreCentro("Facultad de Informatica");
-		em.persist(cen1);
+	
 		
 		
-		//ASIGNATURA
-		Asignaturas as3 = new Asignaturas();
-		as3.setCreditos(6);
-		as3.setNombreAsignatura("La de prueba");
-		em.persist(as3);
-		
-		Asignaturas as1 = new Asignaturas();
-		as1.setCentro(cen1);
-		as1.setCreditos(6);
-		as1.setNombreAsignatura("Introduccion a Bases de Datos");
-		em.persist(as1);
-		
-		Asignaturas as2 = new Asignaturas();
-		as2.setCentro(cen1);
-		as2.setCreditos(6);
-		as2.setNombreAsignatura("Analisis y Diseño de Algoritmos");
-		em.persist(as2);
+	
 		
 		// CURRICULUMNS
 		Curriculum c1 = new Curriculum();
 		c1.setExperienciaLaboral("Camarero, bandeja, Ayudante de cocina");
 		c1.setIdiomas("Frances, Aleman, Ingles");
 		c1.setDisponibilidad("Lunes por la ma�ana y viernes por la tarde");
-		List<Asignaturas> asig1 = new ArrayList<>();
-		asig1.add(as1);
-		c1.setCompuestoDe(asig1);
+		
+		
 		em.persist(c1);
 		
 		Curriculum c2 = new Curriculum();
 		c2.setExperienciaLaboral("Pintor, Carpintero, Alba�il");
 		c2.setIdiomas("Ingles, Frances");
 		c2.setDisponibilidad("Fin de semana");
-		List<Asignaturas> asig2 = new ArrayList<>();
-		asig2.add(as1);
-		asig2.add(as2);
-		c2.setCompuestoDe(asig2);
+		
+		
 		em.persist(c2);
 		
 		// ALUMNOS
@@ -141,7 +118,7 @@ public class NegocioImpl implements Negocio {
 		p1.setNombre("Enrique");
 		p1.setApellido("Soler");
 		p1.setDepartamento("Bases de Datos");
-		p1.addAsignatura(as1);
+		
 		em.persist(p1);
 	}
 
@@ -200,19 +177,7 @@ public class NegocioImpl implements Negocio {
 		return null;
 	}
 
-	@Override
-	public List<Asignaturas> allAsignaturas() {
-		// TODO Auto-generated method stub
-		Query q = em.createNamedQuery("findAllAsignaturas");
-		List<Asignaturas> asig = q.getResultList();
-		return asig;
-	}
 
-	@Override
-	public List<Centro> allCentro() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public List<Curriculum> allCurriculum() {
@@ -238,8 +203,10 @@ public class NegocioImpl implements Negocio {
 
 	@Override
 	public List<Ong> allOng() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Query q = em.createNamedQuery("findAllOng");
+		List<Ong> ins=q.getResultList();
+		return ins;
 	}
 
 	@Override
@@ -250,8 +217,9 @@ public class NegocioImpl implements Negocio {
 
 	@Override
 	public List<Servicios> allServicios() {
-		// TODO Auto-generated method stub
-		return null;
+		Query q = em.createNamedQuery("findAllServicios");
+		List<Servicios> s = q.getResultList();
+		return s;
 	}
 
 	@Override
@@ -280,17 +248,9 @@ public class NegocioImpl implements Negocio {
 		
 	}
 
-	@Override
-	public void addAsignaturas(Asignaturas a) {
-		// TODO Auto-generated method stub
-		em.persist(a);
-	}
+	
 
-	@Override
-	public void addCentro(Centro a) {
-		// TODO Auto-generated method stub
-		em.persist(a);
-	}
+
 
 	@Override
 	public void addCurriculum(Curriculum a) {
@@ -323,7 +283,7 @@ public class NegocioImpl implements Negocio {
 	@Override
 	public void addOng(Ong a) {
 		// TODO Auto-generated method stub
-		
+		em.persist(a);
 	}
 
 	@Override
@@ -355,17 +315,6 @@ public class NegocioImpl implements Negocio {
 		
 	}
 
-	@Override
-	public void deleteAsignaturas(Asignaturas a) {
-		// TODO Auto-generated method stub
-		em.remove(em.contains(a) ? a : em.merge(a));
-	}
-
-	@Override
-	public void deleteCentro(Centro a) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public void deleteCurriculum(Curriculum a) {
@@ -388,7 +337,7 @@ public class NegocioImpl implements Negocio {
 	@Override
 	public void deleteOng(Ong a) {
 		// TODO Auto-generated method stub
-		
+		em.remove(em.contains(a) ? a : em.merge(a));
 	}
 
 	@Override
@@ -421,17 +370,7 @@ public class NegocioImpl implements Negocio {
 		em.merge(a);
 	}
 
-	@Override
-	public void updateAsignaturas(Asignaturas a) {
-		// TODO Auto-generated method stub
-		
-	}
 
-	@Override
-	public void updateCentro(Centro a) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public void updateCurriculum(Curriculum a) {
@@ -487,20 +426,6 @@ public class NegocioImpl implements Negocio {
 		return a;
 	}
 
-	@Override
-	public Asignaturas findAsignaturas(Long id) {
-		// TODO Auto-generated method stub
-		Query q = em.createNamedQuery("findAsignatura").setParameter("id", id);
-		List<Asignaturas> asig = q.getResultList();
-		return asig.get(0);
-		
-	}
-
-	@Override
-	public Centro findCentro(Long id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public Curriculum findCurriculum(Long id) {
