@@ -54,6 +54,11 @@ public class NegocioImpl implements Negocio {
 		
 		
 		//ASIGNATURA
+		Asignaturas as3 = new Asignaturas();
+		as3.setCreditos(6);
+		as3.setNombreAsignatura("La de prueba");
+		em.persist(as3);
+		
 		Asignaturas as1 = new Asignaturas();
 		as1.setCentro(cen1);
 		as1.setCreditos(6);
@@ -182,7 +187,7 @@ public class NegocioImpl implements Negocio {
 	@Override
 	public List<Actividades> allActividadesAlumno(Usuario u) {
 		// TODO Auto-generated method stub
-		Query q = em.createNamedQuery("findAllActividadesAlumno").setParameter("user",u);;
+		Query q = em.createNamedQuery("findAllActividadesAlumno").setParameter("user",u);
 		List<Actividades> act = q.getResultList();
 		return act;
 	}
@@ -198,7 +203,9 @@ public class NegocioImpl implements Negocio {
 	@Override
 	public List<Asignaturas> allAsignaturas() {
 		// TODO Auto-generated method stub
-		return null;
+		Query q = em.createNamedQuery("findAllAsignaturas");
+		List<Asignaturas> asig = q.getResultList();
+		return asig;
 	}
 
 	@Override
@@ -276,13 +283,13 @@ public class NegocioImpl implements Negocio {
 	@Override
 	public void addAsignaturas(Asignaturas a) {
 		// TODO Auto-generated method stub
-		
+		em.persist(a);
 	}
 
 	@Override
 	public void addCentro(Centro a) {
 		// TODO Auto-generated method stub
-		
+		em.persist(a);
 	}
 
 	@Override
@@ -351,7 +358,7 @@ public class NegocioImpl implements Negocio {
 	@Override
 	public void deleteAsignaturas(Asignaturas a) {
 		// TODO Auto-generated method stub
-		
+		em.remove(em.contains(a) ? a : em.merge(a));
 	}
 
 	@Override
@@ -485,7 +492,6 @@ public class NegocioImpl implements Negocio {
 		// TODO Auto-generated method stub
 		Query q = em.createNamedQuery("findAsignatura").setParameter("id", id);
 		List<Asignaturas> asig = q.getResultList();
-
 		return asig.get(0);
 		
 	}

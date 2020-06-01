@@ -28,14 +28,13 @@
 
 						<tbody>
 							<ui:repeat var="i"
-								value="#{controladorValoraciones.valoraciones(controlAutorizacion.getEmail())}">
-								<h:inputHidden value="#{i.informeONG}"></h:inputHidden>
+								value = "#{controladorValoraciones.valoraciones(controlAutorizacion.getEmail())}">
+								<!--  <h:inputHidden value="#{i.informeONG}"></h:inputHidden>-->
 								<tr>
-									<td>#{i.actividades.nombreActividad}</td>
-									<td>#{i.alumno.nombre}</td>
-									<td>#{i.alumno.apellido}</td>
-									<td> <h:inputText value= #{i.informeONG}/></td>
-							<!--  POR TERMINAR :) -->
+									<td><h:outputText value = "#{i.actividades.nombreActividad}"/></td>
+									<td><h:outputText value = "#{i.alumno.nombre}"/></td>
+									<td><h:outputText value = "#{i.alumno.apellido}"/></td>
+									<td><h:inputText value= "#{i.informeONG}"/></td>
 									<td>
 											<h:column>
 												<h:commandButton styleClass="btnGuardar" value="Guardar"

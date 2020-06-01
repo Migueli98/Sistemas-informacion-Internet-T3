@@ -92,7 +92,7 @@ public class controladorValoraciones implements Serializable{
 		List<Servicios> ser = bd.findServiciosOng(u);
 		List<Actividades> act2 = new ArrayList<Actividades>();
 		List<InformeActividades> inf = bd.allInformeActividades();
-		
+		List<InformeActividades> infdefinitivo = new ArrayList<InformeActividades>();
 		for(Servicios s : ser) {
 			for(Actividades a : act) {
 				if(a.getServicio().getCodigoServicio() == s.getCodigoServicio()) {
@@ -104,12 +104,12 @@ public class controladorValoraciones implements Serializable{
 		for(InformeActividades i : inf) {
 			for(Actividades a : act2) {
 				if(i.getActividades().getIdActividad() == a.getIdActividad()) {
-					informes.add(i);
+					infdefinitivo .add(i);
 				}
 			}
 		}
 				
-		return informes;
+		return infdefinitivo ;
 	}
 	
 	/**

@@ -240,8 +240,6 @@ public class controladorPropuestas implements Serializable{
     
     
     public String guardarServicio(Ong ong) throws AprendizajeServicioException {
-    	
-    
     	servicio.setOng(ong);
     	bd.updateServicios(servicio);
     	
@@ -252,7 +250,6 @@ public class controladorPropuestas implements Serializable{
     public String crearPropuestaActividad(Long id) {
     	
     	servicio = bd.findServicios(id);
-    	
     	
     	return "crearPropuestaActividad.xhtml";
     }
@@ -273,7 +270,7 @@ public class controladorPropuestas implements Serializable{
 		if(bd.findActividades(a).getEstado() == Estado.EN_CURSO) { 	
 			FacesMessage fm = new FacesMessage("No se puede eliminar una actividad en curso");
 	        FacesContext.getCurrentInstance().addMessage("login:pass", fm);
-	    	return "propuestas.xhtml";
+
 		}else{
 			bd.deleteActividades(bd.findActividades(a));
 		}
@@ -291,7 +288,7 @@ public class controladorPropuestas implements Serializable{
     	}else {
     		FacesMessage fm = new FacesMessage("No se puede inciar una actividad con este estado: "+ a.getEstado());
             FacesContext.getCurrentInstance().addMessage("login:pass", fm);
-        	return "propuestas.xhtml";
+
     	}
 
     	return "propuestas.xhtml";

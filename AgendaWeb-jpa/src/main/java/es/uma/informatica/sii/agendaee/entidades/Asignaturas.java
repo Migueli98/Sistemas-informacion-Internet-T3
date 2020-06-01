@@ -15,7 +15,8 @@ import javax.persistence.*;
  */
 @Entity
 @NamedQueries({
-    @NamedQuery(name="findAsignatura",query="select asig from Asignaturas asig where asig.codigoAsignatura= :id")})
+    @NamedQuery(name="findAsignatura",query="select asig from Asignaturas asig where asig.codigoAsignatura= :id"),
+    @NamedQuery(name="findAllAsignaturas",query="select asig from Asignaturas asig")})
 
 public class Asignaturas implements Serializable {
 
