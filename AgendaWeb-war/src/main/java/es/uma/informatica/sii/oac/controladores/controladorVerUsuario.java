@@ -13,8 +13,10 @@ import javax.inject.Named;
 
 import es.uma.informatica.sii.agendaee.entidades.Alumno;
 import es.uma.informatica.sii.agendaee.entidades.Curriculum;
-
+import es.uma.informatica.sii.agendaee.entidades.Inscripciones;
+import es.uma.informatica.sii.agendaee.entidades.Ong;
 import es.uma.informatica.sii.agendaee.entidades.Usuario;
+import es.uma.informatica.sii.agendaee.entidades.Usuario.Rol;
 import es.uma.informatica.sii.oac.negocio.AprendizajeServicioException;
 import es.uma.informatica.sii.oac.negocio.Negocio;
 
@@ -106,9 +108,46 @@ public class controladorVerUsuario implements Serializable{
     	return "crearUsuarioAd.xhtml";
     }
     
+    public String guardarUsuario() {
+    	
+ 	   	
+ 	   	bd.addUsuario(usuario);
+    	
+    	return "verUsuariosAd.xhtml";
+    }
+    
+    public String borrarUsuario(String email) {
+    	
+    	
+    	bd.deleteUsuario(bd.findUsuario(email));
+    	
+    	return "verUsuariosAd.xhtml";
+    }
   
+    public List<Usuario> allUsuarios(){
+    	
+    	return bd.allUsuario();
+    	
+    }
+    
+    public List<Usuario> allUsuariosAP(){
+    	
+    	return bd.allUsuarioAP();
+    	
+    }
     
     
     
+    public Usuario inicializarUsuario() {
+    	usuario = new Usuario();
+    	usuario.setEmail("");
+ 	   	usuario.setRol(Rol.ALUMNO);
+ 	   	usuario.setApellido("");
+ 	   	usuario.setNombre("");
+ 	   	usuario.setContrasenia("");
+ 	   	usuario.setInscripciones(new ArrayList<Inscripciones>());
+
+ 	   return usuario;
+    }
     
 }

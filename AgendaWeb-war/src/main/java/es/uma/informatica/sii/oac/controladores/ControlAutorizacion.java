@@ -15,6 +15,7 @@ import javax.inject.Named;
 
 import es.uma.informatica.sii.agendaee.entidades.Actividades;
 import es.uma.informatica.sii.agendaee.entidades.Alumno;
+import es.uma.informatica.sii.agendaee.entidades.Inscripciones;
 import es.uma.informatica.sii.agendaee.entidades.Ong;
 import es.uma.informatica.sii.agendaee.entidades.Usuario;
 import es.uma.informatica.sii.agendaee.entidades.Usuario.Rol;
@@ -32,6 +33,7 @@ public class ControlAutorizacion implements Serializable {
    private Negocio bd;
    
    private Usuario email;
+   private Usuario usuario;
    private Alumno alumno;
    private Ong ong;
    private Ong ongAd;
@@ -41,13 +43,23 @@ public class ControlAutorizacion implements Serializable {
 		ong = new Ong();
 		ongAd = new Ong();
 		ongs = new ArrayList<Ong>();
+		usuario = new Usuario();
    }
    
    public void setEmail(Usuario usuario) {
        this.email = usuario;
    }
+   
+   
+   public Usuario getUsuario() {
+	return usuario;
+}
 
-   public Usuario getEmail() {
+public void setUsuario(Usuario usuario) {
+	this.usuario = usuario;
+}
+
+public Usuario getEmail() {
        return this.email;
    }
    
@@ -162,11 +174,26 @@ public String home() {
 	   return "modificarOngAd.xhtml";
  }
    
-   public String guardarModificacionOng (String ong) throws AprendizajeServicioException {
+   public String modificarUsuario(String usu) throws AprendizajeServicioException {
+		 
+	   usuario = bd.findUsuario(usu);
+	   
+
+	   return "modificarUsuarioAd.xhtml";
+ }
+   
+   public String guardarModificacionOng(String ong) throws AprendizajeServicioException {
 
 	   bd.updateOng(ongAd);
 	   
 	   return "verOngsAd.xhtml";
+   }
+   
+   public String guardarModificacionUsuario() throws AprendizajeServicioException {
+
+	   bd.updateUsuario(usuario);
+	   
+	   return "verUsuariosAd.xhtml";
    }
    
    public String borrarOng(String ong) {
@@ -207,7 +234,31 @@ public String home() {
 	   return ongAd;
    }
    
+   public Usuario inicializarUsuario() {
+   		usuario.setEmail("");
+	   	usuario.setApellido("");
+	   	usuario.setNombre("");
+	   	usuario.setContrasenia("");
 
+	   return usuario;
+   }
+
+   public String guardarAluUsuario() {
+	   	
+	   	usuario.setRol(Rol.ALUMNO);
+	   	bd.addUsuario(usuario);
+   	
+   	return "verUsuariosAd.xhtml";
+   }
+   
+   public String guardarProUsuario() {
+	   	
+	   	usuario.setRol(Rol.PASPDI);
+	   	bd.addUsuario(usuario);
+  	
+  	return "verUsuariosAd.xhtml";
+  }
+   
    public String crearOng() {
 	   return "crearOngAd.xhtml";
    }

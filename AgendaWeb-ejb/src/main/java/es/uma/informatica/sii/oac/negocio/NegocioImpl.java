@@ -230,6 +230,14 @@ public class NegocioImpl implements Negocio {
 		
 	}
 	
+	@Override
+	public List<Usuario> allUsuarioAP() {
+		Query q = em.createNamedQuery("findAllUsuariosAP").setParameter("rol1", Rol.ALUMNO).setParameter("rol2", Rol.PASPDI);
+		List<Usuario> usu = q.getResultList();
+		return usu;
+		
+	}
+	
 	public List<Inscripciones> allInscripciones(){
 		Query q = em.createNamedQuery("findAllInscripciones");
 		List<Inscripciones> ins=q.getResultList();
@@ -300,7 +308,7 @@ public class NegocioImpl implements Negocio {
 	@Override
 	public void addUsuario(Usuario a) {
 		// TODO Auto-generated method stub
-		
+		em.persist(a);
 	}
 
 	@Override
@@ -355,6 +363,7 @@ public class NegocioImpl implements Negocio {
 	@Override
 	public void deleteUsuario(Usuario a) {
 		// TODO Auto-generated method stub
+		em.remove(em.contains(a) ? a : em.merge(a));
 		
 	}
 
@@ -490,9 +499,11 @@ public class NegocioImpl implements Negocio {
 
 	@Override
 	public Usuario findUsuario(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		Query q = em.createNamedQuery("findUsuarioId").setParameter("id", id);
+		List<Usuario> usu = q.getResultList();
+		return usu.get(0);
 	}
+	
 
 	@Override
 	public InformeActividades findInformeActividadesId(Long id) {

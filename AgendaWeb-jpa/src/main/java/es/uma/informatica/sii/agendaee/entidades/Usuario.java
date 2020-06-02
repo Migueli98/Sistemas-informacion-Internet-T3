@@ -25,7 +25,10 @@ import javax.persistence.OneToMany;
 
 @NamedQueries({
     @NamedQuery(name="findAllUsuarios",query="select u from Usuario u"),
+    @NamedQuery(name="findUsuarioId", query="select u from Usuario u where u.email= :id"),
+    @NamedQuery(name="findAllUsuariosAP", query="select u from Usuario u where u.rol= :rol1 or u.rol= :rol2")
 	})
+
 public class Usuario implements Serializable {
     
     public enum Rol {

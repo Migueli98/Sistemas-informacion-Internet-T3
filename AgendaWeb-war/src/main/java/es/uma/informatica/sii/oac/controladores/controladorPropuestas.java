@@ -300,5 +300,21 @@ public class controladorPropuestas implements Serializable{
     	return "propuestas.xhtml";
     }
     
-    
+    public String terminarActividad(Long id) throws AprendizajeServicioException {
+    	
+    	Actividades a = new Actividades();
+    	a = bd.findActividades(id);
+    	
+    	if(a.getEstado() == Estado.EN_CURSO) {
+    		a.setEstado(Estado.REALIZADA);
+    		bd.updateActividades(a);
+    	}else {
+    		FacesMessage fm = new FacesMessage("No se puede inciar una actividad con este estado: "+ a.getEstado());
+            FacesContext.getCurrentInstance().addMessage("login:pass", fm);
+
+    	}
+
+    	return "propuestas.xhtml";
+    }
+
 }
