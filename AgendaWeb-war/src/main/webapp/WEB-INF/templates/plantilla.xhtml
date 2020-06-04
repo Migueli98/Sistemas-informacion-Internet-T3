@@ -52,8 +52,7 @@
                     <c:if test="#{controlAutorizacion.email.rol == 'ONG'}">
                     <li><h:commandLink action="#{controlAutorizacion.serviciosActivos()}" value="Servicios activos"/></li>
                     <li><h:commandLink action="#{controlAutorizacion.propuestasOng()}" value="Propuestas"/></li>
-                    <li><h:commandLink action="#{controlAutorizacion.evaluarParticipante()}" value="Evaluar participantes"/></li>
-                    <li><h:commandLink action="#{controlAutorizacion.valoraciones()}" value="Valoraciones"/></li>
+                    <li><h:commandLink action="#{controlAutorizacion.valoraciones()}" value="Valorar participante"/></li>
                     <li><h:commandLink action="#{controlAutorizacion.supervisionActividad()}" value="Supervisiones"/></li>
                     <li><h:commandLink action="#{controlAutorizacion.miPerfil()}" value="Mi perfil"/></li>
                     </c:if>

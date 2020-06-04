@@ -65,7 +65,7 @@ public class NegocioImpl implements Negocio {
 		
 		// ALUMNOS
 		Alumno al1 = new Alumno();
-		al1.setEmail("alu1");
+		al1.setEmail("alu1@uma.es");
 		al1.setContrasenia("q");
 		al1.setRol(Rol.ALUMNO);
 		al1.setNombre("Christian");
@@ -75,7 +75,7 @@ public class NegocioImpl implements Negocio {
 		al1.setCv(c1);
 		em.persist(al1);
 		Alumno al2 = new Alumno();
-		al2.setEmail("alu2");
+		al2.setEmail("alu2@uma.es");
 		al2.setContrasenia("q");
 		al2.setRol(Rol.ALUMNO);
 		al2.setNombre("Miguel");
@@ -87,7 +87,7 @@ public class NegocioImpl implements Negocio {
 		
 		//ONG
 		Ong ong1 = new Ong();
-		ong1.setEmail("ong1");
+		ong1.setEmail("ong1@xmail.com");
 		ong1.setContrasenia("q");
 		ong1.setRol(Rol.ONG);
 		ong1.setCiudad("Murcia");
@@ -98,7 +98,7 @@ public class NegocioImpl implements Negocio {
 		
 		//ADMIN
 		Usuario us = new Usuario();
-		us.setEmail("admin");
+		us.setEmail("admin@uma.es");
 		us.setContrasenia("q");
 		us.setRol(Rol.ADMIN);
 		//us.setNombre("Francisco");
@@ -107,7 +107,7 @@ public class NegocioImpl implements Negocio {
 
 		//PROFESOR
 		Profesor p1 = new Profesor();
-		p1.setEmail("pro1");
+		p1.setEmail("pro1@uma.es");
 		p1.setContrasenia("q");
 		p1.setRol(Rol.PASPDI);
 		p1.setNombre("Enrique");
@@ -116,7 +116,7 @@ public class NegocioImpl implements Negocio {
 		em.persist(p1);
 		
 		Profesor p2 = new Profesor();
-		p2.setEmail("pro2");
+		p2.setEmail("pro2@uma.es");
 		p2.setContrasenia("q");
 		p2.setRol(Rol.PASPDI);
 		p2.setNombre("Carlos");
@@ -170,22 +170,6 @@ public class NegocioImpl implements Negocio {
 		Query q = em.createNamedQuery("findAllActividadesAlumno").setParameter("user",u);
 		List<Actividades> act = q.getResultList();
 		return act;
-	}
-	
-	
-
-	@Override
-	public List<Alumno> allAlumno() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-
-	@Override
-	public List<Curriculum> allCurriculum() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override
@@ -261,21 +245,10 @@ public class NegocioImpl implements Negocio {
 	}
 
 	@Override
-	public void addAlumno(Alumno a) {
+	public void addOng(Ong ongAd) {
 		// TODO Auto-generated method stub
-		
+		em.persist(ongAd);
 	}
-
-	
-
-
-
-	@Override
-	public void addCurriculum(Curriculum a) {
-		// TODO Auto-generated method stub
-		
-	}
-
 	@Override
 	public void addInformeActividades(InformeActividades a) {
 		// TODO Auto-generated method stub
@@ -299,18 +272,6 @@ public class NegocioImpl implements Negocio {
 	}
 
 	@Override
-	public void addOng(Ong a) {
-		// TODO Auto-generated method stub
-		em.persist(a);
-	}
-
-	@Override
-	public void addProfesor(Profesor a) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void addServicios(Servicios a) {
 		em.persist(a);	
 	}
@@ -327,24 +288,6 @@ public class NegocioImpl implements Negocio {
 		em.remove(em.contains(a) ? a : em.merge(a));
 	}
 
-	@Override
-	public void deleteAlumno(Alumno a) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public void deleteCurriculum(Curriculum a) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void deleteInformeActividades(InformeActividades a) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public void deleteInscripciones(Inscripciones a) {
@@ -356,12 +299,6 @@ public class NegocioImpl implements Negocio {
 	public void deleteOng(Ong a) {
 		// TODO Auto-generated method stub
 		em.remove(em.contains(a) ? a : em.merge(a));
-	}
-
-	@Override
-	public void deleteProfesor(Profesor a) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
@@ -405,12 +342,6 @@ public class NegocioImpl implements Negocio {
 	}
 
 	@Override
-	public void updateProfesor(Profesor a) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void updateServicios(Servicios a) {
 		// TODO Auto-generated method stub
 		em.merge(a);
@@ -422,10 +353,12 @@ public class NegocioImpl implements Negocio {
 		em.merge(a);
 	}
 	
+	@Override
 	public void updateInscripciones(Inscripciones a) {
 		em.merge(a);
 	}
 	
+	@Override
 	public void updateInforme(InformeActividades informe) {
 		em.merge(informe);
 	}
@@ -522,159 +455,4 @@ public class NegocioImpl implements Negocio {
 		return inf.get(0);
 	}
 
-	
-
-    
-    
-    
-    
-    
-/*    @Override
-    public void registrarUsuario(Usuario u, UriBuilder uriBuilder) throws AgendaException {
-        Usuario user = em.find(Usuario.class, u.getCuenta());
-        if (user != null) {
-            // El usuario ya existe
-            throw new CuentaRepetidaException();
-        }
-
-        u.setCadenaValidacion(generarCadenaAleatoria());
-        em.persist(u);
-
-        URI uriValidacion = uriBuilder.build(u.getCuenta(), u.getCadenaValidacion());
-
-        LOGGER.info(uriValidacion.toString());
-    }
-
-    private String generarCadenaAleatoria() {
-        Random rnd = new Random(System.currentTimeMillis());
-        StringBuilder sb = new StringBuilder();
-
-        for (int i = 0; i < TAM_CADENA_VALIDACION; i++) {
-            int v = rnd.nextInt(62);
-            if (v < 26) {
-                sb.append((char) ('a' + v));
-            } else if (v < 52) {
-                sb.append((char) ('A' + v - 26));
-            } else {
-                sb.append((char) ('0' + v - 52));
-            }
-        }
-
-        return sb.toString();
-
-    }
-
-    @Override
-    public void validarCuenta(String cuenta, String validacion) throws AgendaException {
-        Usuario u = em.find(Usuario.class, cuenta);
-        if (u == null) {
-            throw new CuentaInexistenteException();
-        }
-
-        if (u.getCadenaValidacion() == null) {
-            // la cuenta ya está activa
-            return;
-        }
-
-        if (!u.getCadenaValidacion().equals(validacion)) {
-            throw new ValidacionIncorrectaException();
-        }
-        // else
-        // Eliminamos la cadena de validación, indicando que ya está activa la cuenta
-        u.setCadenaValidacion(null);
-    }
-
-    /*
-     * Este método debe comprobar que el nombre de usuario y contraseña que
-     * recibe en el objeto u pertenecen a un usuario que existe en la BBDD y que
-     * está validado (un usuario está validado cuando su cadena de validación es
-     * nula).
-     * 
-     * Puede lanzar las excepciones CuentaInexistenteException, CuentaInactivaException
-     * y ContraseniaInvalidaException
-     *
-     * @param u
-     * @return
-     
-   
-    @Override
-    public void compruebaLogin(Usuario u)  throws AgendaException {
-        // TODO
-    	Usuario uu = em.find(Usuario.class, u.getCuenta());
-    	if (uu == null) {
-    		throw new CuentaInexistenteException();
-    	} else if (!u.getContrasenia().equals(uu.getContrasenia())) {
-    		throw new ContraseniaInvalidaException();
-    	} else if (u.getCadenaValidacion() != null) {
-    		throw new CuentaInactivaException();
-    	}
-    	
-    }
-
-    /**
-     * Este método debe comprobar que el usuario que se le pasa como parámetro
-     * es un usuario existente y con contraseña correcta (ya que estamos en la capa
-     * de negocio con un Session Bean de tipo @Stateless, debemos comprobar
-     * todos los accesos a la capa de nogocio). En caso negativo debe devolver 
-     * la excepción que corresponda,
-     * en caso afirmativo debe devolver una entidad usuario tal con la información
-     * existe ahora mismo en la BBDD.
-     * @param u
-     * @return 
-     
-    @Override
-    public Usuario refrescarUsuario(Usuario u)  throws AgendaException {
-        // TODO
-    	compruebaLogin(u);
-    	Usuario uu = em.find(Usuario.class, u.getCuenta());
-    	em.refresh(uu);
-        return uu;
-
-    }
-
-    /**
-     * Este método debe actualizar el contacto correspondiente en la BBDD con
-     * la información contenida en el objeto que se le pasa como argumento.
-     * Antes de eso, debe comprobar que el usuario a quien pertenece el contacto existe y 
-     * tiene una contraseña correcta (en caso contrario debe devolver la excepción que
-     * corresponda.
-     * @param c
-     * @return 
-     
-    @Override
-    public void modificar(Contacto c)  throws AgendaException {
-        // TODO
-    	compruebaLogin(c.getUsuario());
-        em.merge(c);
-    }
-
-    /** Este método debe insertar un contacto en la BBDD. Antes debe comprobar que
-     * el usuario del contacto existe y tiene contraseña correcta (en caso contrario
-     * debe lanzar la excepción correspodiente).
-     * @param c
-     * @return 
-     
-    
-    @Override
-    public void insertar(Contacto c)  throws AgendaException {
-        // TODO
-    	compruebaLogin(c.getUsuario());
-        em.persist(c);
-    }
-
-    /**
-     * Este método debe eliminar el contacto que se le pasa como argumento.
-     * Antes debe comprobar que el usuario a quien pertenece el contacto existe
-     * y tiene contraseña válida (en caso contrario debe lanzar la excepción
-     * correspondiente).
-     * @param c
-     * @return 
-     
-    @Override
-    public void eliminarContacto(Contacto c)  throws AgendaException {
-        // TODO
-    	compruebaLogin(c.getUsuario());
-        em.remove(em.merge(c));
-    }
-*/
 }

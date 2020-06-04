@@ -80,8 +80,26 @@ public class controladorBuscarActividades implements Serializable{
 	}
 	
 	public String borrarBuscarActividad(Long id) throws AprendizajeServicioException{
+    	Actividades act = new Actividades();
+    	act = bd.findActividades(id);
+    	boolean puede = true;
     	
-		bd.deleteActividades(bd.findActividades(id));
+    	List<Inscripciones> inf= new ArrayList<Inscripciones>();
+    	inf = bd.allInscripciones();
+    	
+    	for(Inscripciones i : inf) {
+    		if(i.getActividad().getIdActividad() == act.getIdActividad()) {
+    			FacesMessage fm = new FacesMessage("No se puede eliminar una actividad con participantes inscritos");
+    	        FacesContext.getCurrentInstance().addMessage("login:pass", fm);
+    	        puede = false;
+    		}
+    	}
+    	
+    	
+    	if(puede) {
+    		bd.deleteActividades(act);
+    	}
+		
 		
         return "buscarActividades.xhtml";
     }

@@ -14,6 +14,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import es.uma.informatica.sii.agendaee.entidades.Actividades;
+import es.uma.informatica.sii.agendaee.entidades.Inscripciones;
 import es.uma.informatica.sii.agendaee.entidades.Ong;
 import es.uma.informatica.sii.agendaee.entidades.Servicios;
 import es.uma.informatica.sii.agendaee.entidades.Actividades.Estado;
@@ -272,14 +273,32 @@ public class controladorPropuestas implements Serializable{
     }
     
     public String borrarActividad(Long a) throws AprendizajeServicioException{	
-    				
-		if(bd.findActividades(a).getEstado() == Estado.EN_CURSO) { 	
-			FacesMessage fm = new FacesMessage("No se puede eliminar una actividad en curso");
+    	Actividades act = new Actividades();
+    	act = bd.findActividades(a);
+    	boolean puede = true;
+    	
+    	List<Inscripciones> inf= new ArrayList<Inscripciones>();
+    	inf = bd.allInscripciones();
+    	
+    	for(Inscripciones i : inf) {
+    		if(i.getActividad().getIdActividad() == act.getIdActividad()) {
+    	        puede = false;
+    		}
+    	}
+
+    	
+		if(bd.findActividades(a).getEstado() == Estado.EN_CURSO || bd.findActividades(a).getEstado() == Estado.REALIZADA) { 	
+			FacesMessage fm = new FacesMessage("No se puede eliminar una actividad en curso o terminada");
 	        FacesContext.getCurrentInstance().addMessage("login:pass", fm);
 
-		}else{
-			bd.deleteActividades(bd.findActividades(a));
+		}else if(!puede){
+			FacesMessage fm = new FacesMessage("No se puede eliminar una actividad con participantes inscritos");
+	        FacesContext.getCurrentInstance().addMessage("login:pass", fm);
+			
+		}else {
+			bd.deleteActividades(act);
 		}
+		
         return "propuestas.xhtml";
     }
   

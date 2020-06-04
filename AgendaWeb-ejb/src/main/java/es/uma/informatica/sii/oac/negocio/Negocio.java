@@ -32,9 +32,6 @@ public interface Negocio {
 	//Mostrar entidades
 	public List<Actividades> allActividades();
 	public List<Actividades> allActividadesEstado(Estado estado);
-	public List<Alumno> allAlumno();
-
-	public List<Curriculum> allCurriculum();
 	public List<InformeActividades> allInformeActividades();
 	public List<InformeActividades> allInformeActividadesProfesor(Profesor pro);
 	public List<Inscripciones> allInscripciones(Usuario u);
@@ -43,30 +40,22 @@ public interface Negocio {
 	public List<Servicios> allServicios();
 	public List<Usuario> allUsuario();
 	public List<Usuario> allUsuarioAP();
-	public List<Actividades> allActividadesAlumno(Usuario u);
 	public List<Inscripciones> allInscripciones();
+	List<Actividades> allActividadesAlumno(Usuario u);
 
 	
-	//A�adir elementos a las entidades
+	//Aniadir elementos a las entidades
 	public void addActividades(Actividades a);
-	
-	public void addAlumno(Alumno a);
-	public void addCurriculum(Curriculum a);
 	public void addInformeActividades(InformeActividades a);
 	public void addInscripciones(Inscripciones a) throws AprendizajeServicioException;
-	public void addOng(Ong a);
-	public void addProfesor(Profesor a);
 	public void addServicios(Servicios a);
 	public void addUsuario(Usuario a);
+	public void addOng(Ong ongAd);
 	
 	//Eliminar elementos de las entidades
 	public void deleteActividades(Actividades a) throws AprendizajeServicioException;
-	public void deleteAlumno(Alumno a);
-	public void deleteCurriculum(Curriculum a);
-	public void deleteInformeActividades(InformeActividades a);
 	public void deleteInscripciones(Inscripciones a);
 	public void deleteOng(Ong a);
-	public void deleteProfesor(Profesor a);
 	public void deleteServicios(Servicios a);
 	public void deleteUsuario(Usuario a);
 	
@@ -74,17 +63,15 @@ public interface Negocio {
 	public void updateActividades(Actividades a);
 	public void updateAlumno(Alumno a) throws AprendizajeServicioException;
 	public void updateCurriculum(Curriculum a);
-	//public void updateInformeActividades(InformeActividades a);
-	public void updateInscripciones(Inscripciones a);
 	public void updateOng(Ong a);
-	public void updateProfesor(Profesor a);
 	public void updateServicios(Servicios a);
-	public void updateInforme(InformeActividades informe);
 	public void updateUsuario(Usuario a);
+	public void updateInscripciones(Inscripciones a);
+	public void updateInforme(InformeActividades informe);
 
 	//Buscar por clave primaria en las entidades
 	public Actividades findActividades(Long id) throws AprendizajeServicioException;
-	public Alumno findAlumno(String id); //�Debe existir m�todos para las entidades que extienden Usuario o vale con los del usuario?
+	public Alumno findAlumno(String id); 
 	public Curriculum findCurriculum(Long id);
 	public InformeActividades findInformeActividades(Actividades a, Usuario u);
 	public Inscripciones findInscripciones(Long id);
@@ -94,13 +81,8 @@ public interface Negocio {
 	public List<Servicios> findServiciosOng(Usuario ong);
 	public Usuario findUsuario(String id);
 	public InformeActividades findInformeActividadesId(Long id);
-	
-	
 
 	
-
-	
-
 
 
 	

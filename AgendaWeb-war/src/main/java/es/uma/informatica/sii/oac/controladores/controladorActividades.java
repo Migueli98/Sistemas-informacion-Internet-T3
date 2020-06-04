@@ -41,16 +41,16 @@ import es.uma.informatica.sii.oac.negocio.Negocio;
 @RequestScoped
 public class controladorActividades implements Serializable {
 	
-	private ArrayList<Actividades> actividades;
+	private List<Actividades> actividades;
 	private Actividades actividad;
-	private ArrayList<InformeActividades> informes;
+	private List<InformeActividades> informes;
 	private InformeActividades informe;
 	private List<Inscripciones> inscripciones;
 	private List<Inscripciones> ins;
 	private Actividades inscripcion;
-	private ArrayList<Actividades> supervisiones;
+	private List<Actividades> supervisiones;
 	private Actividades supervision;
-	private ArrayList<Usuario> usuarios;
+	private List<Usuario> usuarios;
 	private Usuario usuario;
 	
 	private ArrayList<Usuario> usuariosActividad;
@@ -80,7 +80,7 @@ public class controladorActividades implements Serializable {
 
 
 
-		public ArrayList<Usuario> getUsuarios() {
+		public List<Usuario> getUsuarios() {
 			return usuarios;
 		}
 
@@ -198,7 +198,7 @@ public class controladorActividades implements Serializable {
 		}
 
 	    
-	    public ArrayList<InformeActividades> getInformes() {
+	    public List<InformeActividades> getInformes() {
 			return informes;
 		}
 
@@ -214,10 +214,18 @@ public class controladorActividades implements Serializable {
 		}
 		
 
-		public String getInforme(Actividades a, Usuario u) {			
-			informe = bd.findInformeActividades(a, u);
+		public String getInforme(Actividades a, Usuario u) {
+			String sol = "MisActividades.xhtml";
+			if(a.getEstado() != Estado.REALIZADA) {
+				FacesMessage fm = new FacesMessage("No se puede ver el informe de una actividad con el estado: "+a.getEstado());
+		        FacesContext.getCurrentInstance().addMessage("login:pass", fm);
+			}else {
+				informe = bd.findInformeActividades(a, u);
+				sol = "verInformeActividad.xhtml";
+			}
 			
-			return "verInformeActividad.xhtml";
+			
+			return sol;
 		}
 
 		public void setInforme(InformeActividades informe) {
@@ -279,6 +287,17 @@ public class controladorActividades implements Serializable {
 			return "supervisionActividad.xhtml";
 		}
 		
+		
+		public String denegarSolicitud(Long id) {
+			Inscripciones i = new Inscripciones();
+			i = bd.findInscripciones(id);
+			
+			i.setEstado(estadoInscripcion.RECHAZADO);
+			
+			bd.updateInscripciones(i);
+			
+			return "supervisionActividad.xhtml";
+		}
 		
 	    public String modificarActividad(){
 	        return "ModificarActividades.xhtml";
@@ -400,7 +419,7 @@ public class controladorActividades implements Serializable {
 			this.actividades = actividades;
 		}
 
-		public ArrayList<Actividades> getActividades() {
+		public List<Actividades> getActividades() {
 			return actividades;
 		}
 
