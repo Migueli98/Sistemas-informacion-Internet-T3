@@ -14,6 +14,7 @@ import javax.inject.Named;
 import es.uma.informatica.sii.agendaee.entidades.Actividades;
 import es.uma.informatica.sii.agendaee.entidades.InformeActividades;
 import es.uma.informatica.sii.agendaee.entidades.Ong;
+import es.uma.informatica.sii.agendaee.entidades.Profesor;
 import es.uma.informatica.sii.agendaee.entidades.Servicios;
 import es.uma.informatica.sii.agendaee.entidades.Usuario;
 import es.uma.informatica.sii.oac.negocio.Negocio;
@@ -28,12 +29,17 @@ public class controladorValoraciones implements Serializable{
 	private InformeActividades informe;
 	private List<InformeActividades> informes;
 	private List<InformeActividades> informesValorados;
+	private List<InformeActividades> infdefinitivo;
 	
 	@Inject 
 	Negocio bd;
 	
 	public controladorValoraciones() throws ParseException{
 		informes = new ArrayList<InformeActividades>();
+		informe = new InformeActividades();
+		infdefinitivo = new ArrayList<InformeActividades>();
+		
+		
 	}
 
 
@@ -92,7 +98,7 @@ public class controladorValoraciones implements Serializable{
 		List<Servicios> ser = bd.findServiciosOng(u);
 		List<Actividades> act2 = new ArrayList<Actividades>();
 		List<InformeActividades> inf = bd.allInformeActividades();
-		List<InformeActividades> infdefinitivo = new ArrayList<InformeActividades>();
+		infdefinitivo = new ArrayList<InformeActividades>();
 		for(Servicios s : ser) {
 			for(Actividades a : act) {
 				if(a.getServicio().getCodigoServicio() == s.getCodigoServicio()) {
@@ -104,7 +110,7 @@ public class controladorValoraciones implements Serializable{
 		for(InformeActividades i : inf) {
 			for(Actividades a : act2) {
 				if(i.getActividades().getIdActividad() == a.getIdActividad()) {
-					infdefinitivo .add(i);
+					infdefinitivo.add(i);
 				}
 			}
 		}
@@ -124,6 +130,48 @@ public class controladorValoraciones implements Serializable{
 		bd.updateInforme(i);
 		
 		return "valoraciones.xhtml";
+	}
+	
+	public String valorarPro(InformeActividades infact) {
+		InformeActividades i = bd.findInformeActividadesId(infact.getIdInforme());
+		i.setInformeProfesor(infact.getInformeProfesor());
+		
+		bd.updateInforme(i);
+		
+		return "evaluacionActividades.xhtml";
+	}
+	
+	public List<InformeActividades> inicializarInformes(){
+		
+		informes = bd.allInformeActividades();
+		
+		return informes;
+	}
+	
+	public String asignarProfesor(Long id) {
+		
+		informe = bd.findInformeActividadesId(id);
+		
+		return "asignarProfesorElegir.xhtml";
+	}
+	
+	public List<Usuario> allProfesores(){
+		
+		return bd.allProfesor();
+	}
+	
+	public String elegirProfesor(String id) {
+		
+		informe = bd.findInformeActividadesId(informe.getIdInforme());
+		informe.setProfesorAsociado((Profesor) bd.findUsuario(id));
+		bd.updateInforme(informe);
+		return "asignarProfesores.xhtml";
+	}
+	
+	public List<InformeActividades> informesProfesor(Usuario usu){
+		
+		return bd.allInformeActividadesProfesor((Profesor) usu);
+	
 	}
 	
 }

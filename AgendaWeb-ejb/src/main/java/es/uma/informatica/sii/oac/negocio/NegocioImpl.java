@@ -191,6 +191,12 @@ public class NegocioImpl implements Negocio {
 		List<InformeActividades> infact = q.getResultList();
 		return infact;
 	}
+	
+	public List<InformeActividades> allInformeActividadesProfesor(Profesor pro){
+		Query q = em.createNamedQuery("findAllInformeActividadesProfesor").setParameter("p", pro);
+		List<InformeActividades> infact = q.getResultList();
+		return infact;
+	}
 
 	@Override
 	public List<Inscripciones> allInscripciones(Usuario u) {
@@ -210,9 +216,10 @@ public class NegocioImpl implements Negocio {
 	}
 
 	@Override
-	public List<Profesor> allProfesor() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Usuario> allProfesor() {
+		Query q = em.createNamedQuery("findAllProfesor").setParameter("rol", Rol.PASPDI);
+		List<Usuario> pro = q.getResultList();
+		return pro;
 	}
 
 	@Override

@@ -79,17 +79,10 @@ public class controladorBuscarActividades implements Serializable{
 		
 	}
 	
-	public String borrarBuscarActividad(int id){
-    	boolean encontrado =  false;
-    	int cont = 0;
-    	while(!encontrado) {
-    		Actividades ac = actividades.get(cont);
-    		if(ac.getIdActividad() == (id)) {
-    			actividades.remove(cont);
-    			encontrado = true;
-    		}
-    		cont++;
-    	}
+	public String borrarBuscarActividad(Long id) throws AprendizajeServicioException{
+    	
+		bd.deleteActividades(bd.findActividades(id));
+		
         return "buscarActividades.xhtml";
     }
 	
@@ -118,6 +111,9 @@ public class controladorBuscarActividades implements Serializable{
 		this.actividadSelecc = actividadSelecc;
 	}
 	
+	public List<Actividades> allActividades(){
+		return bd.allActividades();
+	}
 	
 	
 }

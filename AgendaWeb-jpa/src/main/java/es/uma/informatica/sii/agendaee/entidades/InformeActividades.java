@@ -14,6 +14,7 @@ import javax.persistence.*;
 
 @NamedQueries({
     @NamedQuery(name="findInforme", query="select i from InformeActividades i where i.actividades= :a and i.alumno= :u"),
+    @NamedQuery(name="findAllInformeActividadesProfesor", query="select i from InformeActividades i where i.profesorAsociado= :p"),
     @NamedQuery(name="findInformeId", query="select i from InformeActividades i where i.idInforme= :id"),
     @NamedQuery(name="findAllInformeActividades", query="select i from InformeActividades i")
  	})

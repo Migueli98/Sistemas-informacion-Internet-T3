@@ -251,14 +251,16 @@ public class controladorActividades implements Serializable {
 			
 			bd.updateInscripciones(i);
 			
-			InformeActividades in = new InformeActividades(); 
-			in.setActividades(i.getActividad());
-			in.setAlumno((Alumno) i.getUsuario());
-			in.setInformeONG("");
-			in.setInformeProfesor("");
-			in.setValoracionAlumno("");
-			in.setEstado(InformeActividades.Estado.EN_CURSO);
-			bd.addInformeActividades(in);
+			if(i.getUsuario().getRol() == Rol.ALUMNO) {
+				InformeActividades in = new InformeActividades(); 
+				in.setActividades(i.getActividad());
+				in.setAlumno((Alumno) i.getUsuario());
+				in.setInformeONG("");
+				in.setInformeProfesor("");
+				in.setValoracionAlumno("");
+				in.setEstado(InformeActividades.Estado.EN_CURSO);
+				bd.addInformeActividades(in);
+			}
 			
 			return "supervisionActividad.xhtml";
 		}
@@ -356,7 +358,7 @@ public class controladorActividades implements Serializable {
 		}
 
 		public List<Actividades> getActividades(Usuario u) {
-			
+			actividades = new ArrayList<Actividades>();
 			List<Actividades> a1 = new ArrayList<Actividades>();
 			a1 = bd.allActividadesEstado(Actividades.Estado.EN_CURSO);
 			List<Actividades> a2 = new ArrayList<Actividades>();

@@ -36,9 +36,10 @@ public interface Negocio {
 
 	public List<Curriculum> allCurriculum();
 	public List<InformeActividades> allInformeActividades();
+	public List<InformeActividades> allInformeActividadesProfesor(Profesor pro);
 	public List<Inscripciones> allInscripciones(Usuario u);
 	public List<Ong> allOng();
-	public List<Profesor> allProfesor();
+	public List<Usuario> allProfesor();
 	public List<Servicios> allServicios();
 	public List<Usuario> allUsuario();
 	public List<Usuario> allUsuarioAP();

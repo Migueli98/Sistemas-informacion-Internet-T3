@@ -26,7 +26,8 @@ import javax.persistence.OneToMany;
 @NamedQueries({
     @NamedQuery(name="findAllUsuarios",query="select u from Usuario u"),
     @NamedQuery(name="findUsuarioId", query="select u from Usuario u where u.email= :id"),
-    @NamedQuery(name="findAllUsuariosAP", query="select u from Usuario u where u.rol= :rol1 or u.rol= :rol2")
+    @NamedQuery(name="findAllUsuariosAP", query="select u from Usuario u where u.rol= :rol1 or u.rol= :rol2"),
+    @NamedQuery(name="findAllProfesor", query="select u from Usuario u where u.rol= :rol")
 	})
 
 public class Usuario implements Serializable {

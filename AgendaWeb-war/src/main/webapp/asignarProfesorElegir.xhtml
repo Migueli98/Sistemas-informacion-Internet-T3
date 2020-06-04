@@ -1,0 +1,54 @@
+<ui:composition template="/WEB-INF/templates/plantilla.xhtml" 
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+                
+            
+	<ui:define name="title">Ver Usuarios</ui:define>
+    <ui:define name="content">
+	
+        <c:choose>
+        	<c:when test="#{controlAutorizacion.getEmail().getRol() == 'ADMIN'}">
+		
+				<h1>Elegir Profesor</h1>
+				<div class="bordeTablaActividades">
+				<h:form>
+                    <h:inputHidden value="#{controladorValoraciones.informe.idInforme}"></h:inputHidden>
+                    <table id="tablaListaActividades">
+                        <thead>
+                                <tr>
+                                    <th>Email</th>
+                                    <th>Nombre</th>
+                                    <th>Apellido</th>
+									<th>Rol</th>
+                                              
+                                </tr>
+                            </thead>
+                        
+                        <tbody>
+                            <ui:repeat var = "i" value="#{controladorValoraciones.allProfesores()}">
+                                <tr>                                
+                                    <td>#{i.email}</td>
+                                    <td>#{i.nombre}</td>
+                                    <td>#{i.apellido}</td>
+                                    <td>#{i.rol}</td>
+                                    
+                                    <td>                                     
+                                        <h:commandButton styleClass="btnModificar" value="Elegir profesor" action="#{controladorValoraciones.elegirProfesor(i.email)}" />
+                                    </td>
+                                    
+                                </tr>
+                            </ui:repeat>
+                        </tbody>
+                    </table>
+                    
+                     <h:commandButton styleClass="btnBorrar" value="Cancelar" action="asignarProfesores.xhtml" />
+                </h:form>
+                </div>
+        	</c:when>
+        	
+        </c:choose>
+     </ui:define>           
+</ui:composition>
