@@ -11,6 +11,8 @@ import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -55,7 +57,7 @@ public class controladorActividades implements Serializable {
 	private ArrayList<Actividades> evaluacionActividades;
 	private ArrayList<Usuario> profesores;
 	private Curriculum curriculum;
-	private Alumno a;
+	private Usuario a;
 	
 	   @Inject 
 	   private Negocio bd;
@@ -66,7 +68,7 @@ public class controladorActividades implements Serializable {
 	    	actividades = new ArrayList<Actividades>();
             informe = new InformeActividades();
             curriculum= new Curriculum();
-            a = new Alumno();
+            a = new Usuario();
 	    }
 	    
 	    public String getNombreApellido(Profesor p) {
@@ -118,7 +120,9 @@ public class controladorActividades implements Serializable {
 				for(Actividades a : activ) {
 					ns = bd.findServicios(a.getServicio().getCodigoServicio());
 					if(ns.getCodigoServicio() == s.getCodigoServicio()) {
-						activ2.add(a);
+						if(a.getEstado() == Estado.BUSCANDO_PARTICIPANTES) {
+							activ2.add(a);
+						}
 					}
 				}
 			}
@@ -127,7 +131,9 @@ public class controladorActividades implements Serializable {
 			
 			for(Inscripciones i : inscrip) {				
 				for(Actividades a : activ2) {
-					if(a.getIdActividad() == i.getActividad().getIdActividad()) resultado.add(i);	
+					if(a.getIdActividad() == i.getActividad().getIdActividad()) {
+						resultado.add(i);	
+					}
 				}
 			}
 			
@@ -165,10 +171,11 @@ public class controladorActividades implements Serializable {
 			for (Actividades a : acts) {
 				for (Inscripciones i : ins) {
 					if(a.getIdActividad() ==i.getActividad().getIdActividad()) {
-						acti.add(a);
+						if(a.getEstado() == Estado.BUSCANDO_PARTICIPANTES) {
+							acti.add(a);
+						}
 					}
 				}
-				
 			}
 			
 			return acti;
@@ -247,20 +254,27 @@ public class controladorActividades implements Serializable {
 			
 			Inscripciones i = new Inscripciones();
 			i = bd.findInscripciones(id);
-			i.setEstado(estadoInscripcion.ACEPTADO);
 			
-			bd.updateInscripciones(i);
-			
-			if(i.getUsuario().getRol() == Rol.ALUMNO) {
-				InformeActividades in = new InformeActividades(); 
-				in.setActividades(i.getActividad());
-				in.setAlumno((Alumno) i.getUsuario());
-				in.setInformeONG("");
-				in.setInformeProfesor("");
-				in.setValoracionAlumno("");
-				in.setEstado(InformeActividades.Estado.EN_CURSO);
-				bd.addInformeActividades(in);
+			if(i.getEstado() == estadoInscripcion.ACEPTADO) {
+				FacesMessage fm = new FacesMessage("No se aceptar 2 veces al mismo alumno a la misma asignatura");
+	            FacesContext.getCurrentInstance().addMessage("login:pass", fm);
+			}else {
+				i.setEstado(estadoInscripcion.ACEPTADO);
+				
+				bd.updateInscripciones(i);
+				
+				if(i.getUsuario().getRol() == Rol.ALUMNO) {
+					InformeActividades in = new InformeActividades(); 
+					in.setActividades(i.getActividad());
+					in.setAlumno((Alumno) i.getUsuario());
+					in.setInformeONG("");
+					in.setInformeProfesor("");
+					in.setValoracionAlumno("");
+					in.setEstado(InformeActividades.Estado.EN_CURSO);
+					bd.addInformeActividades(in);
+				}
 			}
+			
 			
 			return "supervisionActividad.xhtml";
 		}
@@ -396,11 +410,17 @@ public class controladorActividades implements Serializable {
 		
 		public String verCurriculum(String email){
 			
+			a = bd.findUsuario(email);
 			
-			a = bd.findAlumno(email);
-			curriculum = a.getCv();
+			if(a.getRol() == Rol.PASPDI) {
+				FacesMessage fm = new FacesMessage("Este usuario es un profesor. Los profesores no tienen CV");
+	            FacesContext.getCurrentInstance().addMessage("login:pass", fm);
+			}else {
+				curriculum = ((Alumno) a).getCv();
+				return "Curriculum.xhtml";
+			}
 			
-			return "Curriculum.xhtml";
+			return "supervisionActividad.xhtml";
 		}
 		
 	    

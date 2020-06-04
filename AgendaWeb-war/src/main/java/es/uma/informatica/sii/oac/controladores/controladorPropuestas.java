@@ -309,7 +309,7 @@ public class controladorPropuestas implements Serializable{
     		a.setEstado(Estado.REALIZADA);
     		bd.updateActividades(a);
     	}else {
-    		FacesMessage fm = new FacesMessage("No se puede inciar una actividad con este estado: "+ a.getEstado());
+    		FacesMessage fm = new FacesMessage("No se puede terminar una actividad con este estado: "+ a.getEstado());
             FacesContext.getCurrentInstance().addMessage("login:pass", fm);
 
     	}

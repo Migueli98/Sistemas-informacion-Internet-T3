@@ -45,23 +45,18 @@ public class NegocioImpl implements Negocio {
  
 	@Override
 	public void inicializar() {
-		
-	
-		
-		
-	
-		
+
 		// CURRICULUMNS
 		Curriculum c1 = new Curriculum();
 		c1.setExperienciaLaboral("Camarero, bandeja, Ayudante de cocina");
 		c1.setIdiomas("Frances, Aleman, Ingles");
-		c1.setDisponibilidad("Lunes por la ma�ana y viernes por la tarde");
+		c1.setDisponibilidad("Lunes por la maniana y viernes por la tarde");
 		
 		
 		em.persist(c1);
 		
 		Curriculum c2 = new Curriculum();
-		c2.setExperienciaLaboral("Pintor, Carpintero, Alba�il");
+		c2.setExperienciaLaboral("Pintor, Carpintero, Albanil");
 		c2.setIdiomas("Ingles, Frances");
 		c2.setDisponibilidad("Fin de semana");
 		
@@ -118,8 +113,16 @@ public class NegocioImpl implements Negocio {
 		p1.setNombre("Enrique");
 		p1.setApellido("Soler");
 		p1.setDepartamento("Bases de Datos");
-		
 		em.persist(p1);
+		
+		Profesor p2 = new Profesor();
+		p2.setEmail("pro2");
+		p2.setContrasenia("q");
+		p2.setRol(Rol.PASPDI);
+		p2.setNombre("Carlos");
+		p2.setApellido("Rossi");
+		p2.setDepartamento("Sistemas de Informacion");
+		em.persist(p2);
 	}
 
 	@Override
